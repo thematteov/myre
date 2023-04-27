@@ -155,10 +155,8 @@ export default class Sketch {
   }
   smoothScroll() {
     this.lenis = new Lenis({
-      smooth: true,
+      smoothTouch: true,
       duration: 2,
-      mouseMultiplier: 1,
-      touchMultiplier: 1,
     })
   }
   addObjects() {
