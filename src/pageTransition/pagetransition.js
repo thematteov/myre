@@ -367,10 +367,15 @@ export default class Init {
     let tlHover = new gsap.timeline({ paused: true });
     let tlOpen = new gsap.timeline({ paused: true, reversed: true });
     let tlOpenContent = new gsap.timeline({ paused: true, reversed: true });
-    tlOpen.to("#menu--container", 2, {
-      height: "100%",
-      ease: "power4.inOut",
-    });
+    tlOpen.fromTo(
+      "#menu--container",
+      2,
+      { height: "0%" },
+      {
+        height: "100%",
+        ease: "power4.inOut",
+      }
+    );
     tlOpenContent
       .fromTo(
         ".menu--prj--type",
