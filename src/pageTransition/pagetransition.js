@@ -421,8 +421,9 @@ export default class Init {
       .addEventListener('mouseleave', () => {
         tlHover.reverse()
       })
-    document.querySelector('#menu--button').addEventListener('click', () => {
+    document.querySelector('.menu--button').addEventListener('click', () => {
       tlOpen.reversed() ? tlOpen.play() : tlOpen.reverse()
+      console.log('ciao')
       tlOpenContent.reversed() ? tlOpenContent.play() : tlOpenContent.reverse()
     })
   }
