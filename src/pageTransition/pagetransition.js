@@ -367,7 +367,7 @@ export default class Init {
     let tlHover = new gsap.timeline({ paused: true });
     let tlOpen = new gsap.timeline({ paused: true, reversed: true });
     tlOpen.set("#menu--container", {
-      height: '0%'
+      height: "0%",
     });
     let tlOpenContent = new gsap.timeline({ paused: true, reversed: true });
     tlOpen.to("#menu--container", 2, {
@@ -424,10 +424,14 @@ export default class Init {
         tlHover.reverse();
       });
     });
-    document.querySelector("#menu--button").addEventListener("click", () => {
-      tlOpen.reversed() ? tlOpen.play() : tlOpen.reverse();
-      console.log("ciao");
-      tlOpenContent.reversed() ? tlOpenContent.play() : tlOpenContent.reverse();
+    document.querySelectorAll("#menu--button").forEach((e) => {
+      e.addEventListener("click", () => {
+        tlOpen.reversed() ? tlOpen.play() : tlOpen.reverse();
+        console.log("ciao");
+        tlOpenContent.reversed()
+          ? tlOpenContent.play()
+          : tlOpenContent.reverse();
+      });
     });
   }
 }
