@@ -366,6 +366,9 @@ export default class Init {
   menu() {
     let tlHover = new gsap.timeline({ paused: true });
     let tlOpen = new gsap.timeline({ paused: true, reversed: true });
+    tlOpen.set("#menu--container", {
+      height: '0%'
+    });
     let tlOpenContent = new gsap.timeline({ paused: true, reversed: true });
     tlOpen.to("#menu--container", 2, {
       height: "100%",
