@@ -424,14 +424,14 @@ export default class Init {
         tlHover.reverse();
       });
     });
-    document.querySelectorAll("#menu--button").forEach((e) => {
-      e.addEventListener("click", () => {
+    document.querySelector(".menu--button")
+      .addEventListener("click", () => {
         tlOpen.reversed() ? tlOpen.play() : tlOpen.reverse();
         console.log("ciao");
         tlOpenContent.reversed()
           ? tlOpenContent.play()
           : tlOpenContent.reverse();
       });
-    });
+
   }
 }
