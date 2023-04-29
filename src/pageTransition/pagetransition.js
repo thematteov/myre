@@ -77,11 +77,13 @@ export default class Init {
     this.archiveAnimation();
     this.awards();
     this.menu();
+    this.mockups();
   }
 
   preloader() {
-      //////////////
-      this.tl.fromTo(
+    //////////////
+    this.tl
+      .fromTo(
         ".split-word",
         0.5,
         {
@@ -90,8 +92,8 @@ export default class Init {
         {
           opacity: 1,
           stagger: 0.02,
-          delay: 1.6
-        },
+          delay: 1.6,
+        }
       )
       .fromTo(
         ".split-word",
@@ -123,7 +125,13 @@ export default class Init {
         },
         ">-100%"
       )
-      .fromTo(".homeimageswrapper", 2, {y: '120%', scale: 1.2}, { y: "0%", ease: 'power4.out', scale: 1, stagger: 0.1 }, ">-70%")
+      .fromTo(
+        ".homeimageswrapper",
+        2,
+        { y: "120%", scale: 1.2 },
+        { y: "0%", ease: "power4.out", scale: 1, stagger: 0.1 },
+        ">-70%"
+      );
     ///preloader END
   }
 
@@ -131,7 +139,6 @@ export default class Init {
     this.featuredProject.forEach((project) => {
       const p = gsap.utils.selector(project);
       let tl = gsap.timeline({
-
         scrollTrigger: {
           trigger: project,
           markers: false,
@@ -254,9 +261,9 @@ export default class Init {
 
   homeAnimation() {
     this.tlHero
-    .fromTo(".image--4", {height: '100%'}, { height: "0%"})
-    .fromTo(".image--3", {height: '100%'}, { height: "0%"})
-    .fromTo(".image--2", {height: '100%'}, { height: "0%"})
+      .fromTo(".image--4", { height: "100%" }, { height: "0%" })
+      .fromTo(".image--3", { height: "100%" }, { height: "0%" })
+      .fromTo(".image--2", { height: "100%" }, { height: "0%" });
     gsap.to(".uno", {
       ease: "none",
       scrollTrigger: {
@@ -387,5 +394,30 @@ export default class Init {
       console.log("ciao");
       tlOpenContent.reversed() ? tlOpenContent.play() : tlOpenContent.reverse();
     });
+  }
+  mockups() {
+    let tlmockup = new gsap.timeline({ paused: true });
+    tlmockup.fromTo(
+      ".mockupsbackground",
+      1.6,
+      { height: "0%" },
+      {
+        height: "100%",
+        transformOrigin: "center bottom",
+        ease: "power4.inOut",
+        stagger: 0.1
+      }
+    );
+    document.querySelectorAll(".mockupline").forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        tlmockup.play();
+      });
+    });
+    document.querySelectorAll(".mockupline").forEach((el) => {
+      el.addEventListener("mouseleave", () => {
+        tlmockup.reverse();
+      });
+    });
+    // mockupsbackground
   }
 }
