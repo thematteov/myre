@@ -90,7 +90,7 @@ export default class Init {
         {
           opacity: 1,
           stagger: 0.02,
-          delay: 1.4
+          delay: 1.6
         },
       )
       .fromTo(
