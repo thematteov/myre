@@ -6,6 +6,15 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default class Init {
   constructor() {
+    var tricksWord = document.getElementsByClassName("split");
+    for (var i = 0; i < tricksWord.length; i++) {
+      var wordWrap = tricksWord.item(i);
+      wordWrap.innerHTML = wordWrap.innerHTML.replace(
+        /(^|<\/?[^>]+>|\s+)([^\s<]+)/g,
+        '$1<span class="split-word">$2</span>'
+      );
+    }
+
     this.splitLetter = document.getElementsByClassName("splitword");
     for (var b = 0; b < this.splitLetter.length; b++) {
       var letterWrap = this.splitLetter.item(b);
@@ -71,100 +80,50 @@ export default class Init {
   }
 
   preloader() {
-    this.tl.set(".preloader-text-line", {
-      perspective: 1000,
-      scaleX: 2,
-      rotationX: 80,
-    });
-    this.tl.set(".preloader-studio-line", {
-      scaleX: 4,
-      rotationX: 80,
-    });
-    ///preloader
-
-    this.tl
-      .fromTo(
-        ".preloader-text-line",
-        1.2,
-        { y: "120%", scaleX: 2 },
-        {
-          y: 0,
-          scaleX: 1,
-          stagger: 0.05,
-          ease: "power3.inOut",
-        }
-      )
-      .fromTo(
-        ".preloader-text-line",
-        1.2,
-        { rotationX: 80 },
-        {
-          rotationX: 0,
-          stagger: 0.06,
-          ease: "power3.inOut",
-        },
-        ">-95%"
-      )
-      .fromTo(
-        ".preloader-studio-line",
-        1.7,
-        { y: "120%", scaleX: 4 },
-        {
-          y: 0,
-          scaleX: 1,
-          stagger: 0.05,
-          ease: "power3.inOut",
-        },
-        ">-45%"
-      )
-      .fromTo(
-        ".preloader-studio-line",
-        1.7,
-        { rotationX: 80 },
-        {
-          rotationX: 0,
-          stagger: 0.2,
-          ease: "power3.inOut",
-        },
-        ">-95%"
-      )
-      .to(
-        ".studio-preloader",
-        2.5,
-        {
-          x: "-100%",
-          ease: "power3.inOut",
-        },
-        ">-75%"
-      )
-      .to(
-        ".studio-preloader",
-        1,
-        {
-          scale: 30,
-          transformOrigin: "right",
-          ease: "power3.inOut",
-        },
-        ">-20%"
-      )
-      .to(
-        ".preloader-end",
-        1.2,
-        {
-          width: "100vw",
-          transformOrigin: "right",
-          ease: "power3.inOut",
-        },
-        ">-60%"
-      )
-      .to(
-        ".preloader",
+      //////////////
+      this.tl.fromTo(
+        ".split-word",
         0.5,
         {
           opacity: 0,
         },
-        ">-10%"
-      );
+        {
+          opacity: 1,
+          stagger: 0.02,
+          delay: 1.4
+        },
+      )
+      .fromTo(
+        ".split-word",
+        1.2,
+        {
+          scaleX: 2,
+          x: "0.3em",
+        },
+        {
+          scaleX: 1,
+          x: "0em",
+          ease: "power4.out",
+          stagger: 0.02,
+        },
+        ">-100%"
+      )
+      .fromTo(
+        ".split-word",
+        1.2,
+        {
+          scaleX: 2,
+          x: "0.3em",
+        },
+        {
+          scaleX: 1,
+          x: "0em",
+          ease: "power4.out",
+          stagger: 0.02,
+        },
+        ">-100%"
+      )
+      .fromTo(".homeimageswrapper", 2, {y: '120%', scale: 1.2}, { y: "0%", ease: 'power4.out', scale: 1, stagger: 0.1 }, ">-70%")
     ///preloader END
   }
 
@@ -172,13 +131,12 @@ export default class Init {
     this.featuredProject.forEach((project) => {
       const p = gsap.utils.selector(project);
       let tl = gsap.timeline({
-        // yes, we can add it to an entire timeline!
+
         scrollTrigger: {
           trigger: project,
           markers: false,
           start: "top+=40% bottom",
           onEnter: () => tl.play(),
-          // scrub: 1, // smooth scrubbing, takes 1 second to "catch up" to the scrollbar
         },
       });
       ScrollTrigger.create({
@@ -296,9 +254,9 @@ export default class Init {
 
   homeAnimation() {
     this.tlHero
-      .to(".image--4", { height: "0%" })
-      .to(".image--3", { height: "0%" })
-      .to(".image--2", { height: "0%" });
+    .fromTo(".image--4", {height: '100%'}, { height: "0%"})
+    .fromTo(".image--3", {height: '100%'}, { height: "0%"})
+    .fromTo(".image--2", {height: '100%'}, { height: "0%"})
     gsap.to(".uno", {
       ease: "none",
       scrollTrigger: {
@@ -424,14 +382,10 @@ export default class Init {
         tlHover.reverse();
       });
     });
-    document.querySelector(".menu--button")
-      .addEventListener("click", () => {
-        tlOpen.reversed() ? tlOpen.play() : tlOpen.reverse();
-        console.log("ciao");
-        tlOpenContent.reversed()
-          ? tlOpenContent.play()
-          : tlOpenContent.reverse();
-      });
-
+    document.querySelector(".menu--button").addEventListener("click", () => {
+      tlOpen.reversed() ? tlOpen.play() : tlOpen.reverse();
+      console.log("ciao");
+      tlOpenContent.reversed() ? tlOpenContent.play() : tlOpenContent.reverse();
+    });
   }
 }

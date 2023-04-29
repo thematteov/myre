@@ -25,3 +25,7 @@ canvas {
 .awardsimage {
   pointer-events: none;
 }
+.split-word{
+  display: inline-block;
+  position: relative;
+}
