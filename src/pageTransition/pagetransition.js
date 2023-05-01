@@ -165,6 +165,13 @@ export default class Init {
         { y: "0%", ease: "power4.out", scale: 1, stagger: 0.1 },
         ">-70%"
       )
+      .fromTo(
+        ".nav",
+        1.2,
+        { y: "-120%"},
+        { y: "0%", ease: "power4.out"},
+        ">-50%"
+      )
     ///preloader END
   }
 
