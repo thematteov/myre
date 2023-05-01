@@ -106,7 +106,7 @@ export default class Init {
       )
       .fromTo(
         ".year-second",
-        2.6,
+        2.3,
         { y: "120%" },
         { y: "-120%", ease: "power4.out", stagger: 0.4 },
         ">-100%"
@@ -115,7 +115,7 @@ export default class Init {
         ".year-second-last",
         2,
         { y: "120%" },
-        { y: "0%", ease: "power4.out", stagger: 0.5, delay: -2.1 },
+        { y: "0%", ease: "power4.out", stagger: 0.5, delay: -2 },
       )
       .fromTo(
         ".split-word",
