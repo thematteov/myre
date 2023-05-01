@@ -14,15 +14,17 @@ if (document.querySelector('#container'))
 
 new Init()
 
-const lenis = new Lenis({
-  duration: 2,
-})
-lenis.on('scroll', () => {
-  ScrollTrigger.update()
-})
-window.addEventListener('resize', () => {
-  ScrollTrigger.update()
-})
+setTimeout(() => {
+  const lenis = new Lenis({
+    duration: 2,
+  })
+  lenis.on('scroll', () => {
+    ScrollTrigger.update()
+  })
+  window.addEventListener('resize', () => {
+    ScrollTrigger.update()
+  })
+}, 500);
 
 function raf(time) {
   lenis.raf(time)

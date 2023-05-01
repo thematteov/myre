@@ -83,17 +83,50 @@ export default class Init {
   preloader() {
     //////////////
     this.tl
+    .fromTo(
+        ".year--first-two",
+        2,
+        { y: "120%" },
+        { y: "0%", ease: "power4.out", delay: 1.6 },
+        ">-70%"
+      )
+      .fromTo(
+        ".year-first",
+        2.6,
+        { y: "120%" },
+        { y: "-120%", ease: "power4.out", delay: 0.5 },
+        ">-100%"
+      )
+      .fromTo(
+        ".year-first-last",
+        2,
+        { y: "120%" },
+        { y: "0%", ease: "power4.out", stagger: 0.4, delay: 0.5 },
+        ">-100%"
+      )
+      .fromTo(
+        ".year-second",
+        2.6,
+        { y: "120%" },
+        { y: "-120%", ease: "power4.out", stagger: 0.4 },
+        ">-100%"
+      )
+      .fromTo(
+        ".year-second-last",
+        2,
+        { y: "120%" },
+        { y: "0%", ease: "power4.out", stagger: 0.5, delay: -2.1 },
+      )
       .fromTo(
         ".split-word",
-        0.5,
+        1.2,
         {
           opacity: 0,
         },
         {
           opacity: 1,
           stagger: 0.02,
-          delay: 1.6,
-        }
+        }, ">-40%"
       )
       .fromTo(
         ".split-word",
@@ -131,7 +164,7 @@ export default class Init {
         { y: "120%", scale: 1.2 },
         { y: "0%", ease: "power4.out", scale: 1, stagger: 0.1 },
         ">-70%"
-      );
+      )
     ///preloader END
   }
 
@@ -420,4 +453,5 @@ export default class Init {
     });
     // mockupsbackground
   }
+
 }
