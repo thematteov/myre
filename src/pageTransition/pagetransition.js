@@ -254,7 +254,6 @@ export default class Init {
         end: "bottom top",
         onEnterBack: () => tlArchive.restart(),
         onLeaveBack: () => tlArchive.pause(0),
-        invalidateOnRefresh: true
       });
 
       // add animations and labels to the timeline
