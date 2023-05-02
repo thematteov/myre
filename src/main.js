@@ -17,7 +17,7 @@ new Init();
 setTimeout(() => {
   const lenis = new Lenis({
     duration: 2,
-    smoothTouch: false
+    smoothTouch: false,
   });
   lenis.on("scroll", () => {
     ScrollTrigger.update();
@@ -31,16 +31,3 @@ function raf(time) {
   lenis.raf(time);
   requestAnimationFrame(raf);
 }
-
-// requestAnimationFrame(raf);
-// function isMobile() {
-//   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-//     navigator.userAgent
-//   );
-// }
-
-// if (isMobile()) {
-//   ScrollTrigger.config({ ignoreMobileResize: false });
-// } else {
-
-// }
