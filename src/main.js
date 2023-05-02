@@ -40,9 +40,7 @@ function isMobile() {
 
 if (isMobile()) {
   alert("mobile");
-  ScrollTrigger.config({
-    autoRefreshEvents: "visibilitychange,DOMContentLoaded,load", // notice "resize" isn't in the list
-  });
+  ScrollTrigger.config({ ignoreMobileResize: true });
 } else {
   // Code to run if user is on a desktop device
 }
