@@ -80,7 +80,7 @@ export default class Init {
   preloader() {
     //////////////
     this.tl
-    .fromTo(
+      .fromTo(
         ".year--first-two",
         2,
         { y: "120%" },
@@ -112,7 +112,7 @@ export default class Init {
         ".year-second-last",
         2,
         { y: "120%" },
-        { y: "0%", ease: "power4.out", stagger: 0.5, delay: -2 },
+        { y: "0%", ease: "power4.out", stagger: 0.5, delay: -2 }
       )
       .fromTo(
         ".split-word",
@@ -123,7 +123,8 @@ export default class Init {
         {
           opacity: 1,
           stagger: 0.02,
-        }, ">-40%"
+        },
+        ">-40%"
       )
       .fromTo(
         ".split-word",
@@ -165,10 +166,10 @@ export default class Init {
       .fromTo(
         ".nav",
         1.2,
-        { y: "-120%"},
-        { y: "0%", ease: "power4.out"},
+        { y: "-120%" },
+        { y: "0%", ease: "power4.out" },
         ">-50%"
-      )
+      );
     ///preloader END
   }
 
@@ -442,7 +443,7 @@ export default class Init {
         height: "100%",
         transformOrigin: "center bottom",
         ease: "power4.inOut",
-        stagger: 0.1
+        stagger: 0.1,
       }
     );
     document.querySelectorAll(".mockupline").forEach((el) => {
@@ -457,5 +458,4 @@ export default class Init {
     });
     // mockupsbackground
   }
-
 }

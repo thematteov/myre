@@ -20,11 +20,9 @@ setTimeout(() => {
     smoothTouch: true,
   });
   lenis.on("scroll", () => {
-    ScrollTrigger.update();
     ScrollTrigger.refresh();
   });
   window.addEventListener("resize", () => {
-    ScrollTrigger.update();
     ScrollTrigger.refresh();
   });
 }, 500);
