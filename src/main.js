@@ -39,8 +39,7 @@ function isMobile() {
 }
 
 if (isMobile()) {
-  alert("mobile");
-  ScrollTrigger.config({ ignoreMobileResize: true });
+  ScrollTrigger.config({ ignoreMobileResize: false });
 } else {
   // Code to run if user is on a desktop device
 }
