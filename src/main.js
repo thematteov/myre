@@ -17,6 +17,7 @@ new Init();
 setTimeout(() => {
   const lenis = new Lenis({
     duration: 2,
+    smoothTouch: false
   });
   lenis.on("scroll", () => {
     ScrollTrigger.update();
