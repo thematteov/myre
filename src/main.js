@@ -1,34 +1,48 @@
-import Lenis from '@studio-freight/lenis'
-import { ScrollTrigger } from 'gsap/all'
+import Lenis from "@studio-freight/lenis";
+import { ScrollTrigger } from "gsap/all";
 // import $ from 'jquery'
 
-import Sketch from './3d/threeEffect'
-import Init from './pageTransition/pagetransition'
+import Sketch from "./3d/threeEffect";
+import Init from "./pageTransition/pagetransition";
 
-import './styles/style.css'
+import "./styles/style.css";
 
-if (document.querySelector('#container'))
+if (document.querySelector("#container"))
   new Sketch({
-    dom: document.getElementById('container'),
-  })
+    dom: document.getElementById("container"),
+  });
 
-new Init()
+new Init();
 
 setTimeout(() => {
   const lenis = new Lenis({
     duration: 2,
-  })
-  lenis.on('scroll', () => {
-    ScrollTrigger.update()
-  })
-  window.addEventListener('resize', () => {
-    ScrollTrigger.update()
-  })
+  });
+  lenis.on("scroll", () => {
+    ScrollTrigger.update();
+  });
+  window.addEventListener("resize", () => {
+    ScrollTrigger.update();
+  });
 }, 500);
 
 function raf(time) {
-  lenis.raf(time)
-  requestAnimationFrame(raf)
+  lenis.raf(time);
+  requestAnimationFrame(raf);
 }
 
-requestAnimationFrame(raf)
+requestAnimationFrame(raf);
+function isMobile() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  );
+}
+
+if (isMobile()) {
+  alert("mobile");
+  ScrollTrigger.config({
+    autoRefreshEvents: "visibilitychange,DOMContentLoaded,load", // notice "resize" isn't in the list
+  });
+} else {
+  // Code to run if user is on a desktop device
+}
