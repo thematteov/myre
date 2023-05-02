@@ -32,15 +32,15 @@ function raf(time) {
   requestAnimationFrame(raf);
 }
 
-requestAnimationFrame(raf);
-function isMobile() {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-    navigator.userAgent
-  );
-}
+// requestAnimationFrame(raf);
+// function isMobile() {
+//   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+//     navigator.userAgent
+//   );
+// }
 
-if (isMobile()) {
-  ScrollTrigger.config({ ignoreMobileResize: false });
-} else {
-  // Code to run if user is on a desktop device
-}
+// if (isMobile()) {
+//   ScrollTrigger.config({ ignoreMobileResize: false });
+// } else {
+
+// }
