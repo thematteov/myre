@@ -102,7 +102,7 @@ ScrollTrigger.create({
   });
 
 
-  //////LINKS
+  //////LINKS////
 
   let links = gsap.utils.toArray("a")
 
