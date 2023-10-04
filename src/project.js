@@ -1,10 +1,23 @@
 import Lenis from "@studio-freight/lenis";
 import "./styles/style.css";
-import { ScrollTrigger as e } from "gsap/ScrollTrigger";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap/src";
 import SplitType from "split-type";
 
 function initProject() {
+  let lenis = new Lenis({
+    lerp: 0.1,
+    duration: 1,
+    smoothWheel: true,
+    smoothTouch: false,
+    wheelMultiplier: 0.3,
+    touchMultiplier: 0.4,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  });
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
   let g = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent
     ),
@@ -15,6 +28,7 @@ function initProject() {
 
   ///////NAV LOGO SCRUB
   let logoTl = gsap.timeline({});
+  logoTl.set(".logo__svg", { transformOrigin: "50% 0%" });
   logoTl.fromTo(
     ".logo__svg",
     1.2,
@@ -73,10 +87,11 @@ function initProject() {
         trigger: value,
         start: "top bottom-=10%",
         toggleActions: "play none none reverse",
+        markers: true,
       },
     });
     tl.fromTo(
-      value.querySelectorAll('.line'),
+      value.querySelectorAll(".line"),
       0.8,
       { y: "50%", opacity: 0 },
       {
@@ -87,6 +102,34 @@ function initProject() {
       }
     );
   });
+
+  ////works images stack
+  const projImages = gsap.utils.toArray(".project__image__wrapper");
+
+  projImages.forEach((img, index) => {
+    const tween = gsap.to(img, {
+      scrollTrigger: {
+        trigger: img,
+        start: () => `top bottom-=100`,
+        end: () => `bottom bottom`,
+        scrub: true,
+        markers: false,
+      },
+      ease: "none",
+    });
+
+    ScrollTrigger.create({
+      trigger: img,
+      start: "bottom bottom",
+      pin: true,
+      pinSpacing: false,
+      markers: false,
+      id: "pin",
+      endTrigger: img.length,
+      end: "max",
+    });
+  });
+  ////works images stack
 }
-gsap.registerPlugin(e);
+gsap.registerPlugin(ScrollTrigger);
 export default initProject;

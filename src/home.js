@@ -1,10 +1,23 @@
 import Lenis from "@studio-freight/lenis";
 import "./styles/style.css";
-import { ScrollTrigger} from "gsap/ScrollTrigger";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap/src";
 import SplitType from "split-type";
 
 function initHome() {
+  let lenis = new Lenis({
+    lerp: 0.1,
+    duration: 1,
+    smoothWheel: true,
+    smoothTouch: false,
+    wheelMultiplier: 0.3,
+    touchMultiplier: 0.4,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  });
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
   let g = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent
     ),
@@ -15,6 +28,7 @@ function initHome() {
 
   ///////NAV LOGO SCRUB
   let logoTl = gsap.timeline({});
+  logoTl.set(".logo__svg", { transformOrigin: "50% 0%" });
   logoTl.fromTo(
     ".logo__svg",
     1.2,
@@ -42,10 +56,9 @@ function initHome() {
         end: () => `bottom bottom`,
         scrub: true,
         markers: false,
-
       },
       ease: "none",
-      opacity: () => 1 - (services.length - index) * 0.025
+      opacity: () => 1 - (services.length - index) * 0.025,
     });
 
     ScrollTrigger.create({
@@ -58,21 +71,21 @@ function initHome() {
       endTrigger: services.length,
       end: "max",
     });
-});
-ScrollTrigger.create({
-  trigger: ".why__us__section",
-  start: "bottom bottom",
-  pin: true,
-  pinSpacing: false,
-  markers: false,
-});
-ScrollTrigger.create({
-  trigger: ".services__left__inner",
-  start: "top top",
-  pin: true,
-  pinSpacing: false,
-  markers: false,
-});
+  });
+  ScrollTrigger.create({
+    trigger: ".why__us__section",
+    start: "bottom bottom",
+    pin: true,
+    pinSpacing: false,
+    markers: false,
+  });
+  ScrollTrigger.create({
+    trigger: ".services__left__inner",
+    start: "top top",
+    pin: true,
+    pinSpacing: false,
+    markers: false,
+  });
   ///////SPLITTEXT
   const text = new SplitType(".split");
   text.lines;
@@ -101,19 +114,60 @@ ScrollTrigger.create({
     );
   });
 
+  //////LINKS
 
-  //////LINKS////
+  let links = gsap.utils.toArray("a");
 
-  let links = gsap.utils.toArray("a")
-
-  links.forEach(link=>{
-    link.addEventListener("mouseenter", ()=>{
-        gsap.to(link.querySelector(".cta__block"), 0.5, {x: "100%", ease: "Power2.easeOut",})
-    })
-    link.addEventListener("mouseleave", ()=>{
-        gsap.to(link.querySelector(".cta__block"), 0.5, {x: "0%", ease: "Power2.easeOut",})
-    })
-  })
+  links.forEach((link) => {
+    link.addEventListener("mouseenter", () => {
+      gsap.to(link.querySelector(".cta__block"), 0.5, {
+        x: "100%",
+        ease: "Power2.easeOut",
+      });
+    });
+    link.addEventListener("mouseleave", () => {
+      gsap.to(link.querySelector(".cta__block"), 0.5, {
+        x: "0%",
+        ease: "Power2.easeOut",
+      });
+    });
+  });
+  /////////orange square clients
+  let tlSQR = gsap.timeline({
+      scrollTrigger: {
+          trigger: ".fourth__section",
+          start: "bottom bottom",
+          toggleActions: "play none none reverse",
+          markers: false
+        },
+  });
+  tlSQR.fromTo(
+    ".white",
+    1.2,
+    { scale: 0 },
+    { scale: 1, ease: "Power3.easeOut", delay: 0 }
+  );
+  tlSQR.fromTo(
+    ".black",
+    1.2,
+    { scale: 0 },
+    {
+      scale: 1,
+      ease: "Power3.easeOut",
+      delay: -0.7,
+    }
+  );
+  tlSQR.fromTo(
+    ".orange",
+    1.2,
+    { scale: 0 },
+    {
+      scale: 1,
+      ease: "Power3.easeOut",
+      delay: -0.8,
+    }
+  );
 }
+
 gsap.registerPlugin(ScrollTrigger);
 export default initHome;

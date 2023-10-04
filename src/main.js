@@ -33,81 +33,38 @@ async function pagetranIn() {
     let tl = gsap.timeline({
       onComplete: resolve,
     });
-    tl.fromTo(
-      ".transitiontext",
-      0.6,
-      {
-        y: "0%",
-        opacity: 1,
-      },
-      {
-        y: "100%",
-        opacity: 0,
-        ease: "Power3.easeInOut",
-        stagger: 0.1,
-      }
-    );
-    tl.to(".discover__playlist__text", 1.2, {
+    tl.to(".page__transition", 1.2, {
       width: "0vw",
-      height: "0vh",
-      ease: "Power3.easeInOut",
-      delay: -1,
-    });
-    tl.to("a", 0, {
-      pointerEvents: "all",
-      delay: 0.8,
+      ease: "Power3.easeOut",
+      delay: 0.3
     });
   });
 }
 async function pagetranOut(next) {
-  const transitionText = document.querySelector("#transitiontext");
-  if (transitionText) {
-    setTimeout(() => {
-      transitionText.textContent = next.namespace;
-    }, 1);
-  }
   return new Promise((resolve) => {
     let tl = gsap.timeline({
       onComplete: resolve,
     });
-    tl.to("a", 0, {
-      pointerEvents: "none",
+    tl.set(".page__transition", {
+      width: "100vw",
+      height: "0vh"
     });
-    if (window.matchMedia("(max-width: 768px)").matches) {
-      tl.to(".discover__playlist__text", 1.2, {
-        width: "70em",
-        height: "70em",
-        ease: "Power3.easeInOut",
-      });
-      // Your mobile-specific JavaScript code here
-    } else {
-      // Code for non-mobile devices
-      tl.to(".discover__playlist__text", 1.2, {
-        width: "30em",
-        height: "30em",
-        ease: "Power3.easeInOut",
-      });
-    }
+    tl.set(".icon__black", { y: "-100vh" });
+    tl.to(".page__transition", 1.2, {
+      height: "100vh",
+      ease: "Power3.easeOut",
+    });
     tl.fromTo(
-      ".transitiontext",
-      0.6,
+      ".icon__black",
+      1.5,
+      { y: "-100vh", rotateZ: 0 },
       {
-        y: "100%",
-        opacity: 0,
-      },
-      {
-        y: "0%",
-        opacity: 1,
+        y: "45vh",
+        rotateZ: 90,
+        ease: "Bounce.easeOut",
         delay: -1,
-        ease: "Power3.easeInOut",
-        stagger: 0.1,
       }
     );
-    tl.to(".discover__playlist__text", 1.2, {
-      width: "500em",
-      height: "500em",
-      ease: "Power3.easeInOut",
-    });
   });
 }
 /////////////////BARBA
@@ -166,7 +123,8 @@ function pageTransition() {
           setTimeout(() => {
             initProject();
             console.clear();
-          }, 50);
+            ScrollTrigger.refresh();
+          }, 1);
           ScrollTrigger.refresh();
         },
         beforeEnter() {
