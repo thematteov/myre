@@ -87,7 +87,7 @@ function initProject() {
         trigger: value,
         start: "top bottom-=10%",
         toggleActions: "play none none reverse",
-        markers: true,
+        markers: false,
       },
     });
     tl.fromTo(
