@@ -45,13 +45,6 @@ function initHome() {
       },
     }
   );
-
-
-  ////////////infinite banner
-  let banner = gsap.timeline({repeat: -1,});
-  banner.to(".hero__title", 25, {x: "-84em", ease: "linear"})
-  banner.to(".hero__title", 0, {x: "-0em",ease: "linear"})
-  ////////////infinite banner//////////////
   
   const services = gsap.utils.toArray(".service");
 
@@ -204,6 +197,17 @@ function initHome() {
       delay: -0.8,
     }
   );
+    ////////////infinite banner
+    let banner = gsap.timeline({repeat: -1,});
+    banner.to(".hero__title", 25, {x: "-84em", ease: "linear"})
+    banner.to(".hero__title", 0, {x: "-0em",ease: "linear"})
+    ////////////infinite banner//////////////
+
+  ///////////sales banner
+  let salesbanner = gsap.timeline({repeat: -1,});
+  salesbanner.to(".sales__banner", 5, {x: "-23.4em", ease: "linear"})
+  salesbanner.to(".sales__banner", 0, {x: "-0em",ease: "linear"})
+
 }
 
 gsap.registerPlugin(ScrollTrigger);
