@@ -5,19 +5,7 @@ import { gsap } from "gsap/src";
 import SplitType from "split-type";
 
 function initProject() {
-  let lenis = new Lenis({
-    lerp: 0.1,
-    duration: 1,
-    smoothWheel: true,
-    smoothTouch: false,
-    wheelMultiplier: 0.3,
-    touchMultiplier: 0.4,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  });
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
+
   let g = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent
     ),
@@ -110,7 +98,7 @@ function initProject() {
     const tween = gsap.to(img, {
       scrollTrigger: {
         trigger: img,
-        start: () => `top bottom-=100`,
+        start: () => `top top`,
         end: () => `bottom bottom`,
         scrub: true,
         markers: false,
@@ -120,7 +108,7 @@ function initProject() {
 
     ScrollTrigger.create({
       trigger: img,
-      start: "bottom bottom",
+      start: "top top",
       pin: true,
       pinSpacing: false,
       markers: false,
@@ -130,6 +118,26 @@ function initProject() {
     });
   });
   ////works images stack
+  var myVideo = document.getElementsByTagName("video");
+  for (let i = 0; i < myVideo.length; i++) {
+    if (typeof myVideo[i].loop == "boolean") {
+      // loop supported
+      myVideo[i].loop = true;
+    } else {
+      // loop property not supported
+      myVideo[i].addEventListener(
+        "ended",
+        function () {
+          this.currentTime = 0;
+          this.play();
+        },
+        false
+      );
+    }
+  }
+
+  const videos = document.querySelectorAll('video');
+            videos.forEach(video => video.play());
 }
 gsap.registerPlugin(ScrollTrigger);
 export default initProject;

@@ -46,6 +46,13 @@ function initHome() {
     }
   );
 
+
+  ////////////infinite banner
+  let banner = gsap.timeline({repeat: -1,});
+  banner.to(".hero__title", 25, {x: "-84em", ease: "linear"})
+  banner.to(".hero__title", 0, {x: "-0em",ease: "linear"})
+  ////////////infinite banner//////////////
+  
   const services = gsap.utils.toArray(".service");
 
   services.forEach((service, index) => {
@@ -58,7 +65,7 @@ function initHome() {
         markers: false,
       },
       ease: "none",
-      opacity: () => 1 - (services.length - index) * 0.025,
+      opacity: () => 1 - (services.length - index) * 0.02,
     });
 
     ScrollTrigger.create({
@@ -86,11 +93,20 @@ function initHome() {
     pinSpacing: false,
     markers: false,
   });
+  ScrollTrigger.create({
+    trigger: ".latest__project__review",
+    start: "top top",
+    pin: true,
+    pinSpacing: false,
+    markers: false,
+  });
   ///////SPLITTEXT
   const text = new SplitType(".split");
+  const char = new SplitType(".chars");
   text.lines;
 
   let lines = document.querySelectorAll(".split");
+  let chars = document.querySelectorAll(".chars");
 
   lines.forEach((value) => {
     let tl = gsap.timeline({
@@ -113,6 +129,27 @@ function initHome() {
       }
     );
   });
+  chars.forEach((value) => {
+    let tl = gsap.timeline({
+      paused: true,
+      scrollTrigger: {
+        trigger: value,
+        start: "top bottom-=30%",
+        toggleActions: "play none none reverse",
+      },
+    });
+    tl.fromTo(
+      value.querySelectorAll(".char"),
+      0.01,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        ease: "Power2.easeOut",
+        stagger: 0.05,
+      }
+    );
+  });
+
 
   //////LINKS
 

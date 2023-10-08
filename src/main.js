@@ -36,7 +36,7 @@ async function pagetranIn() {
     tl.to(".page__transition", 1.2, {
       width: "0vw",
       ease: "Power3.easeOut",
-      delay: 0.3
+      delay: 0.3,
     });
   });
 }
@@ -47,7 +47,7 @@ async function pagetranOut(next) {
     });
     tl.set(".page__transition", {
       width: "100vw",
-      height: "0vh"
+      height: "0vh",
     });
     tl.set(".icon__black", { y: "-100vh" });
     tl.to(".page__transition", 1.2, {
@@ -69,21 +69,7 @@ async function pagetranOut(next) {
 }
 /////////////////BARBA
 function pageTransition() {
-  let lenis = new Lenis({
-    lerp: 0.1,
-    duration: 1,
-    smoothWheel: true,
-    smoothTouch: false,
-    wheelMultiplier: 0.3,
-    touchMultiplier: 0.4,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  });
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-
-  requestAnimationFrame(raf);
+  let lenis;
   barba.init({
     transitions: [
       {
@@ -104,7 +90,23 @@ function pageTransition() {
         namespace: "home",
         afterEnter() {
           ScrollTrigger.refresh();
+          
           setTimeout(() => {
+            lenis = new Lenis({
+              lerp: 0.1,
+              duration: 1,
+              smoothWheel: true,
+              smoothTouch: false,
+              wheelMultiplier: 0.3,
+              touchMultiplier: 0.4,
+              easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            });
+            function raf(time) {
+              lenis.raf(time);
+              requestAnimationFrame(raf);
+            }
+
+            requestAnimationFrame(raf);
             initHome();
             console.clear();
           }, 1);
@@ -121,6 +123,21 @@ function pageTransition() {
         namespace: "project",
         afterEnter() {
           setTimeout(() => {
+            lenis = new Lenis({
+              lerp: 0.1,
+              duration: 1,
+              smoothWheel: true,
+              smoothTouch: false,
+              wheelMultiplier: 0.3,
+              touchMultiplier: 0.4,
+              easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            });
+            function raf(time) {
+              lenis.raf(time);
+              requestAnimationFrame(raf);
+            }
+
+            requestAnimationFrame(raf);
             initProject();
             console.clear();
             ScrollTrigger.refresh();
