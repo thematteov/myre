@@ -5,6 +5,61 @@ import { gsap } from "gsap/src";
 import SplitType from "split-type";
 
 function initHome() {
+  const text = new SplitType(".split");
+  const char = new SplitType(".chars");
+  text.lines;
+
+  ///////SPLITTEXT
+
+  let lines = document.querySelectorAll(".split");
+  let chars = document.querySelectorAll(".chars");
+
+  lines.forEach((value) => {
+    let tl = gsap.timeline({
+      paused: true,
+      scrollTrigger: {
+        trigger: value,
+        start: "top bottom-=10%",
+        toggleActions: "play none none reverse",
+        markers: false,
+      },
+    });
+    tl.fromTo(
+      value.querySelectorAll(".word"),
+      1,
+      { y: "100%", opacity: 0 },
+      {
+        y: "0%",
+        opacity: 1,
+        ease: "Power2.easeOut",
+        stagger: 0.05,
+      }
+    );
+  });
+  chars.forEach((value) => {
+    let tl = gsap.timeline({
+      paused: true,
+      scrollTrigger: {
+        trigger: value,
+        start: "top bottom-=30%",
+        toggleActions: "play none none reverse",
+      },
+    });
+    tl.fromTo(
+      value.querySelectorAll(".char"),
+      1,
+      { y: "100%", opacity: 0 },
+      {
+        y: "0%",
+        opacity: 1,
+        ease: "Power2.easeOut",
+        stagger: 0.05,
+      }
+    );
+  });
+
+  ///////////////
+
   let lenis = new Lenis({
     lerp: 0.1,
     duration: 1,
@@ -26,44 +81,84 @@ function initHome() {
   if (!g || !y || !h.matches) {
   }
 
-  ///////NAV LOGO SCRUB
+  //home pill
   let logoTl = gsap.timeline({});
-  logoTl.set(".logo__svg", { transformOrigin: "50% 0%" });
   logoTl.fromTo(
-    ".logo__svg",
-    1.2,
-    { scale: 1 },
+    ".home__project__pill__wrapper",
+    { scale: 1, opacity: 1 },
     {
       scale: 0.8,
-      transformOrigin: "100 50",
+      opacity: 0.8,
       ease: "Power3.easeOut",
       scrollTrigger: {
-        trigger: ".logo__svg",
-        start: "top top",
-        pin: true,
+        trigger: ".home__project__pill__wrapper",
+        start: "bottom bottom-=10%",
         scrub: true,
       },
     }
   );
-  
-  const services = gsap.utils.toArray(".service");
+  logoTl.to(".videointroduction", {
+    y: "-20%",
+    // ease: "Power3.easeOut",
+    scrollTrigger: {
+      trigger: ".home__project__pill__wrapper",
+      start: "bottom bottom",
+      scrub: true,
+    },
+  });
+
+  ScrollTrigger.create({
+    trigger: ".home__first__section",
+    start: "top top",
+    end: "bottom top-=200%",
+    pin: true,
+    pinSpacing: false,
+  });
+  ScrollTrigger.create({
+    trigger: ".hero__lst__prj__info__panel",
+    start: "bottom bottom",
+    end: "bottom top-=100%",
+    pin: true,
+    pinSpacing: false,
+  });
+  ScrollTrigger.create({
+    trigger: ".hey__section",
+    start: "top top",
+    end: "bottom top",
+    pin: true,
+    pinSpacing: false,
+  });
+  gsap.to(".our__values__wrapper", {
+    x: "-83.5%",
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".how__section",
+      start: "bottom bottom-=20%",
+      end: () =>
+        "+=" + document.querySelector(".our__values__wrapper").offsetWidth,
+      pin: true,
+      scrub: true,
+      pinSpacing: false,
+    },
+  });
+
+  const services = gsap.utils.toArray(".service__wrapper");
 
   services.forEach((service, index) => {
     const tween = gsap.to(service, {
       scrollTrigger: {
         trigger: service,
-        start: () => `top bottom-=100`,
-        end: () => `bottom bottom`,
+        start: "top top+=10%",
+        end: "bottom bottom",
         scrub: true,
         markers: false,
       },
       ease: "none",
-      opacity: () => 1 - (services.length - index) * 0.02,
     });
 
     ScrollTrigger.create({
       trigger: service,
-      start: "bottom bottom",
+      start: "top top+=20%",
       pin: true,
       pinSpacing: false,
       markers: false,
@@ -79,135 +174,144 @@ function initHome() {
     pinSpacing: false,
     markers: false,
   });
-  ScrollTrigger.create({
-    trigger: ".services__left__inner",
-    start: "top top",
-    pin: true,
-    pinSpacing: false,
-    markers: false,
-  });
-  ScrollTrigger.create({
-    trigger: ".latest__project__review",
-    start: "top top",
-    pin: true,
-    pinSpacing: false,
-    markers: false,
-  });
-  ///////SPLITTEXT
-  const text = new SplitType(".split");
-  const char = new SplitType(".chars");
-  text.lines;
 
-  let lines = document.querySelectorAll(".split");
-  let chars = document.querySelectorAll(".chars");
-
-  lines.forEach((value) => {
-    let tl = gsap.timeline({
-      paused: true,
-      scrollTrigger: {
-        trigger: value,
-        start: "top bottom-=10%",
-        toggleActions: "play none none reverse",
+  //////text count up
+  var konditionen = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".how__section",
+      start: "top top+=10%",
+    },
+    ease: "none",
+  });
+  konditionen.from(
+    ".number__counting h1",
+    {
+      duration: 200,
+      ease: "none",
+      innerText: 0,
+      roundProps: "innerText",
+      onUpdate: function () {
+        this.targets().forEach((target) => {
+          const val = gsap.getProperty(target, "innerText");
+          target.innerText = numberWithCommas(val);
+        });
       },
+    },
+    "<"
+  );
+
+  function numberWithCommas(n) {
+    var parts = n.toString().split(".");
+    return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+  //////enter animation
+
+  let enterbtn = document.querySelector(".enter");
+  //////preloader trigger
+  enterbtn.addEventListener("click", () => {
+    gsap.to(".preloader", 1.2, {
+      opacity: 0,
+      ease: "Power2.easeOut",
     });
-    tl.fromTo(
-      value.querySelectorAll(".line"),
-      0.8,
-      { y: "50%", opacity: 0 },
+    gsap.to(".preloader", 0, {
+      display: "none",
+      delay: 1.2
+    });
+
+    let music = document.querySelector("audio");
+    music.volume = 0.2;
+    music.play();
+
+    ///////NAV LOGO SCRUB
+    let introTl = gsap.timeline();
+    introTl.set(".logo__svg", { transformOrigin: "0 50" });
+    introTl.fromTo(
+      ".logo__svg",
+      1.5,
+      { height: "50em" },
+      {
+        height: "4em",
+        delay: 0.5,
+        transformOrigin: "0 50",
+        ease: "Power3.easeOut",
+        scrollTrigger: {
+          trigger: ".logo__svg",
+        },
+      }
+    );
+
+    const text = new SplitType(".splitfirst");
+    text.lines;
+
+    ///////SPLITTEXT
+
+    let lines = document.querySelectorAll(".splitfirst");
+
+    lines.forEach((value) => {
+      gsap.fromTo(
+        value.querySelectorAll(".word"),
+        1.2,
+        { y: "70%", opacity: 0 },
+        {
+          y: "0%",
+          opacity: 1,
+          ease: "Power3.easeOut",
+          stagger: 0.05,
+          delay: 1,
+        }
+      );
+    });
+    introTl.fromTo(
+      ".index__line",
+      1.2,
+      { width: "0vw" },
+      {
+        width: "100vw",
+        ease: "Power3.easeOut",
+        stagger: 0.05,
+        delay: 0,
+      }
+    );
+    introTl.fromTo(
+      ".index__i",
+      1.2,
+      { y: "70%", opacity: 0 },
       {
         y: "0%",
         opacity: 1,
-        ease: "Power2.easeOut",
-        stagger: 0.1,
-      }
-    );
-  });
-  chars.forEach((value) => {
-    let tl = gsap.timeline({
-      paused: true,
-      scrollTrigger: {
-        trigger: value,
-        start: "top bottom-=30%",
-        toggleActions: "play none none reverse",
-      },
-    });
-    tl.fromTo(
-      value.querySelectorAll(".char"),
-      0.01,
-      { opacity: 0 },
-      {
-        opacity: 1,
-        ease: "Power2.easeOut",
+        ease: "Power3.easeOut",
         stagger: 0.05,
+        delay: -0.5,
+      }
+    );
+    introTl.fromTo(
+      ".image__me",
+      1.2,
+      { height: "0em" },
+      {
+        height: "5.63em",
+        ease: "Power3.easeOut",
+        delay: -1
       }
     );
   });
 
+  let image = document.querySelector('.image__me')
 
-  //////LINKS
-
-  let links = gsap.utils.toArray("a");
-
-  links.forEach((link) => {
-    link.addEventListener("mouseenter", () => {
-      gsap.to(link.querySelector(".cta__block"), 0.5, {
-        x: "100%",
-        ease: "Power2.easeOut",
-      });
-    });
-    link.addEventListener("mouseleave", () => {
-      gsap.to(link.querySelector(".cta__block"), 0.5, {
-        x: "0%",
-        ease: "Power2.easeOut",
-      });
-    });
-  });
-  /////////orange square clients
-  let tlSQR = gsap.timeline({
-      scrollTrigger: {
-          trigger: ".fourth__section",
-          start: "bottom bottom",
-          toggleActions: "play none none reverse",
-          markers: false
-        },
-  });
-  tlSQR.fromTo(
-    ".white",
-    1.2,
-    { scale: 0 },
-    { scale: 1, ease: "Power3.easeOut", delay: 0 }
-  );
-  tlSQR.fromTo(
-    ".black",
-    1.2,
-    { scale: 0 },
-    {
-      scale: 1,
-      ease: "Power3.easeOut",
-      delay: -0.7,
-    }
-  );
-  tlSQR.fromTo(
-    ".orange",
-    1.2,
-    { scale: 0 },
-    {
-      scale: 1,
-      ease: "Power3.easeOut",
-      delay: -0.8,
-    }
-  );
-    ////////////infinite banner
-    let banner = gsap.timeline({repeat: -1,});
-    banner.to(".hero__title", 25, {x: "-84em", ease: "linear"})
-    banner.to(".hero__title", 0, {x: "-0em",ease: "linear"})
-    ////////////infinite banner//////////////
-
-  ///////////sales banner
-  let salesbanner = gsap.timeline({repeat: -1,});
-  salesbanner.to(".sales__banner", 5, {x: "-23.4em", ease: "linear"})
-  salesbanner.to(".sales__banner", 0, {x: "-0em",ease: "linear"})
-
+  image.addEventListener('mouseenter', ()=>{
+    gsap.to(
+      ".image__me",
+      0,
+      { overflow: 'visible', zIndex: 9 },
+    );
+  })
+  image.addEventListener('mouseout', ()=>{
+    gsap.to(
+      ".image__me",
+      0,
+      { overflow: 'hidden', zIndex: 9 },
+    );
+  })
 }
 
 gsap.registerPlugin(ScrollTrigger);

@@ -6,6 +6,9 @@ import imagesLoaded from "imagesloaded";
 
 import initProject from "./project";
 import initHome from "./home";
+import mouseAnimation from "./mouse";
+
+mouseAnimation();
 
 const content = document.querySelector("img");
 const imgLoad = new imagesLoaded(document);
@@ -15,15 +18,14 @@ imgLoad.on("done", () => {
   contentLoaded = true;
 
   gsap.fromTo(
-    ".preloader",
-    1,
-    { opacity: 1 },
+    ".enter",
+    1.5,
+    { y: "0vh", rotateZ: 0 },
     {
-      opacity: 0,
-      delay: 0.5,
-      onComplete: () => {
-        gsap.to(".preloader", { display: "none", delay: 0.5 });
-      },
+      y: "145vh",
+      rotateZ: 90,
+      ease: "Bounce.easeOut",
+      delay: 1
     }
   );
 });

@@ -1,3 +1,20 @@
 .split {
-    font-kerning: none;
-  }  
+  font-kerning: none;
+}
+.line {
+  display: inline-block;
+  position: relative;
+}
+#mousecursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 999;
+}
+
+line {
+  stroke: #e25903;
+  stroke-width: 2;
+}
