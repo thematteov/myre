@@ -13,7 +13,7 @@
   "devDependencies": {
     "jquery": "^3.6.0",
     "rimraf": "^3.0.2",
-    "vite": "^2.7.2",
+    "vite": "3.0",
     "vite-plugin-glsl": "^0.1.1"
   },
   "dependencies": {

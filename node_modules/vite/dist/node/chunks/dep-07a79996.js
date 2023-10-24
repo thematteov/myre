@@ -1,5 +1,11 @@
-'use strict';
+import { fileURLToPath as __cjs_fileURLToPath } from 'node:url';
+import { dirname as __cjs_dirname } from 'node:path';
+import { createRequire as __cjs_createRequire } from 'node:module';
 
+const __filename = __cjs_fileURLToPath(import.meta.url);
+const __dirname = __cjs_dirname(__filename);
+const require = __cjs_createRequire(import.meta.url);
+const __require = require;
 var openParentheses = "(".charCodeAt(0);
 var closeParentheses = ")".charCodeAt(0);
 var singleQuote = "'".charCodeAt(0);
@@ -11,7 +17,7 @@ var colon = ":".charCodeAt(0);
 var star = "*".charCodeAt(0);
 var uLower = "u".charCodeAt(0);
 var uUpper = "U".charCodeAt(0);
-var plus$1 = "+".charCodeAt(0);
+var plus = "+".charCodeAt(0);
 var isUnicodeRange = /^[a-f0-9?-]+$/i;
 
 var parse$1 = function(input) {
@@ -292,7 +298,7 @@ var parse$1 = function(input) {
         name = token;
       } else if (
         (uLower === token.charCodeAt(0) || uUpper === token.charCodeAt(0)) &&
-        plus$1 === token.charCodeAt(1) &&
+        plus === token.charCodeAt(1) &&
         isUnicodeRange.test(token.slice(2))
       ) {
         tokens.push({
@@ -394,126 +400,134 @@ function stringify$1(nodes, custom) {
 
 var stringify_1 = stringify$1;
 
-var minus = "-".charCodeAt(0);
-var plus = "+".charCodeAt(0);
-var dot = ".".charCodeAt(0);
-var exp = "e".charCodeAt(0);
-var EXP = "E".charCodeAt(0);
+var unit;
+var hasRequiredUnit;
 
-// Check if three code points would start a number
-// https://www.w3.org/TR/css-syntax-3/#starts-with-a-number
-function likeNumber(value) {
-  var code = value.charCodeAt(0);
-  var nextCode;
+function requireUnit () {
+	if (hasRequiredUnit) return unit;
+	hasRequiredUnit = 1;
+	var minus = "-".charCodeAt(0);
+	var plus = "+".charCodeAt(0);
+	var dot = ".".charCodeAt(0);
+	var exp = "e".charCodeAt(0);
+	var EXP = "E".charCodeAt(0);
 
-  if (code === plus || code === minus) {
-    nextCode = value.charCodeAt(1);
+	// Check if three code points would start a number
+	// https://www.w3.org/TR/css-syntax-3/#starts-with-a-number
+	function likeNumber(value) {
+	  var code = value.charCodeAt(0);
+	  var nextCode;
 
-    if (nextCode >= 48 && nextCode <= 57) {
-      return true;
-    }
+	  if (code === plus || code === minus) {
+	    nextCode = value.charCodeAt(1);
 
-    var nextNextCode = value.charCodeAt(2);
+	    if (nextCode >= 48 && nextCode <= 57) {
+	      return true;
+	    }
 
-    if (nextCode === dot && nextNextCode >= 48 && nextNextCode <= 57) {
-      return true;
-    }
+	    var nextNextCode = value.charCodeAt(2);
 
-    return false;
-  }
+	    if (nextCode === dot && nextNextCode >= 48 && nextNextCode <= 57) {
+	      return true;
+	    }
 
-  if (code === dot) {
-    nextCode = value.charCodeAt(1);
+	    return false;
+	  }
 
-    if (nextCode >= 48 && nextCode <= 57) {
-      return true;
-    }
+	  if (code === dot) {
+	    nextCode = value.charCodeAt(1);
 
-    return false;
-  }
+	    if (nextCode >= 48 && nextCode <= 57) {
+	      return true;
+	    }
 
-  if (code >= 48 && code <= 57) {
-    return true;
-  }
+	    return false;
+	  }
 
-  return false;
+	  if (code >= 48 && code <= 57) {
+	    return true;
+	  }
+
+	  return false;
+	}
+
+	// Consume a number
+	// https://www.w3.org/TR/css-syntax-3/#consume-number
+	unit = function(value) {
+	  var pos = 0;
+	  var length = value.length;
+	  var code;
+	  var nextCode;
+	  var nextNextCode;
+
+	  if (length === 0 || !likeNumber(value)) {
+	    return false;
+	  }
+
+	  code = value.charCodeAt(pos);
+
+	  if (code === plus || code === minus) {
+	    pos++;
+	  }
+
+	  while (pos < length) {
+	    code = value.charCodeAt(pos);
+
+	    if (code < 48 || code > 57) {
+	      break;
+	    }
+
+	    pos += 1;
+	  }
+
+	  code = value.charCodeAt(pos);
+	  nextCode = value.charCodeAt(pos + 1);
+
+	  if (code === dot && nextCode >= 48 && nextCode <= 57) {
+	    pos += 2;
+
+	    while (pos < length) {
+	      code = value.charCodeAt(pos);
+
+	      if (code < 48 || code > 57) {
+	        break;
+	      }
+
+	      pos += 1;
+	    }
+	  }
+
+	  code = value.charCodeAt(pos);
+	  nextCode = value.charCodeAt(pos + 1);
+	  nextNextCode = value.charCodeAt(pos + 2);
+
+	  if (
+	    (code === exp || code === EXP) &&
+	    ((nextCode >= 48 && nextCode <= 57) ||
+	      ((nextCode === plus || nextCode === minus) &&
+	        nextNextCode >= 48 &&
+	        nextNextCode <= 57))
+	  ) {
+	    pos += nextCode === plus || nextCode === minus ? 3 : 2;
+
+	    while (pos < length) {
+	      code = value.charCodeAt(pos);
+
+	      if (code < 48 || code > 57) {
+	        break;
+	      }
+
+	      pos += 1;
+	    }
+	  }
+
+	  return {
+	    number: value.slice(0, pos),
+	    unit: value.slice(pos)
+	  };
+	};
+	return unit;
 }
-
-// Consume a number
-// https://www.w3.org/TR/css-syntax-3/#consume-number
-var unit = function(value) {
-  var pos = 0;
-  var length = value.length;
-  var code;
-  var nextCode;
-  var nextNextCode;
-
-  if (length === 0 || !likeNumber(value)) {
-    return false;
-  }
-
-  code = value.charCodeAt(pos);
-
-  if (code === plus || code === minus) {
-    pos++;
-  }
-
-  while (pos < length) {
-    code = value.charCodeAt(pos);
-
-    if (code < 48 || code > 57) {
-      break;
-    }
-
-    pos += 1;
-  }
-
-  code = value.charCodeAt(pos);
-  nextCode = value.charCodeAt(pos + 1);
-
-  if (code === dot && nextCode >= 48 && nextCode <= 57) {
-    pos += 2;
-
-    while (pos < length) {
-      code = value.charCodeAt(pos);
-
-      if (code < 48 || code > 57) {
-        break;
-      }
-
-      pos += 1;
-    }
-  }
-
-  code = value.charCodeAt(pos);
-  nextCode = value.charCodeAt(pos + 1);
-  nextNextCode = value.charCodeAt(pos + 2);
-
-  if (
-    (code === exp || code === EXP) &&
-    ((nextCode >= 48 && nextCode <= 57) ||
-      ((nextCode === plus || nextCode === minus) &&
-        nextNextCode >= 48 &&
-        nextNextCode <= 57))
-  ) {
-    pos += nextCode === plus || nextCode === minus ? 3 : 2;
-
-    while (pos < length) {
-      code = value.charCodeAt(pos);
-
-      if (code < 48 || code > 57) {
-        break;
-      }
-
-      pos += 1;
-    }
-  }
-
-  return {
-    number: value.slice(0, pos),
-    unit: value.slice(pos)
-  };
-};
 
 var parse = parse$1;
 var walk = walk$1;
@@ -536,7 +550,7 @@ ValueParser.prototype.walk = function(cb, bubble) {
   return this;
 };
 
-ValueParser.unit = unit;
+ValueParser.unit = requireUnit();
 
 ValueParser.walk = walk;
 
@@ -544,4 +558,4 @@ ValueParser.stringify = stringify;
 
 var lib = ValueParser;
 
-exports.lib = lib;
+export { lib as l };
