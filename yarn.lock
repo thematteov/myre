@@ -51,7 +51,7 @@ esbuild-darwin-arm64@0.14.54:
   resolved "https://registry.npmjs.org/esbuild-darwin-arm64/-/esbuild-darwin-arm64-0.14.54.tgz"
   integrity sha512-OPafJHD2oUPyvJMrsCvDGkRrVCar5aVyHfWGQzY1dWnzErjrDuSETxwA2HSsyg2jORLY8yBfzc1MIpUkXlctmw==
 
-esbuild@^0.14.54:
+esbuild@^0.14.27:
   version "0.14.54"
   resolved "https://registry.npmjs.org/esbuild/-/esbuild-0.14.54.tgz"
   integrity sha512-Cy9llcy8DvET5uznocPyqL3BFRrFXSVqbgpMJ9Wz8oVjZlh/zUSNbPRbov0VX7VxN2JH1Oa0uNxZ7eLRb62pJA==
