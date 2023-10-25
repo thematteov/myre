@@ -15,6 +15,9 @@ window.addEventListener('load', ()=>{
     rotate: 90
   })
 })
+window.addEventListener('resize', ()=>{
+  ScrollTrigger.update()
+})
 
 async function pagetranIn() {
   return new Promise((resolve) => {
