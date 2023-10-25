@@ -5,5 +5,5 @@
     font-kerning: none;
 }
 body{
-    position: absolute;
+    position: fixed;
 }
