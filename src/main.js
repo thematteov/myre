@@ -17,6 +17,9 @@ window.addEventListener('load', ()=>{
 })
 window.addEventListener('resize', ()=>{
   ScrollTrigger.update()
+  ScrollTrigger.config({
+    autoRefreshEvents: "visibilitychange,DOMContentLoaded,load" // notice "resize" isn't in the list
+  });
 })
 
 async function pagetranIn() {
