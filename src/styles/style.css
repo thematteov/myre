@@ -4,3 +4,6 @@
 .char{
     font-kerning: none;
 }
+body{
+    position: absolute;
+}
