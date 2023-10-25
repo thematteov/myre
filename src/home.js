@@ -183,8 +183,7 @@ function initHome() {
     const tween = gsap.to(service, {
       scrollTrigger: {
         trigger: service,
-        start: "top top+=10%",
-        end: "bottom bottom",
+        start: "bottom bottom",
         scrub: true,
         markers: false,
       },
