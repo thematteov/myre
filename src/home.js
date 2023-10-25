@@ -180,26 +180,53 @@ function initHome() {
   const services = gsap.utils.toArray(".service__wrapper");
 
   services.forEach((service, index) => {
-    const tween = gsap.to(service, {
-      scrollTrigger: {
+
+    if (window.matchMedia("(max-width: 768px)").matches) {
+      const tween = gsap.to(service, {
+        scrollTrigger: {
+          trigger: service,
+          start: "bottom bottom",
+          scrub: true,
+          markers: false,
+        },
+        ease: "none",
+      });
+  
+      ScrollTrigger.create({
         trigger: service,
         start: "bottom bottom",
-        scrub: true,
+        pin: true,
+        pinSpacing: false,
         markers: false,
-      },
-      ease: "none",
-    });
-
-    ScrollTrigger.create({
-      trigger: service,
-      start: "top top+=20%",
-      pin: true,
-      pinSpacing: false,
-      markers: false,
-      id: "pin",
-      endTrigger: services.length,
-      end: "max",
-    });
+        id: "pin",
+        endTrigger: services.length,
+        end: "max",
+      });
+      // Your mobile-specific JavaScript code here
+    } else {
+      // Code for non-mobile devices   
+      const tween = gsap.to(service, {
+        scrollTrigger: {
+          trigger: service,
+          start: "top top+=10%",
+          end: "bottom bottom",
+          scrub: true,
+          markers: false,
+        },
+        ease: "none",
+      });
+  
+      ScrollTrigger.create({
+        trigger: service,
+        start: "top top+=20%",
+        pin: true,
+        pinSpacing: false,
+        markers: false,
+        id: "pin",
+        endTrigger: services.length,
+        end: "max",
+      });
+    }
   });
   ScrollTrigger.create({
     trigger: ".why__us__section",
