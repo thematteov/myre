@@ -3,8 +3,17 @@ import "./styles/style.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap/src";
 import SplitType from "split-type";
+import { easing } from "jquery";
 
 function initHome() {
+  //////infinite banner
+
+  gsap.to(".latest__banner", 20, {
+    x: "-82.6em",
+    ease: "linear",
+    repeat: -1
+  });
+
   const text = new SplitType(".split");
   const char = new SplitType(".chars");
   text.lines;
@@ -128,12 +137,38 @@ function initHome() {
     pin: true,
     pinSpacing: false,
   });
+  gsap.to(".cover", {
+    x: "-25%",
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".how__section",
+      start: "top top",
+      end: () =>
+        "+=" + document.querySelector(".our__values__wrapper").offsetWidth,
+      pin: true,
+      scrub: true,
+      pinSpacing: false,
+    },
+  });
   gsap.to(".our__values__wrapper", {
     x: "-83.5%",
     ease: "none",
     scrollTrigger: {
       trigger: ".how__section",
-      start: "bottom bottom-=20%",
+      start: "top top",
+      end: () =>
+        "+=" + document.querySelector(".our__values__wrapper").offsetWidth,
+      pin: true,
+      scrub: true,
+      pinSpacing: false,
+    },
+  });
+  gsap.to(".gallery", {
+    x: "83.5%",
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".how__section",
+      start: "top top",
       end: () =>
         "+=" + document.querySelector(".our__values__wrapper").offsetWidth,
       pin: true,
@@ -215,7 +250,7 @@ function initHome() {
     });
     gsap.to(".preloader", 0, {
       display: "none",
-      delay: 1.2
+      delay: 1.2,
     });
 
     let music = document.querySelector("audio");
@@ -291,27 +326,19 @@ function initHome() {
       {
         height: "5.63em",
         ease: "Power3.easeOut",
-        delay: -1
+        delay: -1,
       }
     );
   });
 
-  let image = document.querySelector('.image__me')
+  let image = document.querySelector(".image__me");
 
-  image.addEventListener('mouseenter', ()=>{
-    gsap.to(
-      ".image__me",
-      0,
-      { overflow: 'visible', zIndex: 9 },
-    );
-  })
-  image.addEventListener('mouseout', ()=>{
-    gsap.to(
-      ".image__me",
-      0,
-      { overflow: 'hidden', zIndex: 9 },
-    );
-  })
+  image.addEventListener("mouseenter", () => {
+    gsap.to(".image__me", 0, { overflow: "visible", zIndex: 9 });
+  });
+  image.addEventListener("mouseout", () => {
+    gsap.to(".image__me", 0, { overflow: "hidden", zIndex: 9 });
+  });
 }
 
 gsap.registerPlugin(ScrollTrigger);
