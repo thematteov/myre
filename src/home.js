@@ -142,7 +142,7 @@ function initHome() {
     ease: "none",
     scrollTrigger: {
       trigger: ".how__section",
-      start: "top top",
+      start: "top top-=20%",
       end: () =>
         "+=" + document.querySelector(".our__values__wrapper").offsetWidth,
       pin: true,
@@ -155,7 +155,7 @@ function initHome() {
     ease: "none",
     scrollTrigger: {
       trigger: ".how__section",
-      start: "top top",
+      start: "top top-=20%",
       end: () =>
         "+=" + document.querySelector(".our__values__wrapper").offsetWidth,
       pin: true,
@@ -168,7 +168,7 @@ function initHome() {
     ease: "none",
     scrollTrigger: {
       trigger: ".how__section",
-      start: "top top",
+      start: "top top-=20%",
       end: () =>
         "+=" + document.querySelector(".our__values__wrapper").offsetWidth,
       pin: true,
