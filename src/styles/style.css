@@ -3,4 +3,5 @@
 }
 .char{
     font-kerning: none;
+    overflow: visible;
 }
