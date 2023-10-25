@@ -11,7 +11,7 @@ function initHome() {
   gsap.to(".latest__banner", 20, {
     x: "-82.6em",
     ease: "linear",
-    repeat: -1
+    repeat: -1,
   });
 
   const text = new SplitType(".split");
@@ -31,6 +31,7 @@ function initHome() {
         start: "top bottom-=10%",
         toggleActions: "play none none reverse",
         markers: false,
+        scroller: document.body,
       },
     });
     tl.fromTo(
@@ -52,6 +53,7 @@ function initHome() {
         trigger: value,
         start: "top bottom-=30%",
         toggleActions: "play none none reverse",
+        scroller: document.body,
       },
     });
     tl.fromTo(
@@ -103,6 +105,7 @@ function initHome() {
         trigger: ".home__project__pill__wrapper",
         start: "bottom bottom-=10%",
         scrub: true,
+        scroller: document.body,
       },
     }
   );
@@ -113,6 +116,7 @@ function initHome() {
       trigger: ".home__project__pill__wrapper",
       start: "bottom bottom",
       scrub: true,
+      scroller: document.body,
     },
   });
 
@@ -122,6 +126,7 @@ function initHome() {
     end: "bottom top-=200%",
     pin: true,
     pinSpacing: false,
+    scroller: document.body,
   });
   ScrollTrigger.create({
     trigger: ".hero__lst__prj__info__panel",
@@ -129,6 +134,7 @@ function initHome() {
     end: "bottom top-=100%",
     pin: true,
     pinSpacing: false,
+    scroller: document.body,
   });
   ScrollTrigger.create({
     trigger: ".hey__section",
@@ -136,6 +142,7 @@ function initHome() {
     end: "bottom top",
     pin: true,
     pinSpacing: false,
+    scroller: document.body,
   });
   gsap.to(".cover", {
     x: "-25%",
@@ -148,6 +155,7 @@ function initHome() {
       pin: true,
       scrub: true,
       pinSpacing: false,
+      scroller: document.body,
     },
   });
   gsap.to(".our__values__wrapper", {
@@ -161,6 +169,7 @@ function initHome() {
       pin: true,
       scrub: true,
       pinSpacing: false,
+      scroller: document.body,
     },
   });
   gsap.to(".gallery", {
@@ -174,6 +183,7 @@ function initHome() {
       pin: true,
       scrub: true,
       pinSpacing: false,
+      scroller: document.body,
     },
   });
 
@@ -187,6 +197,7 @@ function initHome() {
         end: "bottom bottom",
         scrub: true,
         markers: false,
+        scroller: document.body,
       },
       ease: "none",
     });
@@ -200,6 +211,7 @@ function initHome() {
       id: "pin",
       endTrigger: services.length,
       end: "max",
+      scroller: document.body,
     });
   });
   ScrollTrigger.create({
@@ -208,6 +220,7 @@ function initHome() {
     pin: true,
     pinSpacing: false,
     markers: false,
+    scroller: document.body,
   });
 
   //////text count up
@@ -215,6 +228,7 @@ function initHome() {
     scrollTrigger: {
       trigger: ".how__section",
       start: "top top+=10%",
+      scroller: document.body,
     },
     ease: "none",
   });
@@ -271,6 +285,7 @@ function initHome() {
         ease: "Power3.easeOut",
         scrollTrigger: {
           trigger: ".logo__svg",
+          scroller: document.body,
         },
       }
     );
