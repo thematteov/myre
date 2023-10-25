@@ -343,3 +343,4 @@ function initHome() {
 
 gsap.registerPlugin(ScrollTrigger);
 export default initHome;
+////update
