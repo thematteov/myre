@@ -120,13 +120,6 @@ function initHome() {
     pinSpacing: false,
   });
   ScrollTrigger.create({
-    trigger: ".hero__lst__prj__info__panel",
-    start: "bottom bottom",
-    end: "bottom top-=100%",
-    pin: true,
-    pinSpacing: false,
-  });
-  ScrollTrigger.create({
     trigger: ".hey__section",
     start: "top top",
     end: "bottom top",
