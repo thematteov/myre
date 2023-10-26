@@ -10,7 +10,7 @@ function initHome() {
   gsap.to(".latest__banner", 20, {
     x: "-82.6em",
     ease: "linear",
-    repeat: -1
+    repeat: -1,
   });
 
   const text = new SplitType(".split");
@@ -82,15 +82,35 @@ function initHome() {
     requestAnimationFrame(raf);
   }
 
+  //home pill
+  if (window.matchMedia("(max-width: 768px)").matches) {
+    gsap.to(".latest_video", 1.2, {
+      height: "50em",
+      ease: "Power3.easeOut",
+      scrollTrigger: {
+        trigger: ".home__first__section",
+        start: "top top+=30%",
+      },
+    });
+  } else {
+    gsap.to(".latest_video", 1.2, {
+      height: "25em",
+      ease: "Power3.easeOut",
+      scrollTrigger: {
+        trigger: ".home__first__section",
+        start: "top top+=30%",
+      },
+    });
+  }
+
   gsap.to(".detail__2", 1.2, {
     height: "8em",
     ease: "Power3.easeOut",
     scrollTrigger: {
       trigger: ".home__first__section",
       start: "top top+=30%",
-    }
-  })
-
+    },
+  });
 
   ScrollTrigger.create({
     trigger: ".home__first__section",
@@ -156,21 +176,7 @@ function initHome() {
   const services = gsap.utils.toArray(".service__wrapper");
 
   services.forEach((service, index) => {
-
     if (window.matchMedia("(max-width: 768px)").matches) {
-
-      //home pill
-
-  gsap.to(".latest_video", 1.2, {
-    height: "50em",
-    ease: "Power3.easeOut",
-    scrollTrigger: {
-      trigger: ".home__first__section",
-      start: "top top+=30%",
-    }
-  })
-
-
       const tween = gsap.to(service, {
         scrollTrigger: {
           trigger: service,
@@ -180,7 +186,7 @@ function initHome() {
         },
         ease: "none",
       });
-  
+
       ScrollTrigger.create({
         trigger: service,
         start: "bottom bottom",
@@ -193,19 +199,7 @@ function initHome() {
       });
       // Your mobile-specific JavaScript code here
     } else {
-
-      //home pill
-
-  gsap.to(".latest_video", 1.2, {
-    height: "25em",
-    ease: "Power3.easeOut",
-    scrollTrigger: {
-      trigger: ".home__first__section",
-      start: "top top+=30%",
-    }
-  })
-
-      // Code for non-mobile devices   
+      // Code for non-mobile devices
       const tween = gsap.to(service, {
         scrollTrigger: {
           trigger: service,
@@ -216,7 +210,7 @@ function initHome() {
         },
         ease: "none",
       });
-  
+
       ScrollTrigger.create({
         trigger: service,
         start: "top top+=20%",
@@ -366,7 +360,6 @@ function initHome() {
   image.addEventListener("mouseout", () => {
     gsap.to(".image__me", 0, { overflow: "hidden", zIndex: 9 });
   });
-  
 }
 
 gsap.registerPlugin(ScrollTrigger);
