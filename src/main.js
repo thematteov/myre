@@ -8,19 +8,29 @@ import initHome from "./home";
 
 const content = document.querySelector("img");
 
-window.addEventListener('load', ()=>{
-  gsap.to('.enter', 1.2, {
-    y: "145vh",
-    ease: 'Power3.easeOut',
-    rotate: 90
-  })
-})
-window.addEventListener('resize', ()=>{
-  ScrollTrigger.update()
-  ScrollTrigger.config({
-    autoRefreshEvents: "visibilitychange,DOMContentLoaded,load" // notice "resize" isn't in the list
+window.addEventListener("load", () => {
+  gsap.to(".enter", 1.8, {
+    y: "127.3vh",
+    ease: "Bounce.easeOut",
+    rotate: 90,
   });
-})
+  gsap.to(".logo__svg__preloader", 1.8, {
+    opacity: 1,
+    ease: "Power3.easeOut",
+  });
+});
+
+if (window.matchMedia("(max-width: 768px)").matches) {
+  // Your mobile-specific JavaScript code here
+  ScrollTrigger.config({
+    autoRefreshEvents: "visibilitychange,DOMContentLoaded,load", // notice "resize" isn't in the list
+  });
+} else {
+  // Code for non-mobile devices
+  window.addEventListener("resize", () => {
+    ScrollTrigger.update();
+  });
+}
 
 async function pagetranIn() {
   return new Promise((resolve) => {
@@ -54,7 +64,6 @@ async function pagetranIn() {
   });
 }
 async function pagetranOut(next) {
-  
   return new Promise((resolve) => {
     let tl = gsap.timeline({
       onComplete: resolve,
@@ -62,7 +71,7 @@ async function pagetranOut(next) {
     tl.to("a", 0, {
       pointerEvents: "none",
     });
-    
+
     tl.fromTo(
       ".transitiontext",
       0.6,

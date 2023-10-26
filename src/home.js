@@ -3,7 +3,6 @@ import "./styles/style.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap/src";
 import SplitType from "split-type";
-import { easing } from "jquery";
 
 function initHome() {
   //////infinite banner
@@ -82,43 +81,20 @@ function initHome() {
     lenis.raf(time);
     requestAnimationFrame(raf);
   }
-  let g = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    ),
-    y = window.innerWidth <= 980,
-    h = window.matchMedia("(max-width: 768px)");
-  if (!g || !y || !h.matches) {
-  }
 
-  //home pill
-  let logoTl = gsap.timeline({});
-  logoTl.fromTo(
-    ".home__project__pill__wrapper",
-    { scale: 1, opacity: 1 },
-    {
-      scale: 0.8,
-      opacity: 0.8,
-      ease: "Power3.easeOut",
-      scrollTrigger: {
-        trigger: ".home__project__pill__wrapper",
-        start: "bottom bottom-=10%",
-        scrub: true,
-      },
-    }
-  );
-  logoTl.to(".videointroduction", {
-    y: "-20%",
-    // ease: "Power3.easeOut",
+  gsap.to(".detail__2", 1.2, {
+    height: "8em",
+    ease: "Power3.easeOut",
     scrollTrigger: {
-      trigger: ".home__project__pill__wrapper",
-      start: "bottom bottom",
-      scrub: true,
-    },
-  });
+      trigger: ".home__first__section",
+      start: "top top+=30%",
+    }
+  })
+
 
   ScrollTrigger.create({
     trigger: ".home__first__section",
-    start: "top top",
+    start: "top top+=11%",
     end: "bottom top-=200%",
     pin: true,
     pinSpacing: false,
@@ -182,6 +158,19 @@ function initHome() {
   services.forEach((service, index) => {
 
     if (window.matchMedia("(max-width: 768px)").matches) {
+
+      //home pill
+
+  gsap.to(".latest_video", 1.2, {
+    height: "50em",
+    ease: "Power3.easeOut",
+    scrollTrigger: {
+      trigger: ".home__first__section",
+      start: "top top+=30%",
+    }
+  })
+
+
       const tween = gsap.to(service, {
         scrollTrigger: {
           trigger: service,
@@ -204,6 +193,18 @@ function initHome() {
       });
       // Your mobile-specific JavaScript code here
     } else {
+
+      //home pill
+
+  gsap.to(".latest_video", 1.2, {
+    height: "25em",
+    ease: "Power3.easeOut",
+    scrollTrigger: {
+      trigger: ".home__first__section",
+      start: "top top+=30%",
+    }
+  })
+
       // Code for non-mobile devices   
       const tween = gsap.to(service, {
         scrollTrigger: {
@@ -270,7 +271,7 @@ function initHome() {
   let enterbtn = document.querySelector(".enter");
   //////preloader trigger
   enterbtn.addEventListener("click", () => {
-    gsap.to(".preloader", 1.2, {
+    gsap.to(".preloader", 0, {
       opacity: 0,
       ease: "Power2.easeOut",
     });
@@ -365,6 +366,7 @@ function initHome() {
   image.addEventListener("mouseout", () => {
     gsap.to(".image__me", 0, { overflow: "hidden", zIndex: 9 });
   });
+  
 }
 
 gsap.registerPlugin(ScrollTrigger);
