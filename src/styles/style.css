@@ -52,3 +52,12 @@ html.lenis {
     stroke: #111111;
     stroke-width: 2;
   }
+
+  .cursor{
+    pointer-events: none;
+    transform: translate(-50%, 0%);
+  }
+  .cursor__ball{
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+  }

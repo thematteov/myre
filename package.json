@@ -21,6 +21,7 @@
     "barba.js": "^1.0.0",
     "gsap": "^3.9.1",
     "lenis": "^0.0.2",
+    "lottie-web": "^5.12.2",
     "split-type": "^0.3.4",
     "splitting": "^1.0.6"
   }

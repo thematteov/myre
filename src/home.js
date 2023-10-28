@@ -3,7 +3,8 @@ import "./styles/style.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap/src";
 import SplitType from "split-type";
-import { TweenMax } from "gsap/src";
+import Lottie from "lottie-web";
+import { event } from "jquery";
 
 function initHome() {
   //////infinite banner
@@ -23,7 +24,7 @@ function initHome() {
   elementsToWrap.forEach((element) => {
     const wrapper = document.createElement("span");
     wrapper.className = "line-wrapper";
-    wrapper.style.overflow = "hidden";
+    wrapper.style.overflowY = "hidden";
     element.parentNode.replaceChild(wrapper, element);
     wrapper.appendChild(element);
   });
@@ -119,7 +120,7 @@ function initHome() {
     ease: "Power3.easeOut",
     scrollTrigger: {
       trigger: ".home__first__section",
-      start: "top top+=30%",
+      start: "top bottom-=20%",
     },
   });
 
@@ -351,14 +352,6 @@ function initHome() {
     );
   });
 
-  let image = document.querySelector(".image__me");
-
-  image.addEventListener("mouseenter", () => {
-    gsap.to(".image__me", 0, { overflow: "visible", zIndex: 9 });
-  });
-  image.addEventListener("mouseout", () => {
-    gsap.to(".image__me", 0, { overflow: "hidden", zIndex: 9 });
-  });
   //////SVG/////////////
 
   var connected = false;
@@ -393,7 +386,7 @@ function initHome() {
       svgRect = svg.getBoundingClientRect();
       top = svgRect.top;
     });
-    
+
     gsap.ticker.add(update);
     update();
 
@@ -454,6 +447,50 @@ function initHome() {
         p1.y = e.clientY - top;
       }
     });
+  });
+
+  /////lottie CURSOR
+  let cursor = document.querySelector(".cursor");
+  let cursorball = document.querySelector(".cursor__ball");
+  // Define the Lottie animation configuration
+  let animationConfig = Lottie.loadAnimation({
+    container: cursor, // the dom element that will contain the animation
+    renderer: "svg",
+    loop: false,
+    autoplay: false,
+    path: "https://uploads-ssl.webflow.com/62eab1c2a6c3912f62c3d66c/653c6b59c0189b84bffc0edf_Animation%20-%201698458415832.json", // the path to the animation json
+  });
+
+  // Function to play the animation on hover
+  function playAnimation() {
+    animationConfig.setDirection(1);
+    animationConfig.goToAndPlay(0, true);
+    gsap.to(cursorball, 0.5, { scale: 0, ease: "Power2.easeOut" });
+  }
+
+  // Function to stop the animation on mouseout
+  function stopAnimation() {
+    animationConfig.setDirection(-1);
+    if (animationConfig.currentFrame === animationConfig.totalFrames - 1) {
+      animationConfig.goToAndStop(animationConfig.totalFrames, true);
+    } else {
+      animationConfig.goToAndPlay(30, true);
+    }
+    gsap.to(cursorball, 0.5, { scale: 1, ease: "Power2.easeOut" });
+  }
+
+  // Attach event listeners to the link
+  const link = document.querySelectorAll("a");
+  link.forEach((a) => {
+    a.addEventListener("mouseover", playAnimation);
+    a.addEventListener("mouseout", stopAnimation);
+  });
+
+  window.addEventListener("mousemove", (e) => {
+    let X = e.clientX;
+    let Y = e.clientY;
+    gsap.to(cursor, 0.5, { x: X, y: Y, ease: "Power2.easeOut" });
+    gsap.to(cursorball, 0.5, { x: X, y: Y, ease: "Power2.easeOut" });
   });
 }
 
