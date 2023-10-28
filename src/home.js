@@ -3,6 +3,7 @@ import "./styles/style.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap/src";
 import SplitType from "split-type";
+import { TweenMax } from "gsap/src";
 
 function initHome() {
   //////infinite banner
@@ -16,13 +17,22 @@ function initHome() {
   const text = new SplitType(".split");
   const char = new SplitType(".chars");
   text.lines;
+  const elementsToWrap = document.querySelectorAll(".line");
 
+  // Loop through the elements and wrap each one in a <span> with class "line-wrapper"
+  elementsToWrap.forEach((element) => {
+    const wrapper = document.createElement("span");
+    wrapper.className = "line-wrapper";
+    wrapper.style.overflow = "hidden";
+    element.parentNode.replaceChild(wrapper, element);
+    wrapper.appendChild(element);
+  });
   ///////SPLITTEXT
 
   let lines = document.querySelectorAll(".split");
   let chars = document.querySelectorAll(".chars");
 
-  lines.forEach((value) => {
+  lines.forEach((value, index) => {
     let tl = gsap.timeline({
       paused: true,
       scrollTrigger: {
@@ -33,14 +43,15 @@ function initHome() {
       },
     });
     tl.fromTo(
-      value.querySelectorAll(".word"),
+      value.querySelectorAll(".line"),
       1,
-      { y: "100%", opacity: 0 },
+      { y: "100%", opacity: 1 },
       {
         y: "0%",
         opacity: 1,
+        force3D: true,
         ease: "Power2.easeOut",
-        stagger: 0.05,
+        stagger: 0.1,
       }
     );
   });
@@ -248,11 +259,6 @@ function initHome() {
     },
     "<"
   );
-
-  function numberWithCommas(n) {
-    var parts = n.toString().split(".");
-    return parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
   //////enter animation
 
   let enterbtn = document.querySelector(".enter");
@@ -299,7 +305,7 @@ function initHome() {
     lines.forEach((value) => {
       gsap.fromTo(
         value.querySelectorAll(".word"),
-        1.2,
+        1,
         { y: "70%", opacity: 0 },
         {
           y: "0%",
@@ -352,6 +358,102 @@ function initHome() {
   });
   image.addEventListener("mouseout", () => {
     gsap.to(".image__me", 0, { overflow: "hidden", zIndex: 9 });
+  });
+  //////SVG/////////////
+
+  var connected = false;
+
+  gsap.defaults({ ease: "elastic(2, 0.4)" });
+
+  // Define the IDs and classes of the elements you want to apply the interaction to
+  var elementSelectors = document.querySelectorAll(".linesvg");
+
+  elementSelectors.forEach(function (selector) {
+    var svg = selector;
+    var path = svg.querySelector("#path");
+    var svgRect = svg.getBoundingClientRect();
+    var top = svgRect.top;
+    var height = svgRect.height;
+    var startY = height / 2;
+    var p0 = { x: 0, y: startY };
+    var p1 = { x: window.innerWidth / 2, y: startY };
+    var p2 = { x: window.innerWidth, y: startY };
+    var isInsideSVG = false; // Track if the mouse is inside the current SVG
+
+    window.addEventListener("resize", () => {
+      p0 = { x: 0, y: startY };
+      p1 = { x: window.innerWidth / 2, y: startY };
+      p2 = { x: window.innerWidth, y: startY };
+      svgRect = svg.getBoundingClientRect();
+      top = svgRect.top;
+      height = svgRect.height;
+      startY = height / 2;
+    });
+    window.addEventListener("scroll", () => {
+      svgRect = svg.getBoundingClientRect();
+      top = svgRect.top;
+    });
+    
+    gsap.ticker.add(update);
+    update();
+
+    function update() {
+      var d =
+        "M" +
+        p0.x +
+        "," +
+        p0.y +
+        " Q" +
+        p1.x +
+        "," +
+        p1.y +
+        " " +
+        p2.x +
+        "," +
+        p2.y;
+
+      path.setAttribute("d", d);
+    }
+
+    svg.addEventListener("mouseenter", () => {
+      isInsideSVG = true;
+    });
+
+    svg.addEventListener("mouseleave", () => {
+      isInsideSVG = false;
+      if (connected) {
+        connected = false;
+        gsap.to(p1, {
+          duration: 1,
+          x: window.innerWidth / 2,
+          y: height / 2,
+          onComplete: () => (connected = true),
+        });
+      }
+    });
+
+    window.addEventListener("mousemove", (e) => {
+      if (isInsideSVG) {
+        if (p1.y > height * 0.9 || p1.y < -3) {
+          if (connected) {
+            connected = false;
+            gsap.to(p1, {
+              duration: 2,
+              x: e.clientX,
+              y: height / 2,
+              onComplete: () => (connected = true),
+            });
+          }
+        }
+        if (!connected) {
+          connected = true;
+          gsap.killTweensOf(p1);
+        }
+
+        p1.x = e.clientX;
+        p1.y = e.clientY - top;
+      }
+    });
   });
 }
 
