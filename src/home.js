@@ -16,11 +16,12 @@ function initHome() {
   });
 
   const text = new SplitType(".split");
+  const textside = new SplitType(".split__side");
   const char = new SplitType(".chars");
   text.lines;
+  textside.lines;
   const elementsToWrap = document.querySelectorAll(".line");
 
-  // Loop through the elements and wrap each one in a <span> with class "line-wrapper"
   elementsToWrap.forEach((element) => {
     const wrapper = document.createElement("span");
     wrapper.className = "line-wrapper";
@@ -95,77 +96,49 @@ function initHome() {
   }
 
   //home pill
-  if (window.matchMedia("(max-width: 768px)").matches) {
-    gsap.to(".latest_video", 1.2, {
-      height: "50em",
+  gsap.fromTo(
+    ".latest_video",
+    { scale: 0.3, rotateX: 60, rotateY: 60 },
+    {
+      scale: 1,
+      rotateX: 0,
+      rotateY: 0,
       ease: "Power3.easeOut",
       scrollTrigger: {
         trigger: ".home__first__section",
-        start: "top top+=30%",
+        start: "top bottom",
+        end: "top top",
+        scrub: true,
       },
-    });
-  } else {
-    gsap.to(".latest_video", 1.2, {
-      height: "25em",
-      ease: "Power3.easeOut",
-      scrollTrigger: {
-        trigger: ".home__first__section",
-        start: "top top+=30%",
-      },
-    });
-  }
+    }
+  );
+  gsap.to(".detail__2", 0.8, {
+    y: "10em",
+    ease: "Power3.easeOut",
+    scrollTrigger: {
+      trigger: ".last__popup",
+      start: "top top+=10%",
+      end: "bottom top",
+      toggleActions: "play none none reverse",
+      pin: true
+    },
+  });
+  // if (window.matchMedia("(max-width: 768px)").matches) {
+
+  // } else {
+
+  // }
 
   gsap.to(".detail__2", 1.2, {
     height: "8em",
     ease: "Power3.easeOut",
     scrollTrigger: {
-      trigger: ".home__first__section",
+      trigger: ".prj__desc",
       start: "top bottom-=20%",
     },
   });
-
-  ScrollTrigger.create({
-    trigger: ".home__first__section",
-    start: "top top+=11%",
-    end: "bottom top-=200%",
-    pin: true,
-    pinSpacing: false,
-  });
-  ScrollTrigger.create({
-    trigger: ".hey__section",
-    start: "top top",
-    end: "bottom top",
-    pin: true,
-    pinSpacing: false,
-  });
   gsap.to(".cover", {
     x: "-25%",
-    ease: "none",
-    scrollTrigger: {
-      trigger: ".how__section",
-      start: "top top-=20%",
-      end: () =>
-        "+=" + document.querySelector(".our__values__wrapper").offsetWidth,
-      pin: true,
-      scrub: true,
-      pinSpacing: false,
-    },
-  });
-  gsap.to(".our__values__wrapper", {
-    x: "-83.5%",
-    ease: "none",
-    scrollTrigger: {
-      trigger: ".how__section",
-      start: "top top-=20%",
-      end: () =>
-        "+=" + document.querySelector(".our__values__wrapper").offsetWidth,
-      pin: true,
-      scrub: true,
-      pinSpacing: false,
-    },
-  });
-  gsap.to(".gallery", {
-    x: "83.5%",
     ease: "none",
     scrollTrigger: {
       trigger: ".how__section",
@@ -235,32 +208,6 @@ function initHome() {
     pinSpacing: false,
     markers: false,
   });
-
-  //////text count up
-  var konditionen = gsap.timeline({
-    scrollTrigger: {
-      trigger: ".how__section",
-      start: "top top+=10%",
-    },
-    ease: "none",
-  });
-  konditionen.from(
-    ".number__counting h1",
-    {
-      duration: 200,
-      ease: "none",
-      innerText: 0,
-      roundProps: "innerText",
-      onUpdate: function () {
-        this.targets().forEach((target) => {
-          const val = gsap.getProperty(target, "innerText");
-          target.innerText = numberWithCommas(val);
-        });
-      },
-    },
-    "<"
-  );
-  //////enter animation
 
   let enterbtn = document.querySelector(".enter");
   //////preloader trigger
