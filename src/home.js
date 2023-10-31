@@ -1,10 +1,7 @@
-import Lenis from "@studio-freight/lenis";
 import "./styles/style.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap/src";
 import SplitType from "split-type";
-import Lottie from "lottie-web";
-import { event } from "jquery";
 
 function initHome() {
   //////infinite banner
@@ -79,22 +76,6 @@ function initHome() {
     );
   });
 
-  ///////////////
-
-  let lenis = new Lenis({
-    lerp: 0.1,
-    duration: 1,
-    smoothWheel: true,
-    smoothTouch: false,
-    wheelMultiplier: 0.3,
-    touchMultiplier: 0.4,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  });
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-
   //home pill
   gsap.fromTo(
     ".latest_video",
@@ -120,7 +101,7 @@ function initHome() {
       start: "top top+=10%",
       end: "bottom top",
       toggleActions: "play none none reverse",
-      pin: true
+      pin: true,
     },
   });
   // if (window.matchMedia("(max-width: 768px)").matches) {
@@ -394,50 +375,6 @@ function initHome() {
         p1.y = e.clientY - top;
       }
     });
-  });
-
-  /////lottie CURSOR
-  let cursor = document.querySelector(".cursor");
-  let cursorball = document.querySelector(".cursor__ball");
-  // Define the Lottie animation configuration
-  let animationConfig = Lottie.loadAnimation({
-    container: cursor, // the dom element that will contain the animation
-    renderer: "svg",
-    loop: false,
-    autoplay: false,
-    path: "https://uploads-ssl.webflow.com/62eab1c2a6c3912f62c3d66c/653c6b59c0189b84bffc0edf_Animation%20-%201698458415832.json", // the path to the animation json
-  });
-
-  // Function to play the animation on hover
-  function playAnimation() {
-    animationConfig.setDirection(1);
-    animationConfig.goToAndPlay(0, true);
-    gsap.to(cursorball, 0.5, { scale: 0, ease: "Power2.easeOut" });
-  }
-
-  // Function to stop the animation on mouseout
-  function stopAnimation() {
-    animationConfig.setDirection(-1);
-    if (animationConfig.currentFrame === animationConfig.totalFrames - 1) {
-      animationConfig.goToAndStop(animationConfig.totalFrames, true);
-    } else {
-      animationConfig.goToAndPlay(30, true);
-    }
-    gsap.to(cursorball, 0.5, { scale: 1, ease: "Power2.easeOut" });
-  }
-
-  // Attach event listeners to the link
-  const link = document.querySelectorAll("a");
-  link.forEach((a) => {
-    a.addEventListener("mouseover", playAnimation);
-    a.addEventListener("mouseout", stopAnimation);
-  });
-
-  window.addEventListener("mousemove", (e) => {
-    let X = e.clientX;
-    let Y = e.clientY;
-    gsap.to(cursor, 0.5, { x: X, y: Y, ease: "Power2.easeOut" });
-    gsap.to(cursorball, 0.5, { x: X, y: Y, ease: "Power2.easeOut" });
   });
 }
 

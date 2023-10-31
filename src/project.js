@@ -1,74 +1,29 @@
-import Lenis from "@studio-freight/lenis";
 import "./styles/style.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap/src";
 import SplitType from "split-type";
 
 function initProject() {
-
-  let g = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    ),
-    y = window.innerWidth <= 980,
-    h = window.matchMedia("(max-width: 768px)");
-  if (!g || !y || !h.matches) {
-  }
-
-  ///////NAV LOGO SCRUB
-  let logoTl = gsap.timeline({});
-  logoTl.set(".logo__svg", { transformOrigin: "50% 0%" });
-  logoTl.fromTo(
-    ".logo__svg",
-    1.2,
-    { scale: 1 },
-    {
-      scale: 0.8,
-      transformOrigin: "100 50",
-      ease: "Power3.easeOut",
-      scrollTrigger: {
-        trigger: ".logo__svg",
-        start: "top top",
-        pin: true,
-        scrub: true,
-      },
-    }
-  );
-  logoTl.fromTo(
-    ".deliverable__wrapper",
-    { width: "0%" },
-    {
-      width: "20%",
-      scrollTrigger: {
-        trigger: ".third__section",
-        start: "bottom bottom",
-        end: "bottom top",
-        scrub: true,
-        pin: true,
-      },
-    }
-  );
-  gsap.fromTo(
-    ".service__number",
-    2,
-    { x: "-100%" },
-    {
-      x: "0%",
-      ease: "Power3.easeInOut",
-      stagger: 0.1,
-      scrollTrigger: {
-        trigger: ".services",
-        start: "top bottom",
-        toggleActions: "play reverse play reverse",
-      },
-    }
-  );
-  ///////SPLITTEXT
   const text = new SplitType(".split");
+  const textside = new SplitType(".split__side");
+  const char = new SplitType(".chars");
   text.lines;
+  textside.lines;
+  const elementsToWrap = document.querySelectorAll(".line");
+
+  elementsToWrap.forEach((element) => {
+    const wrapper = document.createElement("span");
+    wrapper.className = "line-wrapper";
+    wrapper.style.overflowY = "hidden";
+    element.parentNode.replaceChild(wrapper, element);
+    wrapper.appendChild(element);
+  });
+  ///////SPLITTEXT
 
   let lines = document.querySelectorAll(".split");
+  let chars = document.querySelectorAll(".chars");
 
-  lines.forEach((value) => {
+  lines.forEach((value, index) => {
     let tl = gsap.timeline({
       paused: true,
       scrollTrigger: {
@@ -80,16 +35,46 @@ function initProject() {
     });
     tl.fromTo(
       value.querySelectorAll(".line"),
-      0.8,
-      { y: "50%", opacity: 0 },
+      1,
+      { y: "100%", opacity: 1 },
       {
         y: "0%",
         opacity: 1,
+        force3D: true,
         ease: "Power2.easeOut",
         stagger: 0.1,
       }
     );
   });
+  chars.forEach((value) => {
+    let tl = gsap.timeline({
+      paused: true,
+      scrollTrigger: {
+        trigger: value,
+        start: "top bottom-=30%",
+        toggleActions: "play none none reverse",
+      },
+    });
+    tl.fromTo(
+      value.querySelectorAll(".char"),
+      1,
+      { y: "100%", opacity: 0 },
+      {
+        y: "0%",
+        opacity: 1,
+        ease: "Power2.easeOut",
+        stagger: 0.05,
+      }
+    );
+  });
+
+  let g = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    ),
+    y = window.innerWidth <= 980,
+    h = window.matchMedia("(max-width: 768px)");
+  if (!g || !y || !h.matches) {
+  }
 
   ////works images stack
   const projImages = gsap.utils.toArray(".project__image__wrapper");
@@ -98,7 +83,7 @@ function initProject() {
     const tween = gsap.to(img, {
       scrollTrigger: {
         trigger: img,
-        start: () => `top top`,
+        start: () => `top top+=10%`,
         end: () => `bottom bottom`,
         scrub: true,
         markers: false,
@@ -108,7 +93,7 @@ function initProject() {
 
     ScrollTrigger.create({
       trigger: img,
-      start: "top top",
+      start: "top top+=10%",
       pin: true,
       pinSpacing: false,
       markers: false,
@@ -136,8 +121,8 @@ function initProject() {
     }
   }
 
-  const videos = document.querySelectorAll('video');
-            videos.forEach(video => video.play());
+  const videos = document.querySelectorAll("video");
+  videos.forEach((video) => video.play());
 }
 gsap.registerPlugin(ScrollTrigger);
 export default initProject;
