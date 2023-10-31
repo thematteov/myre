@@ -4,6 +4,9 @@ import { gsap } from "gsap/src";
 import SplitType from "split-type";
 
 function initProject() {
+  gsap.set(".logo__svg", {
+    height: "4em",
+  });
   const text = new SplitType(".split");
   const textside = new SplitType(".split__side");
   const char = new SplitType(".chars");
@@ -68,40 +71,60 @@ function initProject() {
     );
   });
 
-  let g = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    ),
-    y = window.innerWidth <= 980,
-    h = window.matchMedia("(max-width: 768px)");
-  if (!g || !y || !h.matches) {
-  }
-
   ////works images stack
+  
   const projImages = gsap.utils.toArray(".project__image__wrapper");
+  if (window.matchMedia("(max-width: 768px)").matches) {
 
-  projImages.forEach((img, index) => {
-    const tween = gsap.to(img, {
-      scrollTrigger: {
+    projImages.forEach((img, index) => {
+      const tween = gsap.to(img, {
+        scrollTrigger: {
+          trigger: img,
+          start: () => `top top+=40%`,
+          end: () => `bottom bottom`,
+          scrub: true,
+          markers: false,
+        },
+        ease: "none",
+      });
+  
+      ScrollTrigger.create({
         trigger: img,
-        start: () => `top top+=10%`,
-        end: () => `bottom bottom`,
-        scrub: true,
+        start: "top top+=40%",
+        pin: true,
+        pinSpacing: false,
         markers: false,
-      },
-      ease: "none",
+        id: "pin",
+        endTrigger: img.length,
+        end: "max",
+      });
     });
-
-    ScrollTrigger.create({
-      trigger: img,
-      start: "top top+=10%",
-      pin: true,
-      pinSpacing: false,
-      markers: false,
-      id: "pin",
-      endTrigger: img.length,
-      end: "max",
+  } else {
+    // Code for non-mobile devices
+    projImages.forEach((img, index) => {
+      const tween = gsap.to(img, {
+        scrollTrigger: {
+          trigger: img,
+          start: () => `top top+=10%`,
+          end: () => `bottom bottom`,
+          scrub: true,
+          markers: false,
+        },
+        ease: "none",
+      });
+  
+      ScrollTrigger.create({
+        trigger: img,
+        start: "top top+=10%",
+        pin: true,
+        pinSpacing: false,
+        markers: false,
+        id: "pin",
+        endTrigger: img.length,
+        end: "max",
+      });
     });
-  });
+  }
   ////works images stack
   var myVideo = document.getElementsByTagName("video");
   for (let i = 0; i < myVideo.length; i++) {
