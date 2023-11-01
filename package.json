@@ -8,7 +8,7 @@
     "lint:fix": "eslint ./src --ext .js,.jsx --fix"
   },
   "devDependencies": {
-    "jquery": "^3.6.0",
+    "depcheck": "^1.4.7",
     "rimraf": "^3.0.2",
     "vite": "^2.7.2",
     "vite-plugin-glsl": "^0.1.1"
@@ -16,13 +16,8 @@
   "dependencies": {
     "@barba/core": "^2.9.7",
     "@studio-freight/lenis": "^1.0.27",
-    "@tweenjs/tween.js": "^21.0.0",
-    "barba": "^1.0.0",
-    "barba.js": "^1.0.0",
     "gsap": "^3.9.1",
-    "lenis": "^0.0.2",
     "lottie-web": "^5.12.2",
-    "split-type": "^0.3.4",
-    "splitting": "^1.0.6"
+    "split-type": "^0.3.4"
   }
 }
