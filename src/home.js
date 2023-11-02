@@ -102,7 +102,6 @@ function initHome() {
       scrollTrigger: {
         trigger: ".latest_video",
         start: "top top",
-        markers: true
       },
     }
   );
