@@ -1,1 +1,151 @@
-import"./styles/style.css";import{ScrollTrigger as e}from"gsap/ScrollTrigger";import{gsap as t}from"gsap/src";import r from"split-type";function initProject(){t.set(".logo__svg",{height:"4em"});let o=new r(".split"),l=new r(".split__side");new r(".chars"),o.lines,l.lines;let i=document.querySelectorAll(".line");i.forEach(e=>{let t=document.createElement("span");t.className="line-wrapper",t.style.overflowY="hidden",e.parentNode.replaceChild(t,e),t.appendChild(e)});let a=document.querySelectorAll(".split"),s=document.querySelectorAll(".chars");a.forEach((e,r)=>{t.timeline({paused:!0,scrollTrigger:{trigger:e,start:"top bottom-=10%",toggleActions:"play none none reverse",markers:!1}}).fromTo(e.querySelectorAll(".line"),1,{y:"100%",opacity:1},{y:"0%",opacity:1,force3D:!0,ease:"Power2.easeOut",stagger:.1})}),s.forEach(e=>{t.timeline({paused:!0,scrollTrigger:{trigger:e,start:"top bottom-=30%",toggleActions:"play none none reverse"}}).fromTo(e.querySelectorAll(".char"),1,{y:"100%",opacity:0},{y:"0%",opacity:1,ease:"Power2.easeOut",stagger:.05})});let n=t.utils.toArray(".project__image__wrapper");window.matchMedia("(max-width: 768px)").matches?n.forEach((r,o)=>{t.to(r,{scrollTrigger:{trigger:r,start:()=>"top top+=40%",end:()=>"bottom bottom",scrub:!0,markers:!1},ease:"none"}),e.create({trigger:r,start:"top top+=40%",pin:!0,pinSpacing:!1,markers:!1,id:"pin",endTrigger:r.length,end:"max"})}):n.forEach((r,o)=>{t.to(r,{scrollTrigger:{trigger:r,start:()=>"top top+=10%",end:()=>"bottom bottom",scrub:!0,markers:!1},ease:"none"}),e.create({trigger:r,start:"top top+=10%",pin:!0,pinSpacing:!1,markers:!1,id:"pin",endTrigger:r.length,end:"max"})});var p=document.getElementsByTagName("video");for(let g=0;g<p.length;g++)"boolean"==typeof p[g].loop?p[g].loop=!0:p[g].addEventListener("ended",function(){this.currentTime=0,this.play()},!1);let c=document.querySelectorAll("video");c.forEach(e=>e.play())}t.registerPlugin(e);export default initProject;
+import "./styles/style.css";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "gsap/src";
+import SplitType from "split-type";
+
+function initProject() {
+  gsap.set(".logo__svg", {
+    height: "4em",
+  });
+  const text = new SplitType(".split");
+  const textside = new SplitType(".split__side");
+  const char = new SplitType(".chars");
+  text.lines;
+  textside.lines;
+  const elementsToWrap = document.querySelectorAll(".line");
+
+  elementsToWrap.forEach((element) => {
+    const wrapper = document.createElement("span");
+    wrapper.className = "line-wrapper";
+    wrapper.style.overflowY = "hidden";
+    element.parentNode.replaceChild(wrapper, element);
+    wrapper.appendChild(element);
+  });
+  ///////SPLITTEXT
+
+  let lines = document.querySelectorAll(".split");
+  let chars = document.querySelectorAll(".chars");
+
+  lines.forEach((value, index) => {
+    let tl = gsap.timeline({
+      paused: true,
+      scrollTrigger: {
+        trigger: value,
+        start: "top bottom-=10%",
+        toggleActions: "play none none reverse",
+        markers: false,
+      },
+    });
+    tl.fromTo(
+      value.querySelectorAll(".line"),
+      1,
+      { y: "100%", opacity: 1 },
+      {
+        y: "0%",
+        opacity: 1,
+        force3D: true,
+        ease: "Power2.easeOut",
+        stagger: 0.1,
+      }
+    );
+  });
+  chars.forEach((value) => {
+    let tl = gsap.timeline({
+      paused: true,
+      scrollTrigger: {
+        trigger: value,
+        start: "top bottom-=30%",
+        toggleActions: "play none none reverse",
+      },
+    });
+    tl.fromTo(
+      value.querySelectorAll(".char"),
+      1,
+      { y: "100%", opacity: 0 },
+      {
+        y: "0%",
+        opacity: 1,
+        ease: "Power2.easeOut",
+        stagger: 0.05,
+      }
+    );
+  });
+
+  ////works images stack
+  
+  const projImages = gsap.utils.toArray(".project__image__wrapper");
+  if (window.matchMedia("(max-width: 768px)").matches) {
+
+    projImages.forEach((img, index) => {
+      const tween = gsap.to(img, {
+        scrollTrigger: {
+          trigger: img,
+          start: () => `top top+=40%`,
+          end: () => `bottom bottom`,
+          scrub: true,
+          markers: false,
+        },
+        ease: "none",
+      });
+  
+      ScrollTrigger.create({
+        trigger: img,
+        start: "top top+=40%",
+        pin: true,
+        pinSpacing: false,
+        markers: false,
+        id: "pin",
+        endTrigger: img.length,
+        end: "max",
+      });
+    });
+  } else {
+    // Code for non-mobile devices
+    projImages.forEach((img, index) => {
+      const tween = gsap.to(img, {
+        scrollTrigger: {
+          trigger: img,
+          start: () => `top top+=10%`,
+          end: () => `bottom bottom`,
+          scrub: true,
+          markers: false,
+        },
+        ease: "none",
+      });
+  
+      ScrollTrigger.create({
+        trigger: img,
+        start: "top top+=10%",
+        pin: true,
+        pinSpacing: false,
+        markers: false,
+        id: "pin",
+        endTrigger: img.length,
+        end: "max",
+      });
+    });
+  }
+  ////works images stack
+  var myVideo = document.getElementsByTagName("video");
+  for (let i = 0; i < myVideo.length; i++) {
+    if (typeof myVideo[i].loop == "boolean") {
+      // loop supported
+      myVideo[i].loop = true;
+    } else {
+      // loop property not supported
+      myVideo[i].addEventListener(
+        "ended",
+        function () {
+          this.currentTime = 0;
+          this.play();
+        },
+        false
+      );
+    }
+  }
+
+  const videos = document.querySelectorAll("video");
+  videos.forEach((video) => video.play());
+}
+gsap.registerPlugin(ScrollTrigger);
+export default initProject;
