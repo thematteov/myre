@@ -77,20 +77,37 @@ function initHome() {
   });
 
   //home pill
-  gsap.fromTo(
-    ".latest_video",
-    { width: "0em" },
-    {
-      width: "66em",
-      ease: "Power3.easeOut",
-      scrollTrigger: {
-        trigger: ".home__first__section",
-        start: "top bottom-=30%",
-        end: "top top",
-        scrub: true,
-      },
-    }
-  );
+  if (window.matchMedia("(max-width: 768px)").matches) {
+    gsap.fromTo(
+      ".latest_video",
+      { width: "0%" },
+      {
+        width: "96%",
+        ease: "Power3.easeOut",
+        scrollTrigger: {
+          trigger: ".home__first__section",
+          start: "top bottom-=30%",
+          end: "top top",
+          scrub: true,
+        },
+      }
+    );
+  } else {
+    gsap.fromTo(
+      ".latest_video",
+      { width: "0em" },
+      {
+        width: "66em",
+        ease: "Power3.easeOut",
+        scrollTrigger: {
+          trigger: ".home__first__section",
+          start: "top bottom-=30%",
+          end: "top top",
+          scrub: true,
+        },
+      }
+    );
+  }
   gsap.fromTo(
     ".cube__video",
     1.2,
@@ -102,6 +119,7 @@ function initHome() {
       scrollTrigger: {
         trigger: ".latest_video",
         start: "top top",
+        toggleActions: "play none none reverse",
       },
     }
   );
@@ -120,12 +138,6 @@ function initHome() {
       },
     }
   );
-
-  // if (window.matchMedia("(max-width: 768px)").matches) {
-
-  // } else {
-
-  // }
   gsap.to(".cover", {
     x: "-25%",
     ease: "none",
