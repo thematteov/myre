@@ -4,6 +4,37 @@ import { gsap } from "gsap/src";
 import SplitType from "split-type";
 
 function initHome() {
+  //////page progresssion
+
+  const progressBar = document.querySelector(".percentage__number");
+
+  // Function to update the progress bar based on the scroll position
+  function updateProgressBar() {
+    const windowHeight = window.innerHeight;
+    const pageHeight = document.documentElement.scrollHeight - windowHeight;
+    const scrollPosition = window.scrollY;
+    const scrollProgress = (scrollPosition / pageHeight) * 100;
+
+    // Set the width of the progress bar to reflect the scroll progress
+    progressBar.textContent = `Scroll Progress: ${scrollProgress.toFixed(2)}%`;
+  }
+  gsap.to(progressBar, {
+    y: "-80vh",
+    scrollTrigger: {
+      trigger: ".pagewrapper",
+      start: "top top",
+      end: "bottom bottom",
+      scrub: true,
+    },
+  });
+
+  // Update the progress bar on initial page load
+  updateProgressBar();
+
+  // Update the progress bar when the user scrolls or resizes the window
+  window.addEventListener("scroll", updateProgressBar);
+  window.addEventListener("resize", updateProgressBar);
+
   //////infinite banner
 
   gsap.to(".latest__banner", 20, {
@@ -111,7 +142,7 @@ function initHome() {
   gsap.fromTo(
     ".cube__video",
     1.2,
-    {y: "-4em", rotate: 0},
+    { y: "-4em", rotate: 0 },
     {
       y: "0em",
       ease: "Bounce.easeOut",
