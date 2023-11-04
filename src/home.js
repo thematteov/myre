@@ -16,7 +16,7 @@ function initHome() {
     const scrollProgress = (scrollPosition / pageHeight) * 100;
 
     // Set the width of the progress bar to reflect the scroll progress
-    progressBar.textContent = `Scroll Progress: ${scrollProgress.toFixed(2)}%`;
+    progressBar.textContent = `Page Progress: ${scrollProgress.toFixed(2)}%`;
   }
   gsap.to(progressBar, {
     y: "-80vh",
