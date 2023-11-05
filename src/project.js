@@ -4,6 +4,42 @@ import { gsap } from "gsap/src";
 import SplitType from "split-type";
 
 function initProject() {
+  const progressBar = document.querySelector(".percentage__number");
+
+  function updateProgressBar() {
+    const windowHeight = window.innerHeight;
+    const pageHeight = document.documentElement.scrollHeight - windowHeight;
+    const scrollPosition = window.scrollY;
+    const scrollProgress = (scrollPosition / pageHeight) * 100;
+
+    // Set the width of the progress bar to reflect the scroll progress
+    progressBar.textContent = `Page Progress: ${scrollProgress.toFixed(2)}%`;
+  }
+  gsap.to(progressBar, {
+    y: "-80vh",
+    scrollTrigger: {
+      trigger: ".pagewrapper",
+      start: "top top",
+      end: "bottom bottom",
+      scrub: true,
+    },
+  });
+
+  // Update the progress bar on initial page load
+  updateProgressBar();
+
+  // Update the progress bar when the user scrolls or resizes the window
+  window.addEventListener("scroll", updateProgressBar);
+  window.addEventListener("resize", updateProgressBar);
+
+  //////infinite banner
+
+  gsap.to(".latest__banner", 20, {
+    x: "-82.6em",
+    ease: "linear",
+    repeat: -1,
+  });
+
   gsap.set(".logo__svg", {
     height: "4em",
   });
@@ -72,10 +108,9 @@ function initProject() {
   });
 
   ////works images stack
-  
+
   const projImages = gsap.utils.toArray(".project__image__wrapper");
   if (window.matchMedia("(max-width: 768px)").matches) {
-
     projImages.forEach((img, index) => {
       const tween = gsap.to(img, {
         scrollTrigger: {
@@ -87,7 +122,7 @@ function initProject() {
         },
         ease: "none",
       });
-  
+
       ScrollTrigger.create({
         trigger: img,
         start: "top top+=40%",
@@ -112,7 +147,7 @@ function initProject() {
         },
         ease: "none",
       });
-  
+
       ScrollTrigger.create({
         trigger: img,
         start: "top top+=10%",
