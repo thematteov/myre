@@ -4,34 +4,6 @@ import { gsap } from "gsap/src";
 import SplitType from "split-type";
 
 function initProject() {
-  const progressBar = document.querySelector(".percentage__number");
-
-  function updateProgressBar() {
-    const windowHeight = window.innerHeight;
-    const pageHeight = document.documentElement.scrollHeight - windowHeight;
-    const scrollPosition = window.scrollY;
-    const scrollProgress = (scrollPosition / pageHeight) * 100;
-
-    // Set the width of the progress bar to reflect the scroll progress
-    progressBar.textContent = `Page Progress: ${scrollProgress.toFixed(2)}%`;
-  }
-  gsap.to(progressBar, {
-    y: "-80vh",
-    scrollTrigger: {
-      trigger: ".pagewrapper",
-      start: "top top",
-      end: "bottom bottom",
-      scrub: true,
-    },
-  });
-
-  // Update the progress bar on initial page load
-  updateProgressBar();
-
-  // Update the progress bar when the user scrolls or resizes the window
-  window.addEventListener("scroll", updateProgressBar);
-  window.addEventListener("resize", updateProgressBar);
-
   //////infinite banner
 
   gsap.to(".latest__banner", 20, {
@@ -137,27 +109,34 @@ function initProject() {
   } else {
     // Code for non-mobile devices
     projImages.forEach((img, index) => {
-      const tween = gsap.to(img, {
-        scrollTrigger: {
-          trigger: img,
-          start: () => `top top+=10%`,
-          end: () => `bottom bottom`,
-          scrub: true,
-          markers: false,
-        },
-        ease: "none",
-      });
-
-      ScrollTrigger.create({
-        trigger: img,
-        start: "top top+=10%",
-        pin: true,
-        pinSpacing: false,
-        markers: false,
-        id: "pin",
-        endTrigger: img.length,
-        end: "max",
-      });
+      const tween = gsap.fromTo(
+        img,
+        0.8,
+        { scale: 1, opacity: 1 },
+        {
+          scale: 0.8,
+          opacity: 0.7,
+          scrollTrigger: {
+            trigger: img,
+            start: "top top+=15%",
+            pin: true,
+            pinSpacing: false,
+            markers: false,
+            id: "pin",
+            endTrigger: img.length,
+            end: "max",
+            toggleActions: "play none none reverse",
+          },
+          ease: "Power3.easeInOut",
+        }
+      );
+    });
+    ScrollTrigger.create({
+      trigger: ".project__right__wrapper",
+      start: "top top+=12%",
+      pin: true,
+      pinSpacing: false,
+      markers: false,
     });
   }
   ////works images stack

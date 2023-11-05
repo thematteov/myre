@@ -10,6 +10,23 @@ import initProject from "./project";
 
 if (window.matchMedia("(max-width: 768px)").matches) {
 } else {
+  //////percentage
+  //////page progresssion
+
+  let progressBar = document.querySelector(".percentage__number");
+
+  function updateProgressBar() {
+    let windowHeight = window.innerHeight;
+    let pageHeight = document.documentElement.scrollHeight - windowHeight;
+    let scrollPosition = window.scrollY;
+    let scrollProgress = (scrollPosition / pageHeight) * 100;
+    progressBar.textContent = `Your Progress: ${scrollProgress.toFixed(2)}%`;
+  }
+
+  updateProgressBar();
+
+  window.addEventListener("scroll", updateProgressBar);
+  window.addEventListener("resize", updateProgressBar);
   /////lottie CURSOR
   let cursor = document.querySelector(".cursor");
   let cursorball = document.querySelector(".cursor__ball");
@@ -53,6 +70,7 @@ if (window.matchMedia("(max-width: 768px)").matches) {
     gsap.to(cursor, 0.5, { x: X, y: Y, ease: "Power2.easeOut" });
     gsap.to(cursorball, 0.5, { x: X, y: Y, ease: "Power2.easeOut" });
   });
+
 }
 
 const content = document.querySelector("img");
@@ -179,7 +197,7 @@ function pageTransition() {
           ScrollTrigger.refresh();
           setTimeout(() => {
             initHome();
-            console.clear();
+            // console.clear();
           }, 1);
         },
         beforeEnter() {
@@ -196,7 +214,7 @@ function pageTransition() {
           ScrollTrigger.refresh();
           setTimeout(() => {
             initProject();
-            console.clear();
+            // console.clear();
           }, 1);
         },
         beforeEnter() {

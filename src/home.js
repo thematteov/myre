@@ -4,37 +4,6 @@ import { gsap } from "gsap/src";
 import SplitType from "split-type";
 
 function initHome() {
-  //////page progresssion
-
-  const progressBar = document.querySelector(".percentage__number");
-
-  // Function to update the progress bar based on the scroll position
-  function updateProgressBar() {
-    const windowHeight = window.innerHeight;
-    const pageHeight = document.documentElement.scrollHeight - windowHeight;
-    const scrollPosition = window.scrollY;
-    const scrollProgress = (scrollPosition / pageHeight) * 100;
-
-    // Set the width of the progress bar to reflect the scroll progress
-    progressBar.textContent = `Scroll Progress: ${scrollProgress.toFixed(2)}%`;
-  }
-  gsap.to(progressBar, {
-    y: "-80vh",
-    scrollTrigger: {
-      trigger: ".pagewrapper",
-      start: "top top",
-      end: "bottom bottom",
-      scrub: true,
-    },
-  });
-
-  // Update the progress bar on initial page load
-  updateProgressBar();
-
-  // Update the progress bar when the user scrolls or resizes the window
-  window.addEventListener("scroll", updateProgressBar);
-  window.addEventListener("resize", updateProgressBar);
-
   //////infinite banner
 
   gsap.to(".latest__banner", 20, {
@@ -331,18 +300,34 @@ function initHome() {
     );
   });
 
-  //////SVG/////////////
+  ////////gallery
+
+  const wEmbedElement = document.querySelectorAll(".gallery__line");
+
+  wEmbedElement.forEach((e) => {
+    const galleryCover = e.parentElement.querySelector(".gallery__cover");
+    e.addEventListener("mouseenter", () => {
+      gsap.fromTo(galleryCover, { opacity: 0 }, { opacity: 1, duration: 0.5 });
+    });
+    e.addEventListener("mouseleave", () => {
+      gsap.to(galleryCover, { opacity: 0, duration: 0.5 });
+    });
+  });
+
+  //////SVG LINES/////////////
 
   var connected = false;
 
-  gsap.defaults({ ease: "elastic(2, 0.4)" });
+  gsap.defaults({ ease: "elastic.out(2, 0.5)" });
 
+  
   // Define the IDs and classes of the elements you want to apply the interaction to
   var elementSelectors = document.querySelectorAll(".linesvg");
 
-  elementSelectors.forEach(function (selector) {
+  elementSelectors.forEach(function (selector, index) {
     var svg = selector;
     var path = svg.querySelector("#path");
+    path.setAttribute('stroke-width', `${1 + index}px`);
     var svgRect = svg.getBoundingClientRect();
     var top = svgRect.top;
     var height = svgRect.height;
@@ -359,7 +344,7 @@ function initHome() {
       svgRect = svg.getBoundingClientRect();
       top = svgRect.top;
       height = svgRect.height;
-      startY = height / 2;
+      startY = height;
     });
     window.addEventListener("scroll", () => {
       svgRect = svg.getBoundingClientRect();
@@ -406,11 +391,11 @@ function initHome() {
 
     window.addEventListener("mousemove", (e) => {
       if (isInsideSVG) {
-        if (p1.y > height * 0.9 || p1.y < -3) {
+        if (p1.y > height * 0.9) {
           if (connected) {
             connected = false;
             gsap.to(p1, {
-              duration: 2,
+              duration: 2.5,
               x: e.clientX,
               y: height / 2,
               onComplete: () => (connected = true),
@@ -427,6 +412,29 @@ function initHome() {
       }
     });
   });
+
+  //////gallery lines
+  let gallerylines = document.querySelectorAll(".gallery__line");
+
+  gallerylines.forEach((e, index) => {
+    e.style.height = gallerylines.length - index + "px";
+  });
+  gsap.fromTo(
+    ".gallery__line",
+    1.2,
+    { scaleX: 0 },
+    {
+      scaleX: 1,
+      scrollTrigger: {
+        trigger: ".lines__wrapper__gallery",
+        start: "top bottom-=10%",
+        toggleActions: "play none none reverse",
+      },
+      stagger: 0.1,
+      transformOrigin: "center center",
+      ease: "Power3.easeOut"
+    }
+  );
 }
 
 gsap.registerPlugin(ScrollTrigger);
