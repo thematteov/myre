@@ -344,7 +344,7 @@ function initHome() {
       svgRect = svg.getBoundingClientRect();
       top = svgRect.top;
       height = svgRect.height;
-      startY = height;
+      startY = height / 2;
     });
     window.addEventListener("scroll", () => {
       svgRect = svg.getBoundingClientRect();
@@ -391,7 +391,7 @@ function initHome() {
 
     window.addEventListener("mousemove", (e) => {
       if (isInsideSVG) {
-        if (p1.y > height * 0.9) {
+        if (p1.y > height * 0.9 || p1.y < -3) {
           if (connected) {
             connected = false;
             gsap.to(p1, {
