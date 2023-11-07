@@ -443,6 +443,47 @@ function initHome() {
       }
     });
   });
+  //////expertise columns
+  gsap.to(
+    ".clmn__1",
+    {
+      y: "-30%",
+      ease: "Power3.easeOut",
+      scrollTrigger: {
+        trigger: ".services__section",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    }
+  );
+  gsap.to(
+    ".clmn__2",
+    {
+      y: "-50%",
+      ease: "Power3.easeOut",
+      scrollTrigger: {
+        trigger: ".services__section",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    }
+  );
+  gsap.to(
+    ".clmn__3",
+    {
+      y: "-20%",
+      ease: "Power3.easeOut",
+      scrollTrigger: {
+        trigger: ".services__section",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    }
+  );
+
 }
 
 gsap.registerPlugin(ScrollTrigger);
