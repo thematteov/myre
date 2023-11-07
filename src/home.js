@@ -179,16 +179,6 @@ function initHome() {
       // Your mobile-specific JavaScript code here
     } else {
       // Code for non-mobile devices
-      const tween = gsap.to(service, {
-        scrollTrigger: {
-          trigger: service,
-          start: "top top+=10%",
-          end: "bottom bottom",
-          scrub: true,
-          markers: false,
-        },
-        ease: "none",
-      });
 
       ScrollTrigger.create({
         trigger: service,
@@ -196,7 +186,6 @@ function initHome() {
         pin: true,
         pinSpacing: false,
         markers: false,
-        id: "pin",
         endTrigger: services.length,
         end: "max",
       });
@@ -221,10 +210,6 @@ function initHome() {
       display: "none",
       delay: 1.2,
     });
-
-    let music = document.querySelector("audio");
-    music.volume = 0.2;
-    music.play();
 
     ///////NAV LOGO SCRUB
     let introTl = gsap.timeline();
@@ -320,14 +305,13 @@ function initHome() {
 
   gsap.defaults({ ease: "elastic.out(2, 0.5)" });
 
-  
   // Define the IDs and classes of the elements you want to apply the interaction to
   var elementSelectors = document.querySelectorAll(".linesvg");
 
   elementSelectors.forEach(function (selector, index) {
     var svg = selector;
     var path = svg.querySelector("#path");
-    path.setAttribute('stroke-width', `${1 + index}px`);
+    path.setAttribute("stroke-width", `${1 + index}px`);
     var svgRect = svg.getBoundingClientRect();
     var top = svgRect.top;
     var height = svgRect.height;
@@ -432,9 +416,33 @@ function initHome() {
       },
       stagger: 0.1,
       transformOrigin: "center center",
-      ease: "Power3.easeOut"
+      ease: "Power3.easeOut",
     }
   );
+
+  //////FAQS
+
+  let faqs = document.querySelectorAll(".index__line__gallery");
+  let open = false;
+  faqs.forEach((faq) => {
+    faq.addEventListener("click", () => {
+      if (open === false) {
+        gsap.to(faq.querySelector(".answer__wrapper"), 0.5, {
+          height: "auto",
+          marginBottom: "1em",
+          ease: "Power3.easeOut",
+          onComplete: () => (open = true),
+        });
+      } else if (open === true) {
+        gsap.to(faq.querySelector(".answer__wrapper"), 0.5, {
+          height: "0em",
+          ease: "Power3.easeOut",
+          marginBottom: "0em",
+          onComplete: () => (open = false),
+        });
+      }
+    });
+  });
 }
 
 gsap.registerPlugin(ScrollTrigger);
