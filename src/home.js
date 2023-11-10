@@ -4,13 +4,6 @@ import { gsap } from "gsap/src";
 import SplitType from "split-type";
 
 function initHome() {
-  //////infinite banner
-
-  gsap.to(".latest__banner", 20, {
-    x: "-82.6em",
-    ease: "linear",
-    repeat: -1,
-  });
 
   const text = new SplitType(".split");
   const textside = new SplitType(".split__side");
@@ -27,10 +20,10 @@ function initHome() {
     wrapper.appendChild(element);
   });
   ///////SPLITTEXT
-
+  
   let lines = document.querySelectorAll(".split");
   let chars = document.querySelectorAll(".chars");
-
+  
   lines.forEach((value, index) => {
     let tl = gsap.timeline({
       paused: true,
@@ -52,30 +45,45 @@ function initHome() {
         ease: "Power2.easeOut",
         stagger: 0.1,
       }
-    );
-  });
-  chars.forEach((value) => {
-    let tl = gsap.timeline({
-      paused: true,
-      scrollTrigger: {
-        trigger: value,
-        start: "top bottom-=30%",
-        toggleActions: "play none none reverse",
-      },
+      );
     });
-    tl.fromTo(
-      value.querySelectorAll(".char"),
-      1,
-      { y: "100%", opacity: 0 },
-      {
-        y: "0%",
-        opacity: 1,
-        ease: "Power2.easeOut",
-        stagger: 0.05,
-      }
-    );
-  });
-
+    chars.forEach((value) => {
+      let tl = gsap.timeline({
+        paused: true,
+        scrollTrigger: {
+          trigger: value,
+          start: "top bottom-=30%",
+          toggleActions: "play none none reverse",
+        },
+      });
+      tl.fromTo(
+        value.querySelectorAll(".char"),
+        1,
+        { y: "100%", opacity: 0 },
+        {
+          y: "0%",
+          opacity: 1,
+          ease: "Power2.easeOut",
+          stagger: 0.05,
+        }
+        );
+      });
+      
+      gsap.fromTo(
+        ".intro__section",
+        { scale: 1 },
+        {
+          scale: 0.8,
+          ease: "Power3.easeOut",
+          scrollTrigger: {
+            trigger: ".intro__section",
+            start: "bottom bottom",
+            scrub: true,
+            pin: true,
+            pinSpacing: false
+          },
+        }
+      );
   //home video
   if (window.matchMedia("(max-width: 768px)").matches) {
     gsap.fromTo(
@@ -284,21 +292,6 @@ function initHome() {
       }
     );
   });
-
-  ////////gallery
-
-  const wEmbedElement = document.querySelectorAll(".gallery__line");
-
-  wEmbedElement.forEach((e) => {
-    const galleryCover = e.parentElement.querySelector(".gallery__cover");
-    e.addEventListener("mouseenter", () => {
-      gsap.fromTo(galleryCover, { opacity: 0 }, { opacity: 1, duration: 0.5 });
-    });
-    e.addEventListener("mouseleave", () => {
-      gsap.to(galleryCover, { opacity: 0, duration: 0.5 });
-    });
-  });
-
   //////SVG LINES/////////////
 
   var connected = false;
@@ -307,6 +300,9 @@ function initHome() {
 
   // Define the IDs and classes of the elements you want to apply the interaction to
   var elementSelectors = document.querySelectorAll(".linesvg");
+  var lineswrapper = document.querySelector(".lines__wrapper");
+  var rectWidth = lineswrapper.getBoundingClientRect().width;
+  var rectHeight = lineswrapper.getBoundingClientRect().height;
 
   elementSelectors.forEach(function (selector, index) {
     var svg = selector;
@@ -317,14 +313,14 @@ function initHome() {
     var height = svgRect.height;
     var startY = height / 2;
     var p0 = { x: 0, y: startY };
-    var p1 = { x: window.innerWidth / 2, y: startY };
-    var p2 = { x: window.innerWidth, y: startY };
+    var p1 = { x: rectWidth / 2, y: startY };
+    var p2 = { x: rectWidth, y: startY };
     var isInsideSVG = false; // Track if the mouse is inside the current SVG
 
     window.addEventListener("resize", () => {
       p0 = { x: 0, y: startY };
-      p1 = { x: window.innerWidth / 2, y: startY };
-      p2 = { x: window.innerWidth, y: startY };
+      p1 = { x: rectWidth / 2, y: startY };
+      p2 = { x: rectWidth, y: startY };
       svgRect = svg.getBoundingClientRect();
       top = svgRect.top;
       height = svgRect.height;
@@ -366,7 +362,7 @@ function initHome() {
         connected = false;
         gsap.to(p1, {
           duration: 1,
-          x: window.innerWidth / 2,
+          x: rectWidth / 2,
           y: height / 2,
           onComplete: () => (connected = true),
         });
@@ -380,7 +376,7 @@ function initHome() {
             connected = false;
             gsap.to(p1, {
               duration: 2.5,
-              x: e.clientX,
+              // x: e.clientX,
               y: height / 2,
               onComplete: () => (connected = true),
             });
@@ -391,7 +387,7 @@ function initHome() {
           gsap.killTweensOf(p1);
         }
 
-        p1.x = e.clientX;
+        // p1.x = e.clientX;
         p1.y = e.clientY - top;
       }
     });
@@ -411,7 +407,7 @@ function initHome() {
       scaleX: 1,
       scrollTrigger: {
         trigger: ".lines__wrapper__gallery",
-        start: "top bottom-=10%",
+        start: "top bottom-=40%",
         toggleActions: "play none none reverse",
       },
       stagger: 0.1,
@@ -443,47 +439,6 @@ function initHome() {
       }
     });
   });
-  //////expertise columns
-  gsap.to(
-    ".clmn__1",
-    {
-      y: "-30%",
-      ease: "Power3.easeOut",
-      scrollTrigger: {
-        trigger: ".services__section",
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-      },
-    }
-  );
-  gsap.to(
-    ".clmn__2",
-    {
-      y: "-50%",
-      ease: "Power3.easeOut",
-      scrollTrigger: {
-        trigger: ".services__section",
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-      },
-    }
-  );
-  gsap.to(
-    ".clmn__3",
-    {
-      y: "-20%",
-      ease: "Power3.easeOut",
-      scrollTrigger: {
-        trigger: ".services__section",
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-      },
-    }
-  );
-
 }
 
 gsap.registerPlugin(ScrollTrigger);
