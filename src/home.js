@@ -69,23 +69,23 @@ function initHome() {
         );
       });
       
-      gsap.fromTo(
-        ".intro__section",
-        { scale: 1 },
-        {
-          scale: 0.8,
-          ease: "Power3.easeOut",
-          scrollTrigger: {
-            trigger: ".intro__section",
-            start: "bottom bottom",
-            scrub: true,
-            pin: true,
-            pinSpacing: false
-          },
-        }
-      );
   //home video
   if (window.matchMedia("(max-width: 768px)").matches) {
+    gsap.fromTo(
+      ".intro__section",
+      { scale: 1 },
+      {
+        scale: 0.8,
+        ease: "Power3.easeOut",
+        scrollTrigger: {
+          trigger: ".intro__section",
+          start: "bottom bottom",
+          scrub: true,
+          pin: true,
+          pinSpacing: false
+        },
+      }
+    );
     gsap.fromTo(
       ".latest_video",
       { width: "0%" },
