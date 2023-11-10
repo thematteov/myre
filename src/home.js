@@ -72,6 +72,21 @@ function initHome() {
   //home video
   if (window.matchMedia("(max-width: 768px)").matches) {
     gsap.fromTo(
+      ".latest_video",
+      { width: "0%" },
+      {
+        width: "96%",
+        ease: "Power3.easeOut",
+        scrollTrigger: {
+          trigger: ".home__first__section",
+          start: "top bottom-=30%",
+          end: "top top",
+          scrub: true,
+        },
+      }
+      );
+    } else {
+    gsap.fromTo(
       ".intro__section",
       { scale: 1 },
       {
@@ -86,21 +101,6 @@ function initHome() {
         },
       }
     );
-    gsap.fromTo(
-      ".latest_video",
-      { width: "0%" },
-      {
-        width: "96%",
-        ease: "Power3.easeOut",
-        scrollTrigger: {
-          trigger: ".home__first__section",
-          start: "top bottom-=30%",
-          end: "top top",
-          scrub: true,
-        },
-      }
-    );
-  } else {
     gsap.fromTo(
       ".latest_video",
       { width: "0em" },
