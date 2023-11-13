@@ -4,7 +4,6 @@ import { gsap } from "gsap/src";
 import SplitType from "split-type";
 
 function initHome() {
-
   const text = new SplitType(".split");
   const textside = new SplitType(".split__side");
   const char = new SplitType(".chars");
@@ -20,10 +19,10 @@ function initHome() {
     wrapper.appendChild(element);
   });
   ///////SPLITTEXT
-  
+
   let lines = document.querySelectorAll(".split");
   let chars = document.querySelectorAll(".chars");
-  
+
   lines.forEach((value, index) => {
     let tl = gsap.timeline({
       paused: true,
@@ -45,30 +44,29 @@ function initHome() {
         ease: "Power2.easeOut",
         stagger: 0.1,
       }
-      );
+    );
+  });
+  chars.forEach((value) => {
+    let tl = gsap.timeline({
+      paused: true,
+      scrollTrigger: {
+        trigger: value,
+        start: "top bottom-=30%",
+        toggleActions: "play none none reverse",
+      },
     });
-    chars.forEach((value) => {
-      let tl = gsap.timeline({
-        paused: true,
-        scrollTrigger: {
-          trigger: value,
-          start: "top bottom-=30%",
-          toggleActions: "play none none reverse",
-        },
-      });
-      tl.fromTo(
-        value.querySelectorAll(".char"),
-        1,
-        { y: "100%", opacity: 0 },
-        {
-          y: "0%",
-          opacity: 1,
-          ease: "Power2.easeOut",
-          stagger: 0.05,
-        }
-        );
-      });
-      
+    tl.fromTo(
+      value.querySelectorAll(".char"),
+      1,
+      { y: "100%", opacity: 0 },
+      {
+        y: "0%",
+        opacity: 1,
+        ease: "Power2.easeOut",
+        stagger: 0.05,
+      }
+    );
+  });
   //home video
   if (window.matchMedia("(max-width: 768px)").matches) {
     gsap.fromTo(
@@ -84,23 +82,8 @@ function initHome() {
           scrub: true,
         },
       }
-      );
-    } else {
-    gsap.fromTo(
-      ".intro__section",
-      { scale: 1 },
-      {
-        scale: 0.8,
-        ease: "Power3.easeOut",
-        scrollTrigger: {
-          trigger: ".intro__section",
-          start: "bottom bottom",
-          scrub: true,
-          pin: true,
-          pinSpacing: false
-        },
-      }
     );
+  } else {
     gsap.fromTo(
       ".latest_video",
       { width: "0em" },
@@ -116,6 +99,47 @@ function initHome() {
       }
     );
   }
+
+  let elements = $(".prj__cover__wrapper");
+
+  // Exclude the last element
+  let elementsToAnimate = elements.not(":first");
+  let tl = gsap.timeline();
+  tl.set(".prj__cover__wrapper", {
+    transformOrigin: "top 0",
+    transformStyle: "preserve-3d",
+    transformPerspective: 2000,
+  });
+  tl.fromTo(
+    elementsToAnimate,
+    2,
+    { rotationX: 0, rotationY: 0, translateX: '0%',translateY: '0%' },
+    {
+      rotationX: 180,
+      rotationY: -90,
+      stagger: -1,
+      opacity: 0,
+      translateX: '-10%',
+      translateY: '-10%',
+      scrollTrigger: {
+        trigger: ".notebook__flex",
+        pin: true,
+        start: "top top",
+        markers: false,
+        scrub: true,
+      },
+    }
+  );
+  gsap.to(".notebook__flex", {
+    scale: 1.2,
+    scrollTrigger: {
+      trigger: ".intro__section",
+      start: "top top",
+      markers: false,
+      scrub: true,
+    },
+  });
+  
   gsap.fromTo(
     ".cube__video",
     1.2,
