@@ -83,61 +83,38 @@ function initProject() {
 
   const projImages = gsap.utils.toArray(".project__image__wrapper");
   if (window.matchMedia("(max-width: 768px)").matches) {
-    projImages.forEach((img, index) => {
-      const tween = gsap.to(img, {
-        scrollTrigger: {
-          trigger: img,
-          start: () => `top top+=40%`,
-          end: () => `bottom bottom`,
-          scrub: true,
-          markers: false,
-        },
-        ease: "none",
-      });
-
-      ScrollTrigger.create({
-        trigger: img,
-        start: "top top+=40%",
-        pin: true,
-        pinSpacing: false,
-        markers: false,
-        id: "pin",
-        endTrigger: img.length,
-        end: "max",
-      });
-    });
   } else {
     // Code for non-mobile devices
-    // projImages.forEach((img, index) => {
-    //   const tween = gsap.fromTo(
-    //     img,
-    //     0.8,
-    //     { scale: 1, opacity: 1 },
-    //     {
-    //       scale: 0.8,
-    //       opacity: 0.7,
-    //       scrollTrigger: {
-    //         trigger: img,
-    //         start: "top top+=15%",
-    //         pin: true,
-    //         pinSpacing: false,
-    //         markers: false,
-    //         id: "pin",
-    //         endTrigger: img.length,
-    //         end: "max",
-    //         toggleActions: "play none none reverse",
-    //       },
-    //       ease: "Power3.easeInOut",
-    //     }
-    //   );
-    // });
-    // ScrollTrigger.create({
-    //   trigger: ".project__right__wrapper",
-    //   start: "top top+=12%",
-    //   pin: true,
-    //   pinSpacing: false,
-    //   markers: false,
-    // });
+    projImages.forEach((img, index) => {
+      const tween = gsap.fromTo(
+        img,
+        0.8,
+        { scale: 1, opacity: 1 },
+        {
+          scale: 0.8,
+          opacity: 0.7,
+          scrollTrigger: {
+            trigger: img,
+            start: "top top+=15%",
+            pin: true,
+            pinSpacing: false,
+            markers: false,
+            id: "pin",
+            endTrigger: img.length,
+            end: "max",
+            toggleActions: "play none none reverse",
+          },
+          ease: "Power3.easeInOut",
+        }
+      );
+    });
+    ScrollTrigger.create({
+      trigger: ".project__right__wrapper",
+      start: "top top+=12%",
+      pin: true,
+      pinSpacing: false,
+      markers: false,
+    });
   }
   ////works images stack
   var myVideo = document.getElementsByTagName("video");
