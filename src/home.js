@@ -6,10 +6,15 @@ import SplitType from "split-type";
 function initHome() {
   let startaprj = gsap.timeline({ repeat: -1 });
 
-  startaprj.to(".startaprj__track", 5, {
-    x: "-10em",
-    ease: 'none'
-  });
+  startaprj.fromTo(
+    ".startaprj__track",
+    5,
+    { x: "0em" },
+    {
+      x: "-10em",
+      ease: "none",
+    }
+  );
 
   const text = new SplitType(".split");
   const textside = new SplitType(".split__side");
