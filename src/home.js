@@ -4,6 +4,13 @@ import { gsap } from "gsap/src";
 import SplitType from "split-type";
 
 function initHome() {
+  let startaprj = gsap.timeline({ repeat: -1 });
+
+  startaprj.to(".startaprj__track", 5, {
+    x: "-10em",
+    ease: 'none'
+  });
+
   const text = new SplitType(".split");
   const textside = new SplitType(".split__side");
   const char = new SplitType(".chars");
@@ -113,14 +120,14 @@ function initHome() {
   tl.fromTo(
     elementsToAnimate,
     2,
-    { rotationX: 0, rotationY: 0, translateX: '0%',translateY: '0%' },
+    { rotationX: 0, rotationY: 0, translateX: "0%", translateY: "0%" },
     {
       rotationX: 180,
       rotationY: -90,
       stagger: -1,
       opacity: 0,
-      translateX: '-10%',
-      translateY: '-10%',
+      translateX: "-10%",
+      translateY: "-10%",
       scrollTrigger: {
         trigger: ".notebook__flex",
         pin: true,
@@ -139,7 +146,7 @@ function initHome() {
       scrub: true,
     },
   });
-  
+
   gsap.fromTo(
     ".cube__video",
     1.2,
@@ -184,45 +191,6 @@ function initHome() {
     },
   });
 
-  const services = gsap.utils.toArray(".service__wrapper");
-
-  services.forEach((service, index) => {
-    if (window.matchMedia("(max-width: 768px)").matches) {
-      const tween = gsap.to(service, {
-        scrollTrigger: {
-          trigger: service,
-          start: "bottom bottom",
-          scrub: true,
-          markers: false,
-        },
-        ease: "none",
-      });
-
-      ScrollTrigger.create({
-        trigger: service,
-        start: "bottom bottom",
-        pin: true,
-        pinSpacing: false,
-        markers: false,
-        id: "pin",
-        endTrigger: services.length,
-        end: "max",
-      });
-      // Your mobile-specific JavaScript code here
-    } else {
-      // Code for non-mobile devices
-
-      ScrollTrigger.create({
-        trigger: service,
-        start: "top top+=20%",
-        pin: true,
-        pinSpacing: false,
-        markers: false,
-        endTrigger: services.length,
-        end: "max",
-      });
-    }
-  });
   ScrollTrigger.create({
     trigger: ".why__us__section",
     start: "bottom bottom",
