@@ -3,17 +3,50 @@ import Lenis from "@studio-freight/lenis";
 import { ScrollTrigger } from "gsap/all";
 import { gsap } from "gsap/src";
 import Lottie from "lottie-web";
-// import imagesLoaded from "imagesloaded";
+import imagesLoaded from "imagesloaded";
 
 import initHome from "./home";
 import initProject from "./project";
 
 //////preloader progression animation
-window.addEventListener("load", () => {
-  const pageEnd = performance.now(); // Get the time when the page finishes loading
-  const loadTime = (pageEnd - performance.timing.navigationStart) / 1000; // Calculate the page load time in seconds
-  console.log(`Page loaded in ${loadTime} seconds.`);
+
+var imgLoad = imagesLoaded("img");
+
+var progressBar = $(".preloader__progress"),
+  images = $("img").length,
+  loadedCount = 0,
+  loadingProgress = 0,
+  tlProgress = gsap.timeline();
+
+imgLoad.on("progress", function () {
+  loadProgress();
 });
+
+function loadProgress() {
+  loadedCount++;
+
+  loadingProgress = loadedCount / images;
+  console.log(loadingProgress);
+  document.querySelector('.p__preloader').textContent = loadingProgress*100 + '%'
+
+  gsap.to(tlProgress, 1, {
+    progress: loadingProgress,
+    ease: "Power3.easeInOut",
+  });
+}
+
+var tlProgress = gsap.timeline({
+  paused: true,
+  onComplete: loadComplete,
+});
+
+tlProgress.to(progressBar, 1, { width: "100%" });
+
+function loadComplete() {
+  var tlEnd = gsap.timeline();
+  tlEnd.to(".preloader", 0, { opacity: 0, delay: 0.5 });
+}
+
 if (window.matchMedia("(max-width: 768px)").matches) {
 } else {
   //////percentage
