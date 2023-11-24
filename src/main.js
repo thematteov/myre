@@ -3,10 +3,52 @@ import Lenis from "@studio-freight/lenis";
 import { ScrollTrigger } from "gsap/all";
 import { gsap } from "gsap/src";
 import Lottie from "lottie-web";
-// import imagesLoaded from "imagesloaded";
+import imagesLoaded from "imagesloaded";
 
 import initHome from "./home";
 import initProject from "./project";
+
+//////preloader progression animation
+function updateProgressBar() {
+  const progressBar = document.querySelector(".preloader__progress");
+
+  const update = () => {
+    const totalResources = performance.getEntriesByType("resource").length;
+    const completedResources = performance
+      .getEntriesByType("resource")
+      .filter((entry) => entry.duration > 0).length;
+
+    const progress = (completedResources / totalResources) * 100;
+
+    gsap.to(progressBar, {
+      width: `${progress}%`,
+      ease: 'Power3.easeInOut',
+      duration: 0.5,
+      onComplete: () => {
+        if (progress === 100) {
+          // Hide the preloader when the animation is complete
+          gsap.to(".preloader", {
+            ease: 'power3.easeInOut',
+            opacity: 0,
+            delay: 0.5,
+            onComplete: () => {
+              // Ensure the preloader is completely hidden
+              document.querySelector(".preloader").style.display = "none";
+            },
+          });
+        }
+      },
+    });
+  };
+
+  // Delay the progress update to ensure proper initialization
+  setTimeout(update, 100);
+}
+
+// Listen for the 'load' event to make sure all resources are loaded
+window.addEventListener("load", () => {
+  updateProgressBar();
+});
 
 if (window.matchMedia("(max-width: 768px)").matches) {
 } else {
@@ -70,7 +112,6 @@ if (window.matchMedia("(max-width: 768px)").matches) {
     gsap.to(cursor, 0.5, { x: X, y: Y, ease: "Power2.easeOut" });
     gsap.to(cursorball, 0.5, { x: X, y: Y, ease: "Power2.easeOut" });
   });
-
 }
 
 const content = document.querySelector("img");

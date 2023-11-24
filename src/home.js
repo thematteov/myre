@@ -100,13 +100,29 @@ function initHome() {
       ".latest_video",
       { width: "0em" },
       {
-        width: "66em",
-        ease: "Power3.easeOut",
+        width: "50em",
+        ease: "none",
         scrollTrigger: {
           trigger: ".home__first__section",
           start: "top bottom-=30%",
           end: "top top",
           scrub: true,
+        },
+      }
+    );
+    gsap.fromTo(
+      ".home__details__track",
+      { x: "0%" },
+      {
+        x: "-103%",
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".home__first__section",
+          start: "top top+=10%",
+          // end: "bottom top",
+          scrub: true,
+          pin: true,
+          pinSpacing: false
         },
       }
     );
@@ -204,91 +220,90 @@ function initHome() {
     markers: false,
   });
 
-  let enterbtn = document.querySelector(".enter");
-  //////preloader trigger
-  enterbtn.addEventListener("click", () => {
-    gsap.to(".preloader", 0, {
-      opacity: 0,
-      ease: "Power2.easeOut",
-    });
-    gsap.to(".preloader", 0, {
-      display: "none",
-      delay: 1.2,
-    });
+  // //////preloader trigger
+  // enterbtn.addEventListener("click", () => {
+  //   gsap.to(".preloader", 0, {
+  //     opacity: 0,
+  //     ease: "Power2.easeOut",
+  //   });
+  //   gsap.to(".preloader", 0, {
+  //     display: "none",
+  //     delay: 1.2,
+  //   });
 
-    ///////NAV LOGO SCRUB
-    let introTl = gsap.timeline();
-    introTl.set(".logo__svg", { transformOrigin: "0 50" });
-    introTl.fromTo(
-      ".logo__svg",
-      1.5,
-      { height: "50em" },
-      {
-        height: "4em",
-        delay: 0.5,
-        transformOrigin: "0 50",
-        ease: "Power3.easeOut",
-        scrollTrigger: {
-          trigger: ".logo__svg",
-        },
-      }
-    );
+  //   ///////NAV LOGO SCRUB
+  //   let introTl = gsap.timeline();
+  //   introTl.set(".logo__svg", { transformOrigin: "0 50" });
+  //   introTl.fromTo(
+  //     ".logo__svg",
+  //     1.5,
+  //     { height: "50em" },
+  //     {
+  //       height: "4em",
+  //       delay: 0.5,
+  //       transformOrigin: "0 50",
+  //       ease: "Power3.easeOut",
+  //       scrollTrigger: {
+  //         trigger: ".logo__svg",
+  //       },
+  //     }
+  //   );
 
-    const text = new SplitType(".splitfirst");
-    text.lines;
+  //   const text = new SplitType(".splitfirst");
+  //   text.lines;
 
-    ///////SPLITTEXT
+  //   ///////SPLITTEXT
 
-    let lines = document.querySelectorAll(".splitfirst");
+  //   let lines = document.querySelectorAll(".splitfirst");
 
-    lines.forEach((value) => {
-      gsap.fromTo(
-        value.querySelectorAll(".word"),
-        1,
-        { y: "70%", opacity: 0 },
-        {
-          y: "0%",
-          opacity: 1,
-          ease: "Power3.easeOut",
-          stagger: 0.05,
-          delay: 1,
-        }
-      );
-    });
-    introTl.fromTo(
-      ".index__line",
-      1.2,
-      { width: "0vw" },
-      {
-        width: "100vw",
-        ease: "Power3.easeOut",
-        stagger: 0.05,
-        delay: 0,
-      }
-    );
-    introTl.fromTo(
-      ".index__i",
-      1.2,
-      { y: "70%", opacity: 0 },
-      {
-        y: "0%",
-        opacity: 1,
-        ease: "Power3.easeOut",
-        stagger: 0.05,
-        delay: -0.5,
-      }
-    );
-    introTl.fromTo(
-      ".image__me",
-      1.2,
-      { height: "0em" },
-      {
-        height: "5.63em",
-        ease: "Power3.easeOut",
-        delay: -1,
-      }
-    );
-  });
+  //   lines.forEach((value) => {
+  //     gsap.fromTo(
+  //       value.querySelectorAll(".word"),
+  //       1,
+  //       { y: "70%", opacity: 0 },
+  //       {
+  //         y: "0%",
+  //         opacity: 1,
+  //         ease: "Power3.easeOut",
+  //         stagger: 0.05,
+  //         delay: 1,
+  //       }
+  //     );
+  //   });
+  //   introTl.fromTo(
+  //     ".index__line",
+  //     1.2,
+  //     { width: "0vw" },
+  //     {
+  //       width: "100vw",
+  //       ease: "Power3.easeOut",
+  //       stagger: 0.05,
+  //       delay: 0,
+  //     }
+  //   );
+  //   introTl.fromTo(
+  //     ".index__i",
+  //     1.2,
+  //     { y: "70%", opacity: 0 },
+  //     {
+  //       y: "0%",
+  //       opacity: 1,
+  //       ease: "Power3.easeOut",
+  //       stagger: 0.05,
+  //       delay: -0.5,
+  //     }
+  //   );
+  //   introTl.fromTo(
+  //     ".image__me",
+  //     1.2,
+  //     { height: "0em" },
+  //     {
+  //       height: "5.63em",
+  //       ease: "Power3.easeOut",
+  //       delay: -1,
+  //     }
+  //   );
+  // });
   //////SVG LINES/////////////
 
   var connected = false;
@@ -297,14 +312,14 @@ function initHome() {
 
   // Define the IDs and classes of the elements you want to apply the interaction to
   var elementSelectors = document.querySelectorAll(".linesvg");
-  var lineswrapper = document.querySelector(".lines__wrapper");
+  var lineswrapper = document.querySelector(".index__line");
   var rectWidth = lineswrapper.getBoundingClientRect().width;
-  var rectHeight = lineswrapper.getBoundingClientRect().height;
+var rectHeight = lineswrapper.getBoundingClientRect().height;
 
   elementSelectors.forEach(function (selector, index) {
     var svg = selector;
     var path = svg.querySelector("#path");
-    path.setAttribute("stroke-width", `${1 + index}px`);
+    path.setAttribute("stroke-width", `${8 - index*2}px`);
     var svgRect = svg.getBoundingClientRect();
     var top = svgRect.top;
     var height = svgRect.height;

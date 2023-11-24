@@ -17,6 +17,7 @@
     "@barba/core": "^2.9.7",
     "@studio-freight/lenis": "^1.0.27",
     "gsap": "^3.9.1",
+    "imagesloaded": "^5.0.0",
     "lottie-web": "^5.12.2",
     "split-type": "^0.3.4"
   }
