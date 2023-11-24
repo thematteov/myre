@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/all";
 import { gsap } from "gsap/src";
 import Lottie from "lottie-web";
 import imagesLoaded from "imagesloaded";
+import SplitType from "split-type";
 
 import initHome from "./home";
 import initProject from "./project";
@@ -27,7 +28,8 @@ function loadProgress() {
 
   loadingProgress = loadedCount / images;
   console.log(loadingProgress);
-  document.querySelector('.p__preloader').textContent = loadingProgress*100 + '%'
+  document.querySelector(".p__preloader").textContent =
+    loadingProgress * 100 + "%";
 
   gsap.to(tlProgress, 1, {
     progress: loadingProgress,
@@ -45,6 +47,71 @@ tlProgress.to(progressBar, 1, { width: "100%" });
 function loadComplete() {
   var tlEnd = gsap.timeline();
   tlEnd.to(".preloader", 0, { opacity: 0, delay: 0.5 });
+  let lines = document.querySelectorAll(".hero__p");
+  if (window.matchMedia("(max-width: 768px)").matches) {
+    tlEnd.fromTo(
+      ".video__animations__wrapper",
+      1,
+      { height: "0em" },
+      {
+        height: "57em",
+        ease: "Power3.easeInOut",
+      }
+    );
+    tlEnd.fromTo(
+      ".hero__video__wrapper",
+      1,
+      { height: "0em" },
+      {
+        height: "42em",
+        ease: "Power3.easeInOut",
+        delay: -0.8,
+      }
+    );
+  } else {
+    tlEnd.fromTo(
+      ".video__animations__wrapper",
+      1,
+      { height: "0em" },
+      {
+        height: "17em",
+        ease: "Power3.easeInOut",
+      }
+    );
+    tlEnd.fromTo(
+      ".hero__video__wrapper",
+      1,
+      { height: "0em" },
+      {
+        height: "13em",
+        ease: "Power3.easeInOut",
+        delay: -0.8,
+      }
+    );
+  }
+  tlEnd.fromTo(
+    lines,
+    1,
+    { y: "100%", opacity: 0 },
+    {
+      y: "0%",
+      opacity: 1,
+      force3D: true,
+      ease: "Power3.easeOut",
+      stagger: 0.1,
+      delay: -0.5,
+    }
+  );
+  tlEnd.fromTo(
+    ".navigation__wrapper",
+    1,
+    { y: "-100%" },
+    {
+      y: "0%",
+      ease: "Power3.easeOut",
+      delay: -0.9,
+    }
+  );
 }
 
 if (window.matchMedia("(max-width: 768px)").matches) {

@@ -85,7 +85,7 @@ function initHome() {
       ".latest_video",
       { width: "0%" },
       {
-        width: "96%",
+        width: "100%",
         ease: "Power3.easeOut",
         scrollTrigger: {
           trigger: ".home__first__section",
