@@ -4,6 +4,17 @@ import { gsap } from "gsap/src";
 import SplitType from "split-type";
 
 function initProject() {
+  let startaprj = gsap.timeline({ repeat: -1 });
+
+  startaprj.fromTo(
+    ".startaprj__track",
+    5,
+    { x: "0em" },
+    {
+      x: "-10em",
+      ease: "none",
+    }
+  );
   //////infinite banner
   const text = new SplitType(".split");
   const textside = new SplitType(".split__side");
@@ -70,26 +81,46 @@ function initProject() {
   });
 
   //////page animations
-
   let caseTL = gsap.timeline({ delay: 1.5 });
-  caseTL.fromTo(
-    ".project__left",
-    1.5,
-    {
-      width: "0%",
-    },
-    { width: "58%", ease: "Power3.easeOut" }
-  );
+  if (window.matchMedia("(max-width: 768px)").matches) {
+    caseTL.fromTo(
+      ".project__left",
+      1.5,
+      {
+        width: "0%",
+      },
+      { width: "100%", ease: "Power3.easeOut" }
+    );
 
-  caseTL.fromTo(
-    ".case__image__wrapper",
-    1.5,
-    {
-      height: "0em",
-      transformOrigin: "bottom center",
-    },
-    { height: "27.3em", stagger: 0.06, ease: "Power3.easeOut", delay: -0.7 }
-  );
+    caseTL.fromTo(
+      ".case__image__wrapper",
+      1.5,
+      {
+        height: "0em",
+        transformOrigin: "bottom center",
+      },
+      { height: "48.8em", stagger: 0.06, ease: "Power3.easeOut", delay: -0.7 }
+    );
+  } else {
+    caseTL.fromTo(
+      ".project__left",
+      1.5,
+      {
+        width: "0%",
+      },
+      { width: "58%", ease: "Power3.easeOut" }
+    );
+
+    caseTL.fromTo(
+      ".case__image__wrapper",
+      1.5,
+      {
+        height: "0em",
+        transformOrigin: "bottom center",
+      },
+      { height: "27.3em", stagger: 0.06, ease: "Power3.easeOut", delay: -0.7 }
+    );
+  }
   caseTL.fromTo(
     ".case__image",
     1.5,
