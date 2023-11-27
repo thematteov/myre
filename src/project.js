@@ -5,16 +5,6 @@ import SplitType from "split-type";
 
 function initProject() {
   //////infinite banner
-
-  gsap.to(".latest__banner", 20, {
-    x: "-82.6em",
-    ease: "linear",
-    repeat: -1,
-  });
-
-  gsap.set(".logo__svg", {
-    height: "4em",
-  });
   const text = new SplitType(".split");
   const textside = new SplitType(".split__side");
   const char = new SplitType(".chars");
@@ -79,62 +69,53 @@ function initProject() {
     );
   });
 
-  ////works images stack
+  //////page animations
 
-  const projImages = gsap.utils.toArray(".project__image__wrapper");
-  if (window.matchMedia("(max-width: 768px)").matches) {
-  } else {
-    // Code for non-mobile devices
-    projImages.forEach((img, index) => {
-      const tween = gsap.fromTo(
-        img,
-        0.8,
-        { scale: 1, opacity: 1 },
-        {
-          scale: 0.8,
-          opacity: 0.7,
-          scrollTrigger: {
-            trigger: img,
-            start: "top top+=15%",
-            pin: true,
-            pinSpacing: false,
-            markers: false,
-            id: "pin",
-            endTrigger: img.length,
-            end: "max",
-            toggleActions: "play none none reverse",
-          },
-          ease: "Power3.easeInOut",
-        }
-      );
-    });
-    ScrollTrigger.create({
-      trigger: ".project__right__wrapper",
-      start: "top top+=12%",
-      pin: true,
-      pinSpacing: false,
-      markers: false,
-    });
-  }
-  ////works images stack
-  var myVideo = document.getElementsByTagName("video");
-  for (let i = 0; i < myVideo.length; i++) {
-    if (typeof myVideo[i].loop == "boolean") {
-      // loop supported
-      myVideo[i].loop = true;
-    } else {
-      // loop property not supported
-      myVideo[i].addEventListener(
-        "ended",
-        function () {
-          this.currentTime = 0;
-          this.play();
-        },
-        false
-      );
-    }
-  }
+  let caseTL = gsap.timeline({ delay: 1.5 });
+  caseTL.fromTo(
+    ".project__left",
+    1.5,
+    {
+      width: "0%",
+    },
+    { width: "58%", ease: "Power3.easeOut" }
+  );
 
+  caseTL.fromTo(
+    ".case__image__wrapper",
+    1.5,
+    {
+      height: "0em",
+      transformOrigin: "bottom center",
+    },
+    { height: "27.3em", stagger: 0.06, ease: "Power3.easeOut", delay: -0.7 }
+  );
+  caseTL.fromTo(
+    ".case__image",
+    1.5,
+    {
+      scale: 1.2,
+    },
+    { scale: 1, stagger: 0.06, ease: "Power3.easeOut", delay: -1.5 }
+  );
+  caseTL.fromTo(
+    ".footer__text__wrp",
+    1,
+    {
+      yPercent: 100,
+    },
+    { yPercent: 0, stagger: 0.1, ease: "Power3.easeOut", delay: -1 }
+  );
+  gsap.fromTo(
+    ".info__ttl__wrapper",
+    10,
+    {
+      x: "0em",
+    },
+    { x: "-50.5em", ease: "none", repeat: -1 }
+  );
+
+  ///////general
   const videos = document.querySelectorAll("video");
   videos.forEach((video) => video.play());
 }

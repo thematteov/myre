@@ -105,7 +105,7 @@ function initHome() {
         scrollTrigger: {
           trigger: ".home__first__section",
           start: "top bottom-=30%",
-          end: "top top",
+          end: "bottom bottom",
           scrub: true,
         },
       }
@@ -114,18 +114,23 @@ function initHome() {
       ".home__details__track",
       { x: "0%" },
       {
-        x: "-103%",
+        x: "-103.5%",
         ease: "none",
         scrollTrigger: {
           trigger: ".home__first__section",
-          start: "top top+=10%",
-          // end: "bottom top",
+          start: "top top",
+          end: "bottom top",
           scrub: true,
-          pin: true,
-          pinSpacing: false
         },
       }
     );
+    ScrollTrigger.create({
+      trigger: ".home__first__section",
+      start: "top top",
+      end: "bottom top-=100%",
+      pin: true,
+      pinSpacing: false,
+    });
   }
 
   let elements = $(".prj__cover__wrapper");
@@ -229,12 +234,12 @@ function initHome() {
   var elementSelectors = document.querySelectorAll(".linesvg");
   var lineswrapper = document.querySelector(".index__line");
   var rectWidth = lineswrapper.getBoundingClientRect().width;
-var rectHeight = lineswrapper.getBoundingClientRect().height;
+  var rectHeight = lineswrapper.getBoundingClientRect().height;
 
   elementSelectors.forEach(function (selector, index) {
     var svg = selector;
     var path = svg.querySelector("#path");
-    path.setAttribute("stroke-width", `${8 - index*2}px`);
+    path.setAttribute("stroke-width", `${8 - index * 2}px`);
     var svgRect = svg.getBoundingClientRect();
     var top = svgRect.top;
     var height = svgRect.height;
@@ -366,6 +371,10 @@ var rectHeight = lineswrapper.getBoundingClientRect().height;
       }
     });
   });
+
+  ///////general
+  const videos = document.querySelectorAll("video");
+  videos.forEach((video) => video.play());
 }
 
 gsap.registerPlugin(ScrollTrigger);

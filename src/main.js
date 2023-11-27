@@ -4,7 +4,6 @@ import { ScrollTrigger } from "gsap/all";
 import { gsap } from "gsap/src";
 import Lottie from "lottie-web";
 import imagesLoaded from "imagesloaded";
-import SplitType from "split-type";
 
 import initHome from "./home";
 import initProject from "./project";
@@ -46,7 +45,7 @@ tlProgress.to(progressBar, 1, { width: "100%" });
 
 function loadComplete() {
   var tlEnd = gsap.timeline();
-  tlEnd.to(".preloader", 0, { opacity: 0, delay: 0.5 });
+  tlEnd.to(".preloader", 0, { display: "none", delay: 0.5 });
   let lines = document.querySelectorAll(".hero__p");
   if (window.matchMedia("(max-width: 768px)").matches) {
     tlEnd.fromTo(
