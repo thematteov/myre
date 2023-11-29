@@ -48,69 +48,14 @@ function loadComplete() {
   tlEnd.to(".preloader", 0, { display: "none", delay: 0.5 });
   let lines = document.querySelectorAll(".hero__p");
   if (window.matchMedia("(max-width: 768px)").matches) {
-    tlEnd.fromTo(
-      ".video__animations__wrapper",
-      1,
-      { height: "0em" },
-      {
-        height: "57em",
-        ease: "Power3.easeInOut",
-      }
-    );
-    tlEnd.fromTo(
-      ".hero__video__wrapper",
-      1,
-      { height: "0em" },
-      {
-        height: "42em",
-        ease: "Power3.easeInOut",
-        delay: -0.8,
-      }
-    );
   } else {
-    tlEnd.fromTo(
-      ".video__animations__wrapper",
-      1,
-      { height: "0em" },
-      {
-        height: "17em",
-        ease: "Power3.easeInOut",
-      }
-    );
-    tlEnd.fromTo(
-      ".hero__video__wrapper",
-      1,
-      { height: "0em" },
-      {
-        height: "13em",
-        ease: "Power3.easeInOut",
-        delay: -0.8,
-      }
+    gsap.fromTo(
+      ".hero__txt__lines",
+      1.2,
+      { yPercent: 120 },
+      { yPercent: 0, stagger: 0.1, ease: "Power3.easeOut" }
     );
   }
-  tlEnd.fromTo(
-    lines,
-    1,
-    { y: "100%", opacity: 0 },
-    {
-      y: "0%",
-      opacity: 1,
-      force3D: true,
-      ease: "Power3.easeOut",
-      stagger: 0.1,
-      delay: -0.5,
-    }
-  );
-  tlEnd.fromTo(
-    ".navigation__wrapper",
-    1,
-    { y: "-100%" },
-    {
-      y: "0%",
-      ease: "Power3.easeOut",
-      delay: -0.9,
-    }
-  );
 }
 
 if (window.matchMedia("(max-width: 768px)").matches) {
