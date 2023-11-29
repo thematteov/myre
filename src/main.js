@@ -269,7 +269,7 @@ function pageTransition() {
     duration: 1,
     smoothWheel: true,
     smoothTouch: false,
-    wheelMultiplier: 0.3,
+    wheelMultiplier: 0.4,
     touchMultiplier: 0.4,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   });
