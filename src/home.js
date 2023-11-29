@@ -58,6 +58,29 @@ function initHome() {
   });
   //home projects
   if (window.matchMedia("(max-width: 768px)").matches) {
+    lines.forEach((value, index) => {
+      let tl = gsap.timeline({
+        paused: true,
+        scrollTrigger: {
+          trigger: value,
+          start: "top bottom-=10%",
+          toggleActions: "play none none reverse",
+          markers: false,
+        },
+      });
+      tl.fromTo(
+        value.querySelectorAll(".line"),
+        1,
+        { y: "100%", opacity: 1 },
+        {
+          y: "0%",
+          opacity: 1,
+          force3D: true,
+          ease: "Power2.easeOut",
+          stagger: 0.1,
+        }
+      );
+    });
   } else {
     let scrollable = document.querySelector(".home__prj__right");
 
