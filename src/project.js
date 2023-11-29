@@ -143,7 +143,7 @@ function initProject() {
     {
       x: "0em",
     },
-    { x: "-50.5em", ease: "none", repeat: -1 }
+    { x: "-48.5em", ease: "none", repeat: -1 }
   );
 
   ///////general
