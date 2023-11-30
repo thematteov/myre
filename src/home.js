@@ -4,6 +4,24 @@ import { gsap } from "gsap/src";
 import SplitType from "split-type";
 
 function initHome() {
+  ///////links arrow
+
+  let links = document.querySelectorAll(".link__wrapper");
+  links.forEach((lnk) => {
+    lnk.addEventListener("mouseenter", () => {
+      gsap.to(lnk.querySelector(".arrow"), 0.5, {
+        x: "0em",
+        ease: "Power3.easeOut",
+      });
+    });
+    lnk.addEventListener("mouseleave", () => {
+      gsap.to(lnk.querySelector(".arrow"), 0.5, {
+        x: "-1.1em",
+        ease: "Power3.easeOut",
+      });
+    });
+  });
+
   let startaprj = gsap.timeline({ repeat: -1 });
 
   startaprj.fromTo(
@@ -82,13 +100,14 @@ function initHome() {
       );
     });
   } else {
+    ScrollTrigger.create({pin: '.intro__section__wrapper', start: 'top top+=4%', pinSpacing: false });
     let scrollable = document.querySelector(".home__prj__right");
 
     gsap.to(".home__prj__right", {
       y: () => window.innerHeight - scrollable.clientHeight,
       ease: "none",
       scrollTrigger: {
-        trigger: ".home__first__section",
+        trigger: ".projects__flex",
         pin: ".home__first__section",
         start: "top top",
         scrub: true,
@@ -136,11 +155,10 @@ function initHome() {
           { opacity: 1, yPercent: 0, ease: "Power3.easeOut" }
         );
         ///front back text
-        gsap.to(
-          prj.querySelector(".front__back"),
-          0.5,
-          { y: '-1.1em', ease: "Power3.easeOut" }
-        );
+        gsap.to(prj.querySelector(".front__back"), 0.5, {
+          y: "-1.1em",
+          ease: "Power3.easeOut",
+        });
         //video play
         prj
           .querySelector(".prj__home__video")
@@ -159,11 +177,10 @@ function initHome() {
           { opacity: 0, yPercent: 100, ease: "Power3.easeOut" }
         );
         ///front back text
-        gsap.to(
-          prj.querySelector(".front__back"),
-          0.5,
-          { y: '0em', ease: "Power3.easeOut" }
-        );
+        gsap.to(prj.querySelector(".front__back"), 0.5, {
+          y: "0em",
+          ease: "Power3.easeOut",
+        });
         //video pause
         prj
           .querySelector(".prj__home__video")
@@ -172,42 +189,6 @@ function initHome() {
       });
     });
   }
-  gsap.fromTo(
-    ".key__img",
-    1.2,
-    { scale: 1.5, opacity: 0 },
-    {
-      scale: 1,
-      opacity: 1,
-      ease: "Power3.easeOut",
-      scrollTrigger: {
-        trigger: ".hey__section",
-        start: "top top+=20%",
-        toggleActions: "play none none reverse",
-      },
-    }
-  );
-  gsap.to(".cover", {
-    x: "-25%",
-    ease: "none",
-    scrollTrigger: {
-      trigger: ".how__section",
-      start: "top top-=20%",
-      end: () =>
-        "+=" + document.querySelector(".our__values__wrapper").offsetWidth,
-      pin: true,
-      scrub: true,
-      pinSpacing: false,
-    },
-  });
-
-  ScrollTrigger.create({
-    trigger: ".why__us__section",
-    start: "bottom bottom",
-    pin: true,
-    pinSpacing: false,
-    markers: false,
-  });
   //////SVG LINES/////////////
 
   var connected = false;
@@ -339,6 +320,10 @@ function initHome() {
   faqs.forEach((faq) => {
     faq.addEventListener("click", () => {
       if (open === false) {
+        gsap.to(faq.querySelector(".question__square"), 0.5, {
+          width: "2em",
+          ease: "Power3.easeOut",
+        });
         gsap.to(faq.querySelector(".answer__wrapper"), 0.5, {
           height: "auto",
           marginBottom: "1em",
@@ -346,6 +331,10 @@ function initHome() {
           onComplete: () => (open = true),
         });
       } else if (open === true) {
+        gsap.to(faq.querySelector(".question__square"), 0.5, {
+          width: "1em",
+          ease: "Power3.easeOut",
+        });
         gsap.to(faq.querySelector(".answer__wrapper"), 0.5, {
           height: "0em",
           ease: "Power3.easeOut",
