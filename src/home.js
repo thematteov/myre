@@ -4,23 +4,20 @@ import { gsap } from "gsap/src";
 import SplitType from "split-type";
 
 function initHome() {
-  ///////links arrow
 
-  let links = document.querySelectorAll(".link__wrapper");
-  links.forEach((lnk) => {
-    lnk.addEventListener("mouseenter", () => {
-      gsap.to(lnk.querySelector(".arrow"), 0.5, {
-        x: "0em",
-        ease: "Power3.easeOut",
-      });
-    });
-    lnk.addEventListener("mouseleave", () => {
-      gsap.to(lnk.querySelector(".arrow"), 0.5, {
-        x: "-1.1em",
-        ease: "Power3.easeOut",
-      });
-    });
-  });
+  //////navigation
+  gsap.to('.home__nav', 1,{
+    y: '0em',
+    scrollTrigger: {
+      pin: '.home__nav',
+      pinSpacing: true,
+      start: 'top top',
+      end: 'max'
+    }
+  })
+  ScrollTrigger.create({pin: '.nav__wrapper', start: "top top", pinSpacing: false})
+
+  ///////links arrow
 
   let startaprj = gsap.timeline({ repeat: -1 });
 
@@ -189,106 +186,106 @@ function initHome() {
       });
     });
   }
-  //////SVG LINES/////////////
+  // //////SVG LINES/////////////
 
-  var connected = false;
+  // var connected = false;
 
-  gsap.defaults({ ease: "elastic.out(2, 0.5)" });
+  // gsap.defaults({ ease: "elastic.out(2, 0.5)" });
 
-  // Define the IDs and classes of the elements you want to apply the interaction to
-  var elementSelectors = document.querySelectorAll(".linesvg");
-  var lineswrapper = document.querySelector(".index__line");
-  var rectWidth = lineswrapper.getBoundingClientRect().width;
-  var rectHeight = lineswrapper.getBoundingClientRect().height;
+  // // Define the IDs and classes of the elements you want to apply the interaction to
+  // var elementSelectors = document.querySelectorAll(".linesvg");
+  // var lineswrapper = document.querySelector(".index__line");
+  // var rectWidth = lineswrapper.getBoundingClientRect().width;
+  // var rectHeight = lineswrapper.getBoundingClientRect().height;
 
-  elementSelectors.forEach(function (selector, index) {
-    var svg = selector;
-    var path = svg.querySelector("#path");
-    path.setAttribute("stroke-width", `${8 - index * 2}px`);
-    var svgRect = svg.getBoundingClientRect();
-    var top = svgRect.top;
-    var height = svgRect.height;
-    var startY = height / 2;
-    var p0 = { x: 0, y: startY };
-    var p1 = { x: rectWidth / 2, y: startY };
-    var p2 = { x: rectWidth, y: startY };
-    var isInsideSVG = false; // Track if the mouse is inside the current SVG
+  // elementSelectors.forEach(function (selector, index) {
+  //   var svg = selector;
+  //   var path = svg.querySelector("#path");
+  //   path.setAttribute("stroke-width", `${8 - index * 2}px`);
+  //   var svgRect = svg.getBoundingClientRect();
+  //   var top = svgRect.top;
+  //   var height = svgRect.height;
+  //   var startY = height / 2;
+  //   var p0 = { x: 0, y: startY };
+  //   var p1 = { x: rectWidth / 2, y: startY };
+  //   var p2 = { x: rectWidth, y: startY };
+  //   var isInsideSVG = false; // Track if the mouse is inside the current SVG
 
-    window.addEventListener("resize", () => {
-      p0 = { x: 0, y: startY };
-      p1 = { x: rectWidth / 2, y: startY };
-      p2 = { x: rectWidth, y: startY };
-      svgRect = svg.getBoundingClientRect();
-      top = svgRect.top;
-      height = svgRect.height;
-      startY = height / 2;
-    });
-    window.addEventListener("scroll", () => {
-      svgRect = svg.getBoundingClientRect();
-      top = svgRect.top;
-    });
+  //   window.addEventListener("resize", () => {
+  //     p0 = { x: 0, y: startY };
+  //     p1 = { x: rectWidth / 2, y: startY };
+  //     p2 = { x: rectWidth, y: startY };
+  //     svgRect = svg.getBoundingClientRect();
+  //     top = svgRect.top;
+  //     height = svgRect.height;
+  //     startY = height / 2;
+  //   });
+  //   window.addEventListener("scroll", () => {
+  //     svgRect = svg.getBoundingClientRect();
+  //     top = svgRect.top;
+  //   });
 
-    gsap.ticker.add(update);
-    update();
+  //   gsap.ticker.add(update);
+  //   update();
 
-    function update() {
-      var d =
-        "M" +
-        p0.x +
-        "," +
-        p0.y +
-        " Q" +
-        p1.x +
-        "," +
-        p1.y +
-        " " +
-        p2.x +
-        "," +
-        p2.y;
+  //   function update() {
+  //     var d =
+  //       "M" +
+  //       p0.x +
+  //       "," +
+  //       p0.y +
+  //       " Q" +
+  //       p1.x +
+  //       "," +
+  //       p1.y +
+  //       " " +
+  //       p2.x +
+  //       "," +
+  //       p2.y;
 
-      path.setAttribute("d", d);
-    }
+  //     path.setAttribute("d", d);
+  //   }
 
-    svg.addEventListener("mouseenter", () => {
-      isInsideSVG = true;
-    });
+  //   svg.addEventListener("mouseenter", () => {
+  //     isInsideSVG = true;
+  //   });
 
-    svg.addEventListener("mouseleave", () => {
-      isInsideSVG = false;
-      if (connected) {
-        connected = false;
-        gsap.to(p1, {
-          duration: 1,
-          x: rectWidth / 2,
-          y: height / 2,
-          onComplete: () => (connected = true),
-        });
-      }
-    });
+  //   svg.addEventListener("mouseleave", () => {
+  //     isInsideSVG = false;
+  //     if (connected) {
+  //       connected = false;
+  //       gsap.to(p1, {
+  //         duration: 1,
+  //         x: rectWidth / 2,
+  //         y: height / 2,
+  //         onComplete: () => (connected = true),
+  //       });
+  //     }
+  //   });
 
-    window.addEventListener("mousemove", (e) => {
-      if (isInsideSVG) {
-        if (p1.y > height * 0.9 || p1.y < -3) {
-          if (connected) {
-            connected = false;
-            gsap.to(p1, {
-              duration: 2.5,
-              // x: e.clientX,
-              y: height / 2,
-              onComplete: () => (connected = true),
-            });
-          }
-        }
-        if (!connected) {
-          connected = true;
-          gsap.killTweensOf(p1);
-        }
+  //   window.addEventListener("mousemove", (e) => {
+  //     if (isInsideSVG) {
+  //       if (p1.y > height * 0.9 || p1.y < -3) {
+  //         if (connected) {
+  //           connected = false;
+  //           gsap.to(p1, {
+  //             duration: 2.5,
+  //             // x: e.clientX,
+  //             y: height / 2,
+  //             onComplete: () => (connected = true),
+  //           });
+  //         }
+  //       }
+  //       if (!connected) {
+  //         connected = true;
+  //         gsap.killTweensOf(p1);
+  //       }
 
-        // p1.x = e.clientX;
-        p1.y = e.clientY - top;
-      }
-    });
-  });
+  //       // p1.x = e.clientX;
+  //       p1.y = e.clientY - top;
+  //     }
+  //   });
+  // });
 
   //////gallery lines
   let gallerylines = document.querySelectorAll(".gallery__line");
