@@ -7,6 +7,7 @@ import imagesLoaded from "imagesloaded";
 
 import initHome from "./home";
 import initProject from "./project";
+import initAbout from "./about";
 
 //////preloader progression animation
 
@@ -263,6 +264,23 @@ function pageTransition() {
           ScrollTrigger.refresh();
           setTimeout(() => {
             initProject();
+            // console.clear();
+          }, 1);
+        },
+        beforeEnter() {
+          ScrollTrigger.revert();
+          window.onbeforeunload = function () {
+            lenis.scrollTo(-lenis.progress, { immediate: true });
+          };
+          lenis.scrollTo(-lenis.progress, { immediate: true });
+        },
+      },
+      {
+        namespace: "about",
+        afterEnter() {
+          ScrollTrigger.refresh();
+          setTimeout(() => {
+            initAbout();
             // console.clear();
           }, 1);
         },
