@@ -2,20 +2,24 @@ import "./styles/style.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap/src";
 import SplitType from "split-type";
+import AroundCircle from "./circleDivs";
 
 function initHome() {
-
   //////navigation
-  gsap.to('.home__nav', 1,{
-    y: '0em',
+  gsap.to(".home__nav", 1, {
+    y: "0em",
     scrollTrigger: {
-      pin: '.home__nav',
+      pin: ".home__nav",
       pinSpacing: true,
-      start: 'top top',
-      end: 'max'
-    }
-  })
-  ScrollTrigger.create({pin: '.nav__wrapper', start: "top top", pinSpacing: false})
+      start: "top top",
+      end: "max",
+    },
+  });
+  ScrollTrigger.create({
+    pin: ".nav__wrapper",
+    start: "top top",
+    pinSpacing: false,
+  });
 
   ///////links arrow
 
@@ -97,7 +101,11 @@ function initHome() {
       );
     });
   } else {
-    ScrollTrigger.create({pin: '.intro__section__wrapper', start: 'top top+=4%', pinSpacing: false });
+    ScrollTrigger.create({
+      pin: ".intro__section__wrapper",
+      start: "top top+=4%",
+      pinSpacing: false,
+    });
     let scrollable = document.querySelector(".home__prj__right");
 
     gsap.to(".home__prj__right", {
@@ -342,10 +350,39 @@ function initHome() {
     });
   });
 
+  ////SERVICES
+
+  gsap.to(".services__circle", {
+    rotate: 180,
+    scrollTrigger: {
+      scrub: true,
+      trigger: ".services__section",
+      start: "top bottom",
+      end: 'bottom top-=30%',
+    },
+    ease: 'none'
+  });
+  gsap.to(".services__wrapper", {
+    y: '-10em',
+    scrollTrigger: {
+      scrub: true,
+      trigger: ".services__section",
+      start: "top bottom",
+      end: 'bottom top-=30%',
+    },
+    ease: 'none'
+  });
+  gsap.to(".services__circle__back", 25,{
+    rotate: -360,
+    repeat: -1,
+    ease: 'none'
+  });
+
   ///////general
   const videos = document.querySelectorAll("video");
   videos.forEach((video) => video.play());
+  AroundCircle("services__circle", "service__card");
+  AroundCircle("services__circle__back", "service__card__back");
 }
-
 gsap.registerPlugin(ScrollTrigger);
 export default initHome;

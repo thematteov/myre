@@ -8,6 +8,7 @@ import imagesLoaded from "imagesloaded";
 import initHome from "./home";
 import initProject from "./project";
 import initAbout from "./about";
+import initContact from "./contact";
 
 //////preloader progression animation
 
@@ -281,6 +282,23 @@ function pageTransition() {
           ScrollTrigger.refresh();
           setTimeout(() => {
             initAbout();
+            // console.clear();
+          }, 1);
+        },
+        beforeEnter() {
+          ScrollTrigger.revert();
+          window.onbeforeunload = function () {
+            lenis.scrollTo(-lenis.progress, { immediate: true });
+          };
+          lenis.scrollTo(-lenis.progress, { immediate: true });
+        },
+      },
+      {
+        namespace: "contact",
+        afterEnter() {
+          ScrollTrigger.refresh();
+          setTimeout(() => {
+            initContact();
             // console.clear();
           }, 1);
         },
