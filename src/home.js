@@ -4,7 +4,6 @@ import { gsap } from "gsap/src";
 import SplitType from "split-type";
 
 function initHome() {
-
   ///////links arrow
 
   let startaprj = gsap.timeline({ repeat: -1 });
@@ -61,6 +60,36 @@ function initHome() {
   });
   //home projects
   if (window.matchMedia("(max-width: 768px)").matches) {
+    let projects = document.querySelectorAll(".prj__home__wrapper");
+
+    projects.forEach((prj) => {
+      gsap.to(prj.querySelector(".prj__home__video"), 0.2, {
+        opacity: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: prj,
+          start: "top top",
+          toggleActions: "play none none reverse",
+          onEnter: () =>
+            prj
+              .querySelector(".prj__home__video")
+              .querySelector(".video__embed video")
+              .play(),
+        },
+      });
+      ///front back text
+      gsap.to(prj.querySelector(".front__back"), 0.5, {
+        y: "-1.1em",
+        ease: "Power3.easeOut",
+        scrollTrigger: {
+          trigger: prj,
+          start: "top top",
+          toggleActions: "play none none reverse",
+        },
+      });
+      /////////
+    });
+
     lines.forEach((value, index) => {
       let tl = gsap.timeline({
         paused: true,
@@ -86,20 +115,20 @@ function initHome() {
     });
   } else {
     //////navigation
-  gsap.to(".home__nav", 1, {
-    y: "0em",
-    scrollTrigger: {
-      pin: ".home__nav",
-      pinSpacing: true,
+    gsap.to(".home__nav", 1, {
+      y: "0em",
+      scrollTrigger: {
+        pin: ".home__nav",
+        pinSpacing: true,
+        start: "top top",
+        end: "max",
+      },
+    });
+    ScrollTrigger.create({
+      pin: ".nav__wrapper",
       start: "top top",
-      end: "max",
-    },
-  });
-  ScrollTrigger.create({
-    pin: ".nav__wrapper",
-    start: "top top",
-    pinSpacing: false,
-  });
+      pinSpacing: false,
+    });
     ScrollTrigger.create({
       pin: ".intro__section__wrapper",
       start: "top top+=4%",
@@ -351,13 +380,22 @@ function initHome() {
 
   ////SERVICES
 
-  gsap.to('.track1', 10, {x: "-49.2em", ease: 'none', repeat: -1})
-  gsap.to('.track2', 10, {x: "-33.9em", ease: 'none', repeat: -1})
-  gsap.to('.track3', 25, {x: "-266.2em", ease: 'none', repeat: -1})
-  gsap.to('.track4', 25, {x: "-258.8em", ease: 'none', repeat: -1})
-  gsap.to('.track5', 10, {x: "-73.7em", ease: 'none', repeat: -1})
-  
-  gsap.to('.track', {x: "-40em", ease: 'none', scrollTrigger: {scrub: true, trigger: '.services__wrapper', start: 'top bottom', end: 'bottom top'}})
+  gsap.to(".track1", 10, { x: "-49.2em", ease: "none", repeat: -1 });
+  gsap.to(".track2", 10, { x: "-33.9em", ease: "none", repeat: -1 });
+  gsap.to(".track3", 25, { x: "-266.2em", ease: "none", repeat: -1 });
+  gsap.to(".track4", 25, { x: "-258.8em", ease: "none", repeat: -1 });
+  gsap.to(".track5", 10, { x: "-73.7em", ease: "none", repeat: -1 });
+
+  gsap.to(".track", {
+    x: "-40em",
+    ease: "none",
+    scrollTrigger: {
+      scrub: true,
+      trigger: ".services__wrapper",
+      start: "top bottom",
+      end: "bottom top",
+    },
+  });
   ///////general
   const videos = document.querySelectorAll("video");
   videos.forEach((video) => video.play());
