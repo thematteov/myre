@@ -216,7 +216,7 @@ function pageTransition() {
     duration: 1,
     smoothWheel: true,
     smoothTouch: false,
-    wheelMultiplier: 0.4,
+    wheelMultiplier: 0.55,
     touchMultiplier: 0.4,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   });

@@ -2,7 +2,6 @@ import "./styles/style.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap/src";
 import SplitType from "split-type";
-import AroundCircle from "./circleDivs";
 
 function initHome() {
   //////navigation
@@ -30,7 +29,7 @@ function initHome() {
     5,
     { x: "0em" },
     {
-      x: "-10em",
+      x: "-11.4em",
       ease: "none",
     }
   );
@@ -352,37 +351,18 @@ function initHome() {
 
   ////SERVICES
 
-  gsap.to(".services__circle", {
-    rotate: 180,
-    scrollTrigger: {
-      scrub: true,
-      trigger: ".services__section",
-      start: "top bottom",
-      end: 'bottom top-=30%',
-    },
-    ease: 'none'
-  });
-  gsap.to(".services__wrapper", {
-    y: '-10em',
-    scrollTrigger: {
-      scrub: true,
-      trigger: ".services__section",
-      start: "top bottom",
-      end: 'bottom top-=30%',
-    },
-    ease: 'none'
-  });
-  gsap.to(".services__circle__back", 25,{
-    rotate: -360,
-    repeat: -1,
-    ease: 'none'
-  });
-
+  gsap.to('.track1', 10, {x: "-49.2em", ease: 'none', repeat: -1})
+  gsap.to('.track2', 10, {x: "-33.9em", ease: 'none', repeat: -1})
+  gsap.to('.track3', 25, {x: "-266.2em", ease: 'none', repeat: -1})
+  gsap.to('.track4', 25, {x: "-258.8em", ease: 'none', repeat: -1})
+  gsap.to('.track5', 10, {x: "-73.7em", ease: 'none', repeat: -1})
+  
+  gsap.to('.track', {x: "-40em", ease: 'none', scrollTrigger: {scrub: true, trigger: '.services__wrapper', start: 'top bottom', end: 'bottom top'}})
   ///////general
   const videos = document.querySelectorAll("video");
   videos.forEach((video) => video.play());
-  AroundCircle("services__circle", "service__card");
-  AroundCircle("services__circle__back", "service__card__back");
+  // AroundCircle("services__circle", "service__card");
+  // AroundCircle("services__circle__back", "service__card__back");
 }
 gsap.registerPlugin(ScrollTrigger);
 export default initHome;
