@@ -4,21 +4,6 @@ import { gsap } from "gsap/src";
 import SplitType from "split-type";
 
 function initHome() {
-  //////navigation
-  gsap.to(".home__nav", 1, {
-    y: "0em",
-    scrollTrigger: {
-      pin: ".home__nav",
-      pinSpacing: true,
-      start: "top top",
-      end: "max",
-    },
-  });
-  ScrollTrigger.create({
-    pin: ".nav__wrapper",
-    start: "top top",
-    pinSpacing: false,
-  });
 
   ///////links arrow
 
@@ -100,6 +85,21 @@ function initHome() {
       );
     });
   } else {
+    //////navigation
+  gsap.to(".home__nav", 1, {
+    y: "0em",
+    scrollTrigger: {
+      pin: ".home__nav",
+      pinSpacing: true,
+      start: "top top",
+      end: "max",
+    },
+  });
+  ScrollTrigger.create({
+    pin: ".nav__wrapper",
+    start: "top top",
+    pinSpacing: false,
+  });
     ScrollTrigger.create({
       pin: ".intro__section__wrapper",
       start: "top top+=4%",

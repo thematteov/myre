@@ -4,16 +4,6 @@ import { gsap } from "gsap/src";
 import SplitType from "split-type";
 
 function initAbout() {
-  //////navigation
-  gsap.to(".home__nav", 1, {
-    y: "0em",
-    scrollTrigger: {
-      pin: ".home__nav",
-      pinSpacing: true,
-      start: "top top",
-      end: "max",
-    },
-  });
   let startaprj = gsap.timeline({ repeat: -1 });
 
   startaprj.fromTo(
@@ -77,6 +67,16 @@ function initAbout() {
       ease: "none",
     });
   } else {
+    //////navigation
+    gsap.to(".home__nav", 1, {
+      y: "0em",
+      scrollTrigger: {
+        pin: ".home__nav",
+        pinSpacing: true,
+        start: "top top",
+        end: "max",
+      },
+    });
     gsap.to(".about__hero__content", {
       y: "-15em",
       scrollTrigger: { scrub: true },
