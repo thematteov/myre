@@ -68,7 +68,7 @@ function initHome() {
         ease: "none",
         scrollTrigger: {
           trigger: prj,
-          start: "top top",
+          start: "top top+=30%",
           toggleActions: "play none none reverse",
           onEnter: () =>
             prj
@@ -79,7 +79,7 @@ function initHome() {
       });
       ///front back text
       gsap.to(prj.querySelector(".front__back"), 0.5, {
-        y: "-1.1em",
+        y: "-5em",
         ease: "Power3.easeOut",
         scrollTrigger: {
           trigger: prj,
