@@ -1,3 +1,15 @@
 .pagewrapper{
   overflow-x: hidden;
 }
+.splide__pagination{
+  display: none;
+}
+::-moz-selection { /* Code for Firefox */
+  color: #1a1a1a;
+  background: #d23503;
+}
+
+::selection {
+  color: #1a1a1a;
+  background: #d23503;
+}

@@ -1,7 +1,9 @@
 import "./styles/style.css";
+import '@splidejs/splide/css/core';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap/src";
 import SplitType from "split-type";
+import { Splide } from "@splidejs/splide";
 
 function initHome() {
   ///////links arrow
@@ -278,13 +280,34 @@ function initHome() {
     });
   });
 
+  ////concepts
+
+  var splide = new Splide( '.splide', {
+    drag   : 'free',
+    snap   : true,
+    arrows: false,
+    perPage: 4,
+    autoWidth: true,
+    pagination: false,
+    trimSpace: false,
+  } );
+
+  splide.on('drag', ()=>{
+    gsap.to('.splide__slide', 0.5, {scale: 0.5, ease: 'Power3.easeOut'})
+  })
+  splide.on('dragged', ()=>{
+    gsap.to('.splide__slide', 0.5, {scale: 1, ease: 'Power3.easeOut'})
+  })
+  
+  splide.mount();
+
   ////SERVICES
 
   gsap.to(".track1", 10, { x: "-49.2em", ease: "none", repeat: -1 });
-  gsap.to(".track2", 10, { x: "-33.9em", ease: "none", repeat: -1 });
-  gsap.to(".track3", 25, { x: "-266.2em", ease: "none", repeat: -1 });
-  gsap.to(".track4", 25, { x: "-258.8em", ease: "none", repeat: -1 });
-  gsap.to(".track5", 10, { x: "-73.7em", ease: "none", repeat: -1 });
+  gsap.to(".track2", 15, { x: "-220.8em", ease: "none", repeat: -1 });
+  gsap.to(".track3", 25, { x: "-288.9em", ease: "none", repeat: -1 });
+  gsap.to(".track4", 25, { x: "-266.2em", ease: "none", repeat: -1 });
+  gsap.to(".track5", 10, { x: "-81.7em", ease: "none", repeat: -1 });
 
   gsap.to(".track", {
     x: "-40em",
