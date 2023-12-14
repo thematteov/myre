@@ -11,7 +11,7 @@ function initAbout() {
     5,
     { x: "0em" },
     {
-      x: "-10em",
+      x: "-11.4em",
       ease: "none",
     }
   );
@@ -78,11 +78,31 @@ function initAbout() {
       },
     });
     gsap.to(".about__hero__content", {
-      y: "-15em",
+      y: "-40em",
       scrollTrigger: { scrub: true },
       ease: "none",
     });
   }
+
+  let processPhases = document.querySelectorAll(".process__wrapper");
+
+  processPhases.forEach((phase) => {
+    gsap.fromTo(
+      phase,
+      1,
+      { yPercent: 20, opacity: 0 },
+      {
+        yPercent: 0,
+        opacity: 1,
+        ease: "Power3.easeOut",
+        scrollTrigger: {
+          trigger: phase,
+          start: "top bottom",
+          toggleActions: "play none none reverse",
+        },
+      }
+    );
+  });
 
   ///////general
   const videos = document.querySelectorAll("video");

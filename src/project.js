@@ -11,7 +11,7 @@ function initProject() {
     5,
     { x: "0em" },
     {
-      x: "-10em",
+      x: "-11.4em",
       ease: "none",
     }
   );

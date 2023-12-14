@@ -4,20 +4,6 @@ import { gsap } from "gsap/src";
 import SplitType from "split-type";
 
 function initContact() {
-  //////navigation
-  
-  let startaprj = gsap.timeline({ repeat: -1 });
-
-  startaprj.fromTo(
-    ".startaprj__track",
-    5,
-    { x: "0em" },
-    {
-      x: "-10em",
-      ease: "none",
-    }
-  );
-  //////infinite banner
   const text = new SplitType(".split");
   const textside = new SplitType(".split__side");
   const char = new SplitType(".chars");
