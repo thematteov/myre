@@ -1,5 +1,5 @@
 import "./styles/style.css";
-import '@splidejs/splide/css/core';
+import "@splidejs/splide/css/core";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap/src";
 import SplitType from "split-type";
@@ -20,46 +20,6 @@ function initHome() {
     }
   );
 
-  const text = new SplitType(".split");
-  const textside = new SplitType(".split__side");
-  const char = new SplitType(".chars");
-  text.lines;
-  textside.lines;
-  const elementsToWrap = document.querySelectorAll(".line");
-
-  elementsToWrap.forEach((element) => {
-    const wrapper = document.createElement("span");
-    wrapper.className = "line-wrapper";
-    wrapper.style.overflowY = "hidden";
-    element.parentNode.replaceChild(wrapper, element);
-    wrapper.appendChild(element);
-  });
-  ///////SPLITTEXT
-
-  let lines = document.querySelectorAll(".split");
-  let chars = document.querySelectorAll(".chars");
-
-  chars.forEach((value) => {
-    let tl = gsap.timeline({
-      paused: true,
-      scrollTrigger: {
-        trigger: value,
-        start: "top bottom-=30%",
-        toggleActions: "play none none reverse",
-      },
-    });
-    tl.fromTo(
-      value.querySelectorAll(".char"),
-      1,
-      { y: "100%", opacity: 0 },
-      {
-        y: "0%",
-        opacity: 1,
-        ease: "Power2.easeOut",
-        stagger: 0.05,
-      }
-    );
-  });
   //home projects
   if (window.matchMedia("(max-width: 768px)").matches) {
     let projects = document.querySelectorAll(".prj__home__wrapper");
@@ -90,30 +50,6 @@ function initHome() {
         },
       });
       /////////
-    });
-
-    lines.forEach((value, index) => {
-      let tl = gsap.timeline({
-        paused: true,
-        scrollTrigger: {
-          trigger: value,
-          start: "top bottom-=10%",
-          toggleActions: "play none none reverse",
-          markers: false,
-        },
-      });
-      tl.fromTo(
-        value.querySelectorAll(".line"),
-        1,
-        { y: "100%", opacity: 1 },
-        {
-          y: "0%",
-          opacity: 1,
-          force3D: true,
-          ease: "Power2.easeOut",
-          stagger: 0.1,
-        }
-      );
     });
   } else {
     //////navigation
@@ -149,35 +85,13 @@ function initHome() {
         pinSpacing: true,
       },
     });
-    lines.forEach((value, index) => {
-      let tl = gsap.timeline({
-        paused: true,
-        scrollTrigger: {
-          trigger: value,
-          start: "top bottom-=10%",
-          toggleActions: "play none none reverse",
-          markers: false,
-        },
-      });
-      tl.fromTo(
-        value.querySelectorAll(".line"),
-        1,
-        { y: "100%", opacity: 1 },
-        {
-          y: "0%",
-          opacity: 1,
-          force3D: true,
-          ease: "Power2.easeOut",
-          stagger: 0.1,
-        }
-      );
-    });
 
     ///////home project video hover
 
     let projects = document.querySelectorAll(".prj__home__wrapper");
 
     projects.forEach((prj) => {
+      ///mouseenter
       prj.addEventListener("mouseenter", () => {
         gsap.to(prj.querySelector(".prj__home__video"), 0.2, {
           opacity: 1,
@@ -200,6 +114,7 @@ function initHome() {
           .querySelector(".video__embed video")
           .play();
       });
+      ///mouseleave
       prj.addEventListener("mouseleave", () => {
         gsap.to(prj.querySelector(".prj__home__video"), 0.2, {
           opacity: 0,
@@ -225,7 +140,7 @@ function initHome() {
     });
   }
 
-  //////gallery lines
+  //////FAQS
   let gallerylines = document.querySelectorAll(".gallery__line");
 
   gallerylines.forEach((e, index) => {
@@ -247,8 +162,6 @@ function initHome() {
       ease: "Power3.easeOut",
     }
   );
-
-  //////FAQS
 
   let faqs = document.querySelectorAll(".index__line__gallery");
   let open = false;
@@ -282,23 +195,23 @@ function initHome() {
 
   ////concepts
 
-  var splide = new Splide( '.splide', {
-    drag   : 'free',
-    snap   : true,
+  var splide = new Splide(".splide", {
+    drag: "free",
+    snap: true,
     arrows: false,
     perPage: 4,
     autoWidth: true,
     pagination: false,
     trimSpace: false,
-  } );
+  });
 
-  splide.on('drag', ()=>{
-    gsap.to('.splide__slide', 0.5, {scale: 0.5, ease: 'Power3.easeOut'})
-  })
-  splide.on('dragged', ()=>{
-    gsap.to('.splide__slide', 0.5, {scale: 1, ease: 'Power3.easeOut'})
-  })
-  
+  splide.on("drag", () => {
+    gsap.to(".splide__slide", 0.5, { scale: 0.5, ease: "Power3.easeOut" });
+  });
+  splide.on("dragged", () => {
+    gsap.to(".splide__slide", 0.5, { scale: 1, ease: "Power3.easeOut" });
+  });
+
   splide.mount();
 
   ////SERVICES
@@ -319,11 +232,75 @@ function initHome() {
       end: "bottom top",
     },
   });
-  ///////general
+
+  //////////GENERAL//////////
+  //->videos
   const videos = document.querySelectorAll("video");
   videos.forEach((video) => video.play());
-  // AroundCircle("services__circle", "service__card");
-  // AroundCircle("services__circle__back", "service__card__back");
+  //->split text
+  const text = new SplitType(".split");
+  const textside = new SplitType(".split__side");
+  const char = new SplitType(".chars");
+  text.lines;
+  textside.lines;
+  const elementsToWrap = document.querySelectorAll(".line");
+
+  elementsToWrap.forEach((element) => {
+    const wrapper = document.createElement("span");
+    wrapper.className = "line-wrapper";
+    wrapper.style.overflowY = "hidden";
+    element.parentNode.replaceChild(wrapper, element);
+    wrapper.appendChild(element);
+  });
+
+  let lines = document.querySelectorAll(".split");
+  let chars = document.querySelectorAll(".chars");
+
+  lines.forEach((value, index) => {
+    let tl = gsap.timeline({
+      paused: true,
+      scrollTrigger: {
+        trigger: value,
+        start: "top bottom-=10%",
+        toggleActions: "play none none reverse",
+        markers: false,
+      },
+    });
+    tl.fromTo(
+      value.querySelectorAll(".line"),
+      1,
+      { y: "100%", opacity: 1 },
+      {
+        y: "0%",
+        opacity: 1,
+        force3D: true,
+        ease: "Power2.easeOut",
+        stagger: 0.1,
+      }
+    );
+  });
+
+  chars.forEach((value) => {
+    let tl = gsap.timeline({
+      paused: true,
+      scrollTrigger: {
+        trigger: value,
+        start: "top bottom-=30%",
+        toggleActions: "play none none reverse",
+      },
+    });
+    tl.fromTo(
+      value.querySelectorAll(".char"),
+      1,
+      { y: "100%", opacity: 0 },
+      {
+        y: "0%",
+        opacity: 1,
+        ease: "Power2.easeOut",
+        stagger: 0.05,
+      }
+    );
+  });
 }
 gsap.registerPlugin(ScrollTrigger);
 export default initHome;
