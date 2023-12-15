@@ -5,7 +5,7 @@ import { gsap } from "gsap/src";
 import SplitType from "split-type";
 import { Splide } from "@splidejs/splide";
 
-function initHome() {s
+function initHome() {
   ///////links arrow
 
   let startaprj = gsap.timeline({ repeat: -1 });
@@ -301,7 +301,6 @@ function initHome() {s
       }
     );
   });
-  
 }
 gsap.registerPlugin(ScrollTrigger);
 export default initHome;
