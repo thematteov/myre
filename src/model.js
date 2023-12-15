@@ -1,40 +1,22 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import SplineLoader from "@splinetool/loader";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 function model3d() {
   let container = document.querySelector(".matteo__valentino");
   // camera
-
   const camera = new THREE.PerspectiveCamera(
     45,
     container.clientWidth / container.clientHeight,
     70,
     100000
   );
-  camera.position.set(0, 0, 10000);
+  camera.position.set(0, 0, 200);
 
   // scene
   const scene = new THREE.Scene();
-  let spline;
-  // spline scene
-  const loader = new SplineLoader();
-  loader.load(
-    "https://prod.spline.design/nbBMcfIKCGNqNCBF/scene.splinecode",
-    (splineScene) => {
-      splineScene.children[0].children[1].scale.set(1.5, 1.5, 1.5);
-      splineScene.children[0].children[1].position.set(0, 0, 0);
-      scene.add(splineScene);
-      spline = splineScene;
-    }
-  );
-  if (spline) {
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 100000);
-    scene.add(directionalLight);
-    const targetObject = spline.children[0].children[1];
-    scene.add(targetObject);
-    directionalLight.target = targetObject;
-  }
-
+  const light = new THREE.AmbientLight(0x404040, 50); // soft white light
+  scene.add(light);
   // renderer
   const renderer = new THREE.WebGLRenderer({
     antialias: true,
@@ -43,6 +25,31 @@ function model3d() {
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.setAnimationLoop(animate);
   container.appendChild(renderer.domElement);
+
+  // Instantiate a loader
+  const loader = new GLTFLoader();
+  const dracoLoader = new DRACOLoader();
+  dracoLoader.setDecoderPath("https://raw.githubusercontent.com/thematteov/3d-model/main/lib/");
+  loader.setDRACOLoader(dracoLoader);
+  let mainmesh;
+  // Load a glTF resource
+  loader.load(
+    // resource URL
+    "https://raw.githubusercontent.com/thematteov/3d-model/main/modelmy.glb",
+    // called when the resource is loaded
+    function (gltf) {
+      mainmesh = gltf.scene.children[0];
+      //   gltf.animations; // Array<THREE.AnimationClip>
+      gltf.scene; // THREE.Group
+      gltf.scenes; // Array<THREE.Group>
+      gltf.cameras; // Array<THREE.Camera>
+      gltf.asset; // Object
+      mainmesh.material.side = THREE.FrontSide;
+      mainmesh.scale.set(230, 230, 230);
+      mainmesh.position.set(0, -100, 0);
+      scene.add(gltf.scene);
+    }
+  );
 
   // scene settings
   renderer.shadowMap.enabled = true;
@@ -61,14 +68,14 @@ function model3d() {
 
   window.addEventListener("resize", onWindowResize);
   function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.aspect = container.clientWidth / container.clientHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(container.clientWidth, container.clientHeight);
   }
 
   function animate(time) {
-    if (spline) {
-      spline.children[0].children[1].rotation.y = time * 0.0006;
+    if(mainmesh){
+        mainmesh.rotation.y = time*0.0006
     }
     controls.update();
     renderer.render(scene, camera);

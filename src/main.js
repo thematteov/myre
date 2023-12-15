@@ -15,7 +15,7 @@ import initContact from "./contact";
 var imgLoad = imagesLoaded("img");
 
 var progressBar = $(".preloader__progress"),
-  images = $("img").length,
+  images = document.querySelectorAll('img').length,
   loadedCount = 0,
   loadingProgress = 0,
   tlProgress = gsap.timeline();
@@ -29,7 +29,7 @@ function loadProgress() {
 
   loadingProgress = loadedCount / images;
   document.querySelector(".p__preloader").textContent =
-    loadingProgress * 100 + "%";
+    Math.round(loadingProgress * 100 ) + '%';
 
   gsap.to(tlProgress, 1, {
     progress: loadingProgress,
@@ -58,6 +58,8 @@ function loadComplete() {
     );
   }
 }
+
+// gsap.to('.preloader', 1, {yPercent: -100})
 
 if (window.matchMedia("(max-width: 768px)").matches) {
 } else {
