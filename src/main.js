@@ -28,7 +28,6 @@ function loadProgress() {
   loadedCount++;
 
   loadingProgress = loadedCount / images;
-  console.log(loadingProgress);
   document.querySelector(".p__preloader").textContent =
     loadingProgress * 100 + "%";
 
