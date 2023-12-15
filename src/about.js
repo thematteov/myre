@@ -2,6 +2,7 @@ import "./styles/style.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap/src";
 import SplitType from "split-type";
+import model3d from "./model";
 
 function initAbout() {
   let startaprj = gsap.timeline({ repeat: -1 });
@@ -107,6 +108,8 @@ function initAbout() {
   ///////general
   const videos = document.querySelectorAll("video");
   videos.forEach((video) => video.play());
+
+  model3d()
 }
 gsap.registerPlugin(ScrollTrigger);
 export default initAbout;

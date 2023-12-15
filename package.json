@@ -16,10 +16,12 @@
   "dependencies": {
     "@barba/core": "^2.9.7",
     "@splidejs/splide": "^4.1.4",
+    "@splinetool/loader": "^0.9.523",
     "@studio-freight/lenis": "^1.0.27",
     "gsap": "^3.9.1",
     "imagesloaded": "^5.0.0",
     "lottie-web": "^5.12.2",
-    "split-type": "^0.3.4"
+    "split-type": "^0.3.4",
+    "three": "^0.159.0"
   }
 }
