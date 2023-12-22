@@ -46,7 +46,8 @@ tlProgress.to(progressBar, 1, { width: "100%" });
 
 function loadComplete() {
   var tlEnd = gsap.timeline();
-  tlEnd.to(".preloader", 0.5, { yPercent: -100, delay: 0.2 });
+  tlEnd.to(".lottie__preloader", 1.3, { yPercent: 500, rotate: 20});
+  tlEnd.to(".preloader", 0.5, { yPercent: -100 });
   let lines = document.querySelectorAll(".hero__p");
   if (window.matchMedia("(max-width: 768px)").matches) {
   } else {
