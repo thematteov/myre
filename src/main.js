@@ -51,11 +51,11 @@ function loadComplete() {
   let lines = document.querySelectorAll(".hero__p");
   if (window.matchMedia("(max-width: 768px)").matches) {
   } else {
-    gsap.fromTo(
+    tlEnd.fromTo(
       ".hero__txt__lines",
       1.2,
-      { yPercent: 120 },
-      { yPercent: 0, stagger: 0.1, ease: "Power3.easeOut" }
+      { yPercent: 120, opacity: 0 },
+      { yPercent: 0, opacity: 1, stagger: 0.1, ease: "Power3.easeOut", delay: -.4 }
     );
   }
 }
