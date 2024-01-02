@@ -4,7 +4,6 @@ import { ScrollTrigger } from "gsap/all";
 import { gsap } from "gsap/src";
 import Lottie from "lottie-web";
 import imagesLoaded from "imagesloaded";
-
 import initHome from "./home";
 import initProject from "./project";
 import initAbout from "./about";
