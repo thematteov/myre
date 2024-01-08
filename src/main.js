@@ -127,22 +127,10 @@ if (window.matchMedia("(max-width: 768px)").matches) {
 
 const content = document.querySelector("img");
 
-window.addEventListener("load", () => {
-  gsap.to(".enter", 1.8, {
-    y: "125.3vh",
-    ease: "Bounce.easeOut",
-    rotate: 90,
-  });
-  gsap.to(".logo__svg__preloader", 1.8, {
-    opacity: 1,
-    ease: "Power3.easeOut",
-  });
-});
-
 if (window.matchMedia("(max-width: 768px)").matches) {
   // Your mobile-specific JavaScript code here
   ScrollTrigger.config({
-    autoRefreshEvents: "visibilitychange,DOMContentLoaded,load", // notice "resize" isn't in the list
+    autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
   });
 } else {
   // Code for non-mobile devices
