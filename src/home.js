@@ -1,9 +1,7 @@
 import "./styles/style.css";
-import "@splidejs/splide/css/core";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap/src";
 import SplitType from "split-type";
-import { Splide } from "@splidejs/splide";
 
 function initHome() {
   ///////links arrow
@@ -53,20 +51,20 @@ function initHome() {
     });
   } else {
     //////navigation
-    gsap.to(".home__nav", 1, {
-      y: "0em",
-      scrollTrigger: {
-        pin: ".home__nav",
-        pinSpacing: true,
-        start: "top top",
-        end: "max",
-      },
-    });
-    ScrollTrigger.create({
-      pin: ".nav__wrapper",
-      start: "top top",
-      pinSpacing: false,
-    });
+    // gsap.to(".home__nav", 1, {
+    //   y: "0em",
+    //   scrollTrigger: {
+    //     pin: ".home__nav",
+    //     pinSpacing: true,
+    //     start: "top top",
+    //     end: "max",
+    //   },
+    // });
+    // ScrollTrigger.create({
+    //   pin: ".nav__wrapper",
+    //   start: "top top",
+    //   pinSpacing: false,
+    // });
     ScrollTrigger.create({
       pin: ".intro__section__wrapper",
       start: "top top+=4%",
@@ -195,24 +193,6 @@ function initHome() {
 
   ////concepts
 
-  var splide = new Splide(".splide", {
-    drag: "free",
-    snap: true,
-    arrows: false,
-    perPage: 4,
-    autoWidth: true,
-    pagination: false,
-    trimSpace: false,
-  });
-
-  splide.on("drag", () => {
-    gsap.to(".splide__slide", 0.5, { scale: 0.5, ease: "Power3.easeOut" });
-  });
-  splide.on("dragged", () => {
-    gsap.to(".splide__slide", 0.5, { scale: 1, ease: "Power3.easeOut" });
-  });
-
-  splide.mount();
 
   ////SERVICES
 

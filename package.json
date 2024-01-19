@@ -16,6 +16,7 @@
   "dependencies": {
     "@barba/core": "^2.9.7",
     "@splidejs/splide": "^4.1.4",
+    "@splidejs/splide-extension-auto-scroll": "^0.5.3",
     "@splinetool/loader": "^0.9.523",
     "@splinetool/runtime": "^0.9.523",
     "@studio-freight/lenis": "^1.0.27",

@@ -73,7 +73,7 @@ if (window.matchMedia("(max-width: 768px)").matches) {
     let pageHeight = document.documentElement.scrollHeight - windowHeight;
     let scrollPosition = window.scrollY;
     let scrollProgress = (scrollPosition / pageHeight) * 100;
-    progressBar.textContent = `Your Progress: ${scrollProgress.toFixed(2)}%`;
+    progressBar.textContent = `Your are here: ${scrollProgress.toFixed(2)}%`;
   }
 
   updateProgressBar();
