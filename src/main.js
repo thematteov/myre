@@ -184,6 +184,7 @@ async function pagetranOut(next) {
         ease: "Power3.easeInOut",
       }
     );
+    tl.set('.menuwrapper', {height: '0vh'})
     tl.fromTo(
       ".icon__black",
       1,

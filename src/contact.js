@@ -46,21 +46,6 @@ function initContact() {
       }
     );
   });
-
-  //////page animations
-  if (window.matchMedia("(max-width: 768px)").matches) {
-    
-  } else {
-    gsap.to(".home__nav", 1, {
-      y: "0em",
-      scrollTrigger: {
-        pin: ".home__nav",
-        pinSpacing: true,
-        start: "top top",
-        end: "max",
-      },
-    });
-  }
 }
 gsap.registerPlugin(ScrollTrigger);
 export default initContact;

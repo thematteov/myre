@@ -68,16 +68,6 @@ function initAbout() {
       ease: "none",
     });
   } else {
-    //////navigation
-    gsap.to(".home__nav", 1, {
-      y: "0em",
-      scrollTrigger: {
-        pin: ".home__nav",
-        pinSpacing: true,
-        start: "top top",
-        end: "max",
-      },
-    });
     gsap.to(".about__hero__content", {
       y: "-40em",
       scrollTrigger: { scrub: true },

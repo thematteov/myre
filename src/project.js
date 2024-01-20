@@ -102,21 +102,6 @@ function initProject() {
       { height: "48.8em", stagger: 0.06, ease: "Power3.easeOut", delay: -0.7 }
     );
   } else {
-    ///navigation
-    gsap.to(".home__nav", 1, {
-      y: "0em",
-      scrollTrigger: {
-        pin: ".home__nav",
-        pinSpacing: true,
-        start: "top top",
-        end: "max",
-      },
-    });
-    ScrollTrigger.create({
-      pin: ".nav__wrapper",
-      start: "top top",
-      pinSpacing: false,
-    });
 
     caseTL.fromTo(
       ".project__left",
