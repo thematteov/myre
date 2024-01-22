@@ -6,7 +6,7 @@ import initAbout from "./pages/about";
 import initContact from "./pages/contact";
 import preloader from "./general/preloader";
 import cta from "./general/cta";
-
+window.scrollTo(0, 0)
 preloader()
 cta()
 let lenis = new Lenis({
