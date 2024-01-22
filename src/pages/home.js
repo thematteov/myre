@@ -1,4 +1,4 @@
-import "./styles/style.css";
+import "../styles/style.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap/src";
 import SplitType from "split-type";

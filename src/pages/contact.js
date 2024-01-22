@@ -1,22 +1,9 @@
-import "./styles/style.css";
+import "../styles/style.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap/src";
 import SplitType from "split-type";
-import model3d from "./model";
 
-function initAbout() {
-  let startaprj = gsap.timeline({ repeat: -1 });
-
-  startaprj.fromTo(
-    ".startaprj__track",
-    5,
-    { x: "0em" },
-    {
-      x: "-11.4em",
-      ease: "none",
-    }
-  );
-  //////infinite banner
+function initContact() {
   const text = new SplitType(".split");
   const textside = new SplitType(".split__side");
   const char = new SplitType(".chars");
@@ -59,47 +46,6 @@ function initAbout() {
       }
     );
   });
-
-  //////page animations
-  if (window.matchMedia("(max-width: 768px)").matches) {
-    gsap.to(".about__hero__content", {
-      y: "-30em",
-      scrollTrigger: { scrub: true },
-      ease: "none",
-    });
-  } else {
-    gsap.to(".about__hero__content", {
-      y: "-40em",
-      scrollTrigger: { scrub: true },
-      ease: "none",
-    });
-  }
-
-  let processPhases = document.querySelectorAll(".process__wrapper");
-
-  processPhases.forEach((phase) => {
-    gsap.fromTo(
-      phase,
-      1,
-      { yPercent: 20, opacity: 0 },
-      {
-        yPercent: 0,
-        opacity: 1,
-        ease: "Power3.easeOut",
-        scrollTrigger: {
-          trigger: phase,
-          start: "top bottom",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-  });
-
-  ///////general
-  const videos = document.querySelectorAll("video");
-  videos.forEach((video) => video.play());
-
-  model3d()
 }
 gsap.registerPlugin(ScrollTrigger);
-export default initAbout;
+export default initContact;
