@@ -13,7 +13,7 @@ function initHome() {
     5,
     { x: "0em" },
     {
-      x: "-14.4em",
+      x: "-10.2em",
       ease: "none",
     }
   );
