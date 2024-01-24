@@ -13,7 +13,7 @@ function initHome() {
     5,
     { x: "0em" },
     {
-      x: "-11.4em",
+      x: "-15em",
       ease: "none",
     }
   );
@@ -197,11 +197,11 @@ function initHome() {
 
   ////SERVICES
 
-  gsap.to(".track1", 10, { x: "-49.2em", ease: "none", repeat: -1 });
-  gsap.to(".track2", 15, { x: "-220.8em", ease: "none", repeat: -1 });
-  gsap.to(".track3", 25, { x: "-288.9em", ease: "none", repeat: -1 });
-  gsap.to(".track4", 25, { x: "-266.2em", ease: "none", repeat: -1 });
-  gsap.to(".track5", 10, { x: "-81.7em", ease: "none", repeat: -1 });
+  gsap.to(".track1", 10, { x: "-43.6em", ease: "none", repeat: -1 });
+  gsap.to(".track2", 15, { x: "-204.9em", ease: "none", repeat: -1 });
+  gsap.to(".track3", 25, { x: "-261.8em", ease: "none", repeat: -1 });
+  gsap.to(".track4", 25, { x: "-244.8em", ease: "none", repeat: -1 });
+  gsap.to(".track5", 10, { x: "-74.2em", ease: "none", repeat: -1 });
 
   gsap.to(".track", {
     x: "-40em",
