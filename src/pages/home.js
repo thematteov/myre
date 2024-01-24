@@ -266,7 +266,7 @@ function initHome() {
       paused: true,
       scrollTrigger: {
         trigger: value,
-        start: "top bottom-=30%",
+        start: "top bottom-=20%",
         toggleActions: "play none none reverse",
       },
     });
