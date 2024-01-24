@@ -123,22 +123,6 @@ function initHome() {
     });
   }
 
-  ///////////menu
-  const menucta = document.querySelector('.menubutton')
-  const closecta = document.querySelector('.closebutton')
-  menucta.addEventListener('click', ()=> {
-    gsap.to('.menuwrapper', 0.6, {height: '100vh', ease: "power2.inOut"})
-    gsap.fromTo('.menu__link', 0.6,
-    {y: '120%'},
-    {y: '0%', ease: "power2.inOut", stagger: 0.05, delay: 0.2})
-    gsap.fromTo('.line1', .5, {scale: 0}, {scale: 1, ease: "power2.inOut", delay: 0.3})
-  })
-  closecta.addEventListener('click', ()=> {
-    gsap.to('.menuwrapper', 0.6, {height: '0vh', ease: "power2.inOut"})
-    gsap.to('.menu__link', 0.6, {y: '120%'})
-    gsap.to('.line1', .5, {scale: 0})
-  })
-
   //////FAQS
   let gallerylines = document.querySelectorAll(".gallery__line");
 
