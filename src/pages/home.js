@@ -272,7 +272,7 @@ function initHome() {
     });
     tl.fromTo(
       value.querySelectorAll(".char"),
-      1,
+      0.7,
       { y: "100%", opacity: 0 },
       {
         y: "0%",
