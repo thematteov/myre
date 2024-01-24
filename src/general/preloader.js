@@ -6,7 +6,7 @@ function preloader() {
     left: "100vw",
     duration: 0.6,
     ease: "power2.inOut",
-    onUpdate: ()=> window.scrollTo(0, 0),
+    onUpdate: () => window.scrollTo(0, 0),
     onComplete: () => gsap.set(".page__transition", { display: "none" }),
   });
   window.addEventListener("load", function () {
@@ -83,10 +83,9 @@ function preloader() {
 
   var tlProgress = gsap.timeline({
     paused: true,
-    onComplete: ()=>{
-      window.addEventListener('load', ()=>{
-        loadComplete()
-      })
+    onComplete: () => {
+      if (document.readyState === "ready" || document.readyState === "complete")
+        loadComplete();
     },
   });
 
