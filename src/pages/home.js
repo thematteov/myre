@@ -249,7 +249,7 @@ function initHome() {
     });
     tl.fromTo(
       value.querySelectorAll(".line"),
-      1,
+      0.6,
       { y: "100%", opacity: 1 },
       {
         y: "0%",
@@ -272,7 +272,7 @@ function initHome() {
     });
     tl.fromTo(
       value.querySelectorAll(".char"),
-      0.7,
+      0.6,
       { y: "100%", opacity: 0 },
       {
         y: "0%",
