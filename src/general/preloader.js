@@ -83,7 +83,11 @@ function preloader() {
 
   var tlProgress = gsap.timeline({
     paused: true,
-    onComplete: loadComplete,
+    onComplete: ()=>{
+      window.addEventListener('load', ()=>{
+        loadComplete()
+      })
+    },
   });
 
   tlProgress.to(progressBar, 1, { width: "100%" });
