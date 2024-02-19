@@ -53,6 +53,7 @@ function initHome() {
     ScrollTrigger.create({
       pin: ".intro__section__wrapper",
       start: "top top+=4%",
+      end: "bottom top-=10%",
       pinSpacing: false,
     });
     let scrollable = document.querySelector(".home__prj__right");
