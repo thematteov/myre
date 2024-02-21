@@ -84,7 +84,6 @@ function preloader() {
   var tlProgress = gsap.timeline({
     paused: true,
     onComplete: () => {
-      if (document.readyState === "ready" || document.readyState === "complete")
         loadComplete();
     },
   });
