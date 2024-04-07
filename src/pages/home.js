@@ -50,12 +50,12 @@ function initHome() {
       /////////
     });
   } else {
-    ScrollTrigger.create({
-      pin: ".intro__section__wrapper",
-      start: "top top+=4%",
-      end: "bottom top-=10%",
-      pinSpacing: false,
-    });
+    // ScrollTrigger.create({
+    //   pin: ".intro__section__wrapper",
+    //   start: "top top+=4%",
+    //   end: "bottom top-=10%",
+    //   pinSpacing: false,
+    // });
     let scrollable = document.querySelector(".home__prj__right");
 
     gsap.to(".home__prj__right", {
@@ -182,22 +182,25 @@ function initHome() {
 
   ////SERVICES
 
-  gsap.to(".track1", 10, { x: "-43.6em", ease: "none", repeat: -1 });
-  gsap.to(".track2", 15, { x: "-204.9em", ease: "none", repeat: -1 });
-  gsap.to(".track3", 25, { x: "-261.8em", ease: "none", repeat: -1 });
-  gsap.to(".track4", 25, { x: "-244.8em", ease: "none", repeat: -1 });
-  gsap.to(".track5", 10, { x: "-74.2em", ease: "none", repeat: -1 });
-
   gsap.to(".track", {
-    x: "-40em",
+    xPercent: -80,
     ease: "none",
     scrollTrigger: {
-      scrub: true,
-      trigger: ".services__wrapper",
-      start: "top bottom",
-      end: "bottom top",
+      scrub: 0.8,
+      trigger: ".services__section",
+      start: "top top",
+      end: "bottom bottom",
     },
   });
+  
+  ScrollTrigger.create({
+    trigger: '.services__section',
+    pin: '.services__left',
+    pinSpacing: false,
+    start: 'top top',
+    end: 'bottom bottom',
+  })
+
 
   //////////GENERAL//////////
   //->videos
