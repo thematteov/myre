@@ -13,7 +13,7 @@ function initHome() {
     5,
     { x: "0em" },
     {
-      x: "-10.2em",
+      x: "-11.2em",
       ease: "none",
     }
   );
@@ -181,6 +181,8 @@ function initHome() {
 
 
   ////SERVICES
+
+  let serviceSection = document.querySelector('.serivces__right')
 
   gsap.to(".track", {
     xPercent: -80,

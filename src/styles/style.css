@@ -30,3 +30,18 @@
           rgba(227,224,219,0) calc(50% + 3px),
           rgba(227,224,219,0) 100%);
 }
+.formkit-form{
+  background-color: rgba(227,224,219,0) !important;
+  border: 0px !important;
+}
+.formkit-header{
+  display: none;
+}
+.formkit-subheader{
+  display: none;
+}
+[data-style="minimal"]{
+  padding: 0!important;
+  margin: 0!important;
+  
+}
