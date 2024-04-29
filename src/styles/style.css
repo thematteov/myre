@@ -33,6 +33,7 @@
 .formkit-form{
   background-color: rgba(227,224,219,0) !important;
   border: 0px !important;
+  max-width: none !important;
 }
 .formkit-header{
   display: none;
@@ -44,4 +45,10 @@
   padding: 0!important;
   margin: 0!important;
   
+}
+.formkit-powered-by-convertkit-container{
+  display: none !important;
+}
+.formkit-guarantee{
+  display: none;
 }
