@@ -75,6 +75,51 @@ function split() {
     );
   });
 }
+function splitMOBILE() {
+  const videos = document.querySelectorAll("video");
+  videos.forEach((video) => video.play());
+  //->split text
+  const text = new SplitType(".split");
+  const textside = new SplitType(".split__side");
+  text.lines;
+  textside.lines;
+  const elementsToWrap = document.querySelectorAll(".line");
+
+  elementsToWrap.forEach((element) => {
+    const wrapper = document.createElement("span");
+    wrapper.className = "line-wrapper";
+    wrapper.style.overflowY = "hidden";
+    element.parentNode.replaceChild(wrapper, element);
+    wrapper.appendChild(element);
+  });
+
+  let lines = document.querySelectorAll(".split");
+
+  lines.forEach((value, index) => {
+    let tl = gsap.timeline({
+      paused: true,
+      scrollTrigger: {
+        trigger: value,
+        start: "top bottom",
+        toggleActions: "play none none reverse",
+        markers: false,
+      },
+    });
+    tl.fromTo(
+      value.querySelectorAll(".word"),
+      0.8,
+      { yPercent: 100 },
+      {
+        yPercent: 0,
+        ease: "Power3.easeOut",
+        stagger: {
+          amount: 0.5,
+          from: "random",
+        },
+      }
+    );
+  });
+}
 function splithorizontal() {
   let cahrsSlide = document.querySelectorAll(".splitx");
   new SplitType(".splitx");
@@ -110,10 +155,12 @@ function splithorizontal() {
 }
 if (isMobile()) {
   // Your mobile-specific JavaScript code here
+  splitMOBILE();
   ScrollTrigger.config({
     autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
   });
 } else {
+  split();
   // Code for non-mobile devices
   window.addEventListener("resize", () => {
     ScrollTrigger.update();
@@ -143,7 +190,6 @@ imagesLoaded(document.querySelectorAll("img"), function () {
   // initabout()
   cta();
   // initTest()
-  split();
   splithorizontal();
 
   console.log("all images are loaded");
