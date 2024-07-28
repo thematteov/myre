@@ -27,11 +27,38 @@ function initProject() {
     .to("body", { duration: 0.1 });
   let img = gsap.utils.toArray(".project__image");
   img.forEach((img, index) => {
-    if (index%2 !== 0) {
-      console.log(img)
-      gsap.set(img, { width: "60%"});
+    if (index % 2 !== 0) {
+      console.log(img);
+      gsap.set(img, { width: "60%" });
     }
   });
+  function imagesTriggers() {
+    let images = gsap.utils.toArray(".project__image");
+
+    images.forEach((el) => {
+      gsap.from(el.querySelector(".case__image__wrapper"), {
+        scale: 0.5,
+        duration: 1.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top bottom-=20%",
+          toggleActions: "play none none reverse",
+        },
+      });
+      gsap.from(el.querySelector(".case__image"), {
+        scale: 1.5,
+        duration: 1.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top bottom-=10%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    });
+  }
+  imagesTriggers()
 }
 
 export default initProject;
