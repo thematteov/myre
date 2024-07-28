@@ -11,6 +11,11 @@ import initabout from "./pages/about";
 import SplitType from "split-type";
 
 import initTest from "./test/test";
+function isMobile() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  );
+}
 let lenis = new Lenis({
   lerp: 2,
   duration: 1.5,
@@ -103,7 +108,7 @@ function splithorizontal() {
     });
   });
 }
-if (window.matchMedia("(max-width: 768px)").matches) {
+if (isMobile()) {
   // Your mobile-specific JavaScript code here
   ScrollTrigger.config({
     autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
