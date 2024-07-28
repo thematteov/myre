@@ -1,7 +1,6 @@
 import "../styles/style.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap/src";
-import SplitType from "split-type";
 function initHome() {
   let tl = gsap.timeline();
   tl.to(".hero_top", {
@@ -40,7 +39,7 @@ function initHome() {
         start: "top bottom",
         end: "bottom top",
         scrub: true,
-        invalidateOnRefresh: true
+        invalidateOnRefresh: true,
       },
     });
     gsap.to(".hero_block", 0.5, {
@@ -63,8 +62,6 @@ function initHome() {
     },
     { opacity: 1, stagger: 0.5 }
   );
-
-  /////services
 
   //////////GENERAL//////////
   //->videos

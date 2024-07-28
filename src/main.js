@@ -9,31 +9,18 @@ import barba from "@barba/core";
 import { gsap } from "gsap/src";
 import initabout from "./pages/about";
 import SplitType from "split-type";
-
 import initTest from "./test/test";
+
 function isMobile() {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
     navigator.userAgent
   );
 }
-let lenis = new Lenis({
-  lerp: 2,
-  duration: 1.5,
-  smoothWheel: true,
-  smoothTouch: false,
-  wheelMultiplier: 1,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-});
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
 
-requestAnimationFrame(raf);
 function split() {
   const videos = document.querySelectorAll("video");
   videos.forEach((video) => video.play());
-  //->split text
+
   const text = new SplitType(".split");
   const textside = new SplitType(".split__side");
   text.lines;
@@ -50,7 +37,7 @@ function split() {
 
   let lines = document.querySelectorAll(".split");
 
-  lines.forEach((value, index) => {
+  lines.forEach((value) => {
     let tl = gsap.timeline({
       paused: true,
       scrollTrigger: {
@@ -75,10 +62,11 @@ function split() {
     );
   });
 }
+
 function splitMOBILE() {
   const videos = document.querySelectorAll("video");
   videos.forEach((video) => video.play());
-  //->split text
+
   const text = new SplitType(".split");
   const textside = new SplitType(".split__side");
   text.lines;
@@ -95,7 +83,7 @@ function splitMOBILE() {
 
   let lines = document.querySelectorAll(".split");
 
-  lines.forEach((value, index) => {
+  lines.forEach((value) => {
     let tl = gsap.timeline({
       paused: true,
       scrollTrigger: {
@@ -117,6 +105,7 @@ function splitMOBILE() {
     );
   });
 }
+
 function splithorizontal() {
   let cahrsSlide = document.querySelectorAll(".splitx");
   new SplitType(".splitx");
@@ -150,47 +139,31 @@ function splithorizontal() {
     });
   });
 }
-if (isMobile()) {
-  splitMOBILE();
-  ScrollTrigger.config({
-    autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
-  });
-} else {
-  split();
-  window.addEventListener("resize", () => {
-    ScrollTrigger.update();
-  });
-}
 
-imagesLoaded(document.querySelectorAll("img"), function () {
-  window.scrollTo(0, 0);
-  lenis.scrollTo(-lenis.progress, { immediate: true });
-  // gsap.to(".tpclmn", 1, {
-  //   scaleY: 0,
-  //   stagger: 0.1,
-  //   ease: "power2.inOut",
-  //   onComplete: ()=> gsap.set('.tpreloader', {display: 'none'})
-  // });
-  gsap.to(".preloaderi", 1.2, {
-    scaleX: 0,
-    xPercent: 100,
-    ease: "power2.inOut",
-  });
-  // setTimeout(() => {
-  //   ScrollTrigger.refresh();
-  // }, 500);
-  // model3d()
-  // initHome();
-  initProject()
-  // initabout()
+function reinitializeGeneral() {
+  let videos = document.querySelectorAll("video");
+
+  if (document.querySelector("video")) {
+    videos.forEach((video) => {
+      video.play();
+    });
+  }
   cta();
-  // initTest()
   splithorizontal();
+  if (isMobile()) {
+    splitMOBILE();
+    ScrollTrigger.config({
+      autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
+    });
+  } else {
+    split();
+    window.addEventListener("resize", () => {
+      ScrollTrigger.update();
+    });
+  }
+}
 
-});
-
-/////////////////////////barba js
-async function pagetranIn() {
+async function pagetranIn(current) {
   return new Promise((resolve) => {
     let tl = gsap.timeline({
       onComplete: resolve,
@@ -199,16 +172,19 @@ async function pagetranIn() {
       ".page__transition",
       1,
       {
-        y: "100vh",
+        width: "100vw",
+        x: "0vw",
       },
       {
-        y: "200vh",
+        width: "0vw",
+        x: "100vw",
         ease: "Power3.easeInOut",
       }
     );
   });
 }
-async function pagetranOut() {
+
+async function pagetranOut(next) {
   return new Promise((resolve) => {
     let tl = gsap.timeline({
       onComplete: resolve,
@@ -217,16 +193,48 @@ async function pagetranOut() {
       ".page__transition",
       1,
       {
-        y: "0vh",
+        width: "0vw",
+        x: "0vw",
       },
       {
-        y: "100vh",
+        width: "100vw",
+        x: "0vw",
         ease: "Power3.easeInOut",
       }
     );
   });
 }
-/////////////////BARBA
+
+function reinitializeWebflow() {
+  Webflow.destroy(); // Destroy the current Webflow instance
+  Webflow.ready(); // Re-trigger Webflow ready event
+  Webflow.require("ix2").init(); // Reinitialize interactions
+}
+
+function reattachFormSubmitHandler() {
+  const form = document.querySelector("form");
+  if (form) {
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      console.log("Form submitted!");
+      // Handle form submission
+      // Example: Use fetch or XMLHttpRequest to submit form data
+    });
+  } else {
+    console.log("Form not found");
+  }
+}
+
+function resetScroll() {
+  window.scrollTo(0, 0);
+  ScrollTrigger.revert();
+  window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+    lenis.scrollTo(-lenis.progress, { immediate: true });
+  };
+  lenis.scrollTo(-lenis.progress, { immediate: true });
+}
+
 function pageTransition() {
   let lenis = new Lenis({
     lerp: 0.1,
@@ -237,12 +245,14 @@ function pageTransition() {
     touchMultiplier: 0.4,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   });
+
   function raf(time) {
     lenis.raf(time);
     requestAnimationFrame(raf);
   }
 
   requestAnimationFrame(raf);
+
   barba.init({
     transitions: [
       {
@@ -251,10 +261,20 @@ function pageTransition() {
           await pagetranOut(next);
           done();
         },
-        async after() {
+        async after({ current }) {
           const done = this.async();
-          await pagetranIn();
+          await pagetranIn(current);
           done();
+        },
+        async enter() {
+          reinitializeGeneral();
+          reinitializeWebflow();
+          reattachFormSubmitHandler();
+        },
+        async once() {
+          reinitializeGeneral();
+          reinitializeWebflow();
+          reattachFormSubmitHandler();
         },
       },
     ],
@@ -264,45 +284,48 @@ function pageTransition() {
         afterEnter() {
           ScrollTrigger.refresh();
           setTimeout(() => {
-            initInterior();
+            initHome();
             ScrollTrigger.refresh();
             // console.clear();
           }, 1);
         },
         beforeEnter() {
-          window.scrollTo(0, 0);
-          ScrollTrigger.revert();
-          window.onbeforeunload = function () {
-            window.scrollTo(0, 0);
-            lenis.scrollTo(-lenis.progress, { immediate: true });
-          };
-          lenis.scrollTo(-lenis.progress, { immediate: true });
+          resetScroll();
         },
       },
       {
-        namespace: "archive",
+        namespace: "about",
         afterEnter() {
-          inteirorarchive();
+          ScrollTrigger.refresh();
           setTimeout(() => {
-            inteirorarchive();
+            initabout();
             ScrollTrigger.refresh();
             // console.clear();
           }, 1);
         },
         beforeEnter() {
-          window.scrollTo(0, 0);
-          ScrollTrigger.revert();
-          window.onbeforeunload = function () {
-            window.scrollTo(0, 0);
-            lenis.scrollTo(-lenis.progress, { immediate: true });
-          };
-          lenis.scrollTo(-lenis.progress, { immediate: true });
+          resetScroll();
+        },
+      },
+      {
+        namespace: "project",
+        afterEnter() {
+          ScrollTrigger.refresh();
+          setTimeout(() => {
+            initProject();
+            ScrollTrigger.refresh();
+            // console.clear();
+          }, 1);
+        },
+        beforeEnter() {
+          resetScroll();
         },
       },
     ],
   });
 }
-// pageTransition();
+
+pageTransition();
+reattachFormSubmitHandler(); // Initial call to attach form submit handler
+
 gsap.registerPlugin(ScrollTrigger);
-
-
