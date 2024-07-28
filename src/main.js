@@ -56,13 +56,13 @@ function split() {
       scrollTrigger: {
         trigger: value,
         start: "top bottom-=15%",
-        toggleActions: "play none none reverse",
+        toggleActions: "play none none reset",
         markers: false,
       },
     });
     tl.fromTo(
       value.querySelectorAll(".word"),
-      0.8,
+      1.2,
       { yPercent: 100 },
       {
         yPercent: 0,
@@ -180,8 +180,8 @@ imagesLoaded(document.querySelectorAll("img"), function () {
   //   ScrollTrigger.refresh();
   // }, 500);
   // model3d()
-  initHome();
-  // initProject()
+  // initHome();
+  initProject()
   // initabout()
   cta();
   // initTest()
@@ -304,3 +304,5 @@ function pageTransition() {
 }
 // pageTransition();
 gsap.registerPlugin(ScrollTrigger);
+
+
