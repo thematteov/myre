@@ -3,7 +3,6 @@ import Lottie from "lottie-web";
 function cta() {
   function cursor() {
     let cursor = document.querySelector(".cursor");
-    let cursorball = document.querySelector(".cursor__ball");
     // Define the Lottie animation configuration
     let animationConfig = Lottie.loadAnimation({
       container: cursor, // the dom element that will contain the animation
@@ -17,18 +16,11 @@ function cta() {
     function playAnimation() {
       animationConfig.setDirection(1);
       animationConfig.goToAndPlay(0, true);
-      gsap.to(cursorball, 0.5, { scale: 0, ease: "Power2.easeOut" });
     }
 
     // Function to stop the animation on mouseout
     function stopAnimation() {
       animationConfig.setDirection(-1);
-      if (animationConfig.currentFrame === animationConfig.totalFrames - 1) {
-        animationConfig.goToAndStop(animationConfig.totalFrames, true);
-      } else {
-        animationConfig.goToAndPlay(30, true);
-      }
-      gsap.to(cursorball, 0.5, { scale: 1, ease: "Power2.easeOut" });
     }
 
     // Attach event listeners to the link
@@ -42,61 +34,56 @@ function cta() {
       let X = e.clientX;
       let Y = e.clientY;
       gsap.to(cursor, 0.5, { x: X, y: Y, ease: "Power2.easeOut" });
-      gsap.to(cursorball, 0.5, { x: X, y: Y, ease: "Power2.easeOut" });
     });
   }
-  function startAProject() {
-    if (window.matchMedia("(max-width: 768px)").matches) {
-    } else {
-      //////percentage
-      //////page progresssion
+  function microinteractions() {
+    let links = document.querySelectorAll(".a");
 
-      let progressBar = document.querySelector(".percentage__number");
-
-      function updateProgressBar() {
-        let windowHeight = window.innerHeight;
-        let pageHeight = document.documentElement.scrollHeight - windowHeight;
-        let scrollPosition = window.scrollY;
-        let scrollProgress = (scrollPosition / pageHeight) * 100;
-        progressBar.textContent = `Your are here: ${scrollProgress.toFixed(
-          2
-        )}%`;
-      }
-
-      updateProgressBar();
-
-      window.addEventListener("scroll", updateProgressBar);
-      window.addEventListener("resize", updateProgressBar);
-      /////lottie CURSOR
-    }
-  }
-  function menu() {
-    ///////////menu
-    const menucta = document.querySelector(".menubutton");
-    const closecta = document.querySelector(".closebutton");
-    menucta.addEventListener("click", () => {
-      gsap.fromTo(".menuwrapper", 0.6, {width: "0vw", left: '0vw'}, { width: "100vw", ease: "power2.inOut" });
-      gsap.fromTo(
-        ".menu__link",
-        0.6,
-        { y: "120%" },
-        { y: "0%", ease: "power2.inOut", stagger: 0.05, delay: 0.2 }
-        );
+    links.forEach((link) => {
+      link.addEventListener("mouseenter", () => {
         gsap.fromTo(
-          ".line1",
+          link.querySelector(".ctaindicatororange"),
           0.5,
-          { scale: 0 },
-          { scale: 1, ease: "power2.inOut", delay: 0.3 }
-          );
+          { yPercent: -100 },
+          {
+            yPercent: 100,
+            ease: "power3.out",
+          }
+        );
+        gsap.to(link.querySelector(".ctaindicatorblack"), 0.5, {
+          width: "3em",
+          ease: "power3.out",
         });
-        closecta.addEventListener("click", () => {
-      gsap.to(".menuwrapper", 0.6, { width: "0vw", left: '100vw', ease: "power2.inOut" });
-      gsap.to(".menu__link", 0.6, { y: "120%" });
-      gsap.to(".line1", 0.5, { scale: 0 });
+      });
+      link.addEventListener("mouseleave", () => {
+        gsap.to(link.querySelector(".ctaindicatororange"), 0.5, {
+          yPercent: 200,
+          ease: "power3.out",
+        });
+        gsap.to(link.querySelector(".ctaindicatorblack"), 0.5, {
+          width: "2em",
+          ease: "power3.out",
+        });
+      });
     });
   }
-  menu();
-  startAProject();
+  function casestudy_open() {
+    const covers = document.querySelectorAll('.case');
+
+covers.forEach((cover) => {
+  const cta = cover.querySelector('.caselink');
+
+  cover.addEventListener('mousemove', (event) => {
+    gsap.to(cta, { duration: 0.7, x: event.offsetX, y: event.offsetY, ease: 'power1.out' });
+  });
+  
+  cover.addEventListener('mouseleave', () => {
+    gsap.to(cta, { duration: 1.2, x: '0%', y: '0%', ease: 'power3.out' });
+  });
+});
+  }
+  casestudy_open();
+  microinteractions();
   cursor();
 }
 export default cta;

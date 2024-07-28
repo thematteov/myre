@@ -1,126 +1,86 @@
-import "../styles/style.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap/src";
-import SplitType from "split-type";
-import model3d from "../general/model";
 
-function initAbout() {
-  let startaprj = gsap.timeline({ repeat: -1 });
-
-  startaprj.fromTo(
-    ".startaprj__track",
-    5,
-    { x: "0em" },
-    {
-      x: "-11.4em",
-      ease: "none",
-    }
-  );
-  //////infinite banner
-  const text = new SplitType(".split");
-  const textside = new SplitType(".split__side");
-  const char = new SplitType(".chars");
-  text.lines;
-  textside.lines;
-  const elementsToWrap = document.querySelectorAll(".line");
-
-  elementsToWrap.forEach((element) => {
-    const wrapper = document.createElement("span");
-    wrapper.className = "line-wrapper";
-    wrapper.style.overflowY = "hidden";
-    element.parentNode.replaceChild(wrapper, element);
-    wrapper.appendChild(element);
-  });
-  ///////SPLITTEXT
-
-  let lines = document.querySelectorAll(".split");
-  let chars = document.querySelectorAll(".chars");
-
-  lines.forEach((value, index) => {
-    let tl = gsap.timeline({
-      paused: true,
-      scrollTrigger: {
-        trigger: value,
-        start: "top bottom-=10%",
-        toggleActions: "play none none reverse",
-        markers: false,
-      },
-    });
-    tl.fromTo(
-      value.querySelectorAll(".line"),
-      1,
-      { y: "100%", opacity: 1 },
-      {
-        y: "0%",
-        opacity: 1,
-        force3D: true,
-        ease: "Power2.easeOut",
-        stagger: 0.1,
-      }
-    );
-  });
-  chars.forEach((value) => {
-    let tl = gsap.timeline({
-      paused: true,
-      scrollTrigger: {
-        trigger: value,
-        start: "top bottom-=20%",
-        toggleActions: "play none none reverse",
-      },
-    });
-    tl.fromTo(
-      value.querySelectorAll(".char"),
-      0.6,
-      { y: "100%", opacity: 0 },
-      {
-        y: "0%",
-        opacity: 1,
-        ease: "Power2.easeOut",
-        stagger: 0.05,
-      }
-    );
-  });
-
-  //////page animations
-  if (window.matchMedia("(max-width: 768px)").matches) {
-    gsap.to(".about__hero__content", {
-      y: "-30em",
-      scrollTrigger: { scrub: true },
-      ease: "none",
-    });
-  } else {
-    gsap.to(".about__hero__content", {
-      y: "-40em",
-      scrollTrigger: { scrub: true },
-      ease: "none",
-    });
-  }
-
-  let processPhases = document.querySelectorAll(".process__wrapper");
-
-  processPhases.forEach((phase) => {
-    gsap.fromTo(
-      phase,
-      1,
-      { yPercent: 20, opacity: 0 },
-      {
-        yPercent: 0,
-        opacity: 1,
-        ease: "Power3.easeOut",
-        scrollTrigger: {
-          trigger: phase,
-          start: "top bottom",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
-  });
-
-  ///////general
-  const videos = document.querySelectorAll("video");
-  videos.forEach((video) => video.play());
-
-  model3d()
-}
 gsap.registerPlugin(ScrollTrigger);
-export default initAbout;
+
+function initabout() {
+  let roibtn = document.querySelector(".roi");
+  let qualitybtn = document.querySelector(".quality");
+  let agencyofone = document.querySelector(".agencyofone");
+  agencyofone.addEventListener("click", () => {
+    gsap.to(".agencyofonepanel", 0.6, { yPercent: 100, ease: "power2.inOut" });
+    gsap.to(".roipanel", 0.6, { yPercent: -100, ease: "power2.inOut" });
+    gsap.to(".qualitypanel", 0.6, { yPercent: -100, ease: "power2.inOut" });
+    gsap.to(".sqr1", 0.3, {
+      background: "rgba(210, 53, 3, 100)",
+      ease: "power2.inOut",
+    });
+    gsap.to(".sqr2", 0.3, {
+      background: "rgba(210, 53, 3, 0)",
+      ease: "power2.inOut",
+    });
+    gsap.to(".sqr3", 0.3, {
+      background: "rgba(210, 53, 3, 0)",
+      ease: "power2.inOut",
+    });
+  });
+  qualitybtn.addEventListener("click", () => {
+    gsap.to(".qualitypanel", 0.6, { yPercent: 100, ease: "power2.inOut" });
+    gsap.to(".roipanel", 0.6, { yPercent: -100, ease: "power2.inOut" });
+    gsap.to(".agencyofonepanel", 0.6, { yPercent: -100, ease: "power2.inOut" });
+    gsap.to(".sqr2", 0.3, {
+      background: "rgba(210, 53, 3, 100)",
+      ease: "power2.inOut",
+    });
+    gsap.to(".sqr3", 0.3, {
+      background: "rgba(210, 53, 3, 0)",
+      ease: "power2.inOut",
+      delay: 0.2,
+    });
+  });
+  roibtn.addEventListener("click", () => {
+    gsap.to(".roipanel", 0.6, { yPercent: 100, ease: "power2.inOut" });
+    gsap.to(".qualitypanel", 0.6, { yPercent: -100, ease: "power2.inOut" });
+    gsap.to(".agencyofonepanel", 0.6, { yPercent: -100, ease: "power2.inOut" });
+    gsap.to(".sqr2", 0.3, {
+      background: "rgba(210, 53, 3, 100)",
+      ease: "power2.inOut",
+    });
+    gsap.to(".sqr3", 0.3, {
+      background: "rgba(210, 53, 3, 100)",
+      ease: "power2.inOut",
+      delay: 0.2,
+    });
+  });
+
+  /////////////lines
+
+  gsap.to(".bottomline", 1, {
+    width: "100%",
+    ease: "power2.inOut",
+    stagger: 0.2,
+    scrollTrigger: {
+        trigger: '.about__values',
+        start: 'top center',
+    }
+  });
+  gsap.to(".lineleft", 1, {
+    height: "100%",
+    ease: "power2.inOut",
+    stagger: 0.2,
+    scrollTrigger: {
+        trigger: '.about__values',
+        start: 'top center',
+    }
+  });
+  gsap.to(".linetop", 1, {
+    width: "100%",
+    ease: "power2.inOut",
+    stagger: 0.2,
+    scrollTrigger: {
+        trigger: '.about__values',
+        start: 'top center',
+    }
+  });
+}
+export default initabout;
