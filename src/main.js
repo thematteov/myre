@@ -112,9 +112,7 @@ function splitMOBILE() {
       {
         yPercent: 0,
         ease: "Power3.easeOut",
-        stagger: {
-          amount: 0.5,
-        },
+        stagger: 0.05,
       }
     );
   });
