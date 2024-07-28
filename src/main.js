@@ -100,7 +100,7 @@ function splitMOBILE() {
       paused: true,
       scrollTrigger: {
         trigger: value,
-        start: "top bottom",
+        start: "top bottom-=5%",
         toggleActions: "play none none reverse",
         markers: false,
       },
