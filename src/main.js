@@ -114,7 +114,6 @@ function splitMOBILE() {
         ease: "Power3.easeOut",
         stagger: {
           amount: 0.5,
-          from: "random",
         },
       }
     );
@@ -154,14 +153,12 @@ function splithorizontal() {
   });
 }
 if (isMobile()) {
-  // Your mobile-specific JavaScript code here
   splitMOBILE();
   ScrollTrigger.config({
     autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
   });
 } else {
   split();
-  // Code for non-mobile devices
   window.addEventListener("resize", () => {
     ScrollTrigger.update();
   });
@@ -192,7 +189,6 @@ imagesLoaded(document.querySelectorAll("img"), function () {
   // initTest()
   splithorizontal();
 
-  console.log("all images are loaded");
 });
 
 /////////////////////////barba js
