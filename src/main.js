@@ -55,7 +55,7 @@ function split() {
         yPercent: 0,
         ease: "Power3.easeOut",
         stagger: {
-          amount: 0.5,
+          amount: 0.8,
           from: "random",
         },
       }
@@ -206,7 +206,6 @@ async function pagetranOut(next) {
 }
 
 function reinitializeWebflow() {
-  Webflow.destroy(); // Destroy the current Webflow instance
   Webflow.ready(); // Re-trigger Webflow ready event
   Webflow.require("ix2").init(); // Reinitialize interactions
 }
@@ -269,12 +268,12 @@ function pageTransition() {
         async enter() {
           reinitializeGeneral();
           reinitializeWebflow();
-          reattachFormSubmitHandler();
+          // reattachFormSubmitHandler();
         },
         async once() {
           reinitializeGeneral();
           reinitializeWebflow();
-          reattachFormSubmitHandler();
+          // reattachFormSubmitHandler();
         },
       },
     ],
