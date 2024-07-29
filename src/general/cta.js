@@ -40,7 +40,9 @@ function cta() {
   }
   function microinteractions() {
     let links = document.querySelectorAll(".a");
-
+    let width = document
+      .querySelector(".ctaindicatorblack")
+      .getBoundingClientRect().width;
     links.forEach((link) => {
       link.addEventListener("mouseenter", () => {
         gsap.fromTo(
@@ -63,7 +65,7 @@ function cta() {
           ease: "power3.out",
         });
         gsap.to(link.querySelector(".ctaindicatorblack"), 0.5, {
-          width: "2em",
+          width: width,
           ease: "power3.out",
         });
       });
