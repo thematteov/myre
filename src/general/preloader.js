@@ -1,61 +1,8 @@
 import gsap from "gsap";
 import imagesLoaded from "imagesloaded";
+import SplitType from "split-type";
 function preloader() {
-  gsap.to(".page__transition", {
-    width: "0vw",
-    left: "100vw",
-    duration: 0.6,
-    ease: "power2.inOut",
-    onUpdate: () => window.scrollTo(0, 0),
-    onComplete: () => gsap.set(".page__transition", { display: "none" }),
-  });
-  window.addEventListener("load", function () {
-    let tl = gsap.timeline();
-    let links = document.querySelectorAll("a");
-
-    links.forEach((link) => {
-      link.addEventListener("click", function (e) {
-        if (
-          $(this).prop("hostname") === window.location.host &&
-          $(this).attr("href").indexOf("#") === -1 &&
-          $(this).attr("target") !== "_blank"
-        ) {
-          e.preventDefault();
-          let destination = this.getAttribute("href");
-          tl.set(".page__transition", { display: "flex" });
-          tl.fromTo(
-            ".page__transition",
-            { width: "0vw", left: "0vw" },
-            {
-              width: "100vw",
-              left: "0vw",
-              duration: 0.6,
-              ease: "power2.inOut",
-              onComplete: () => (window.location = destination),
-            }
-          );
-        }
-      });
-    });
-    window.onpageshow = function (event) {
-      if (event.persisted) {
-        window.location.reload();
-      }
-    };
-  });
   //////preloader progression animation
-
-  if (
-    !sessionStorage.getItem("animationPlayed") ||
-    performance.navigation.type === 1
-  ) {
-    // If not played, run the animation
-    gsap.set(".page__transition", { display: "none" });
-    gsap.set(".preloader", { display: "flex" });
-  } else {
-    gsap.set(".preloader", { display: "none" });
-  }
-
   var imgLoad = imagesLoaded("img");
 
   var progressBar = $(".preloader__progress"),
@@ -84,34 +31,37 @@ function preloader() {
   var tlProgress = gsap.timeline({
     paused: true,
     onComplete: () => {
-        loadComplete();
+      loadComplete();
     },
   });
 
   tlProgress.to(progressBar, 1, { width: "100%" });
-
+  new SplitType(".intro");
+  let intro = document.querySelector(".intro");
   function loadComplete() {
     var tlEnd = gsap.timeline();
-    tlEnd.to(".lottie__preloader", 1.3, { yPercent: 500, rotate: 20 });
-    tlEnd.to(".preloader", 0.5, {
-      yPercent: -100,
-      onComplete: function () {
-        sessionStorage.setItem("animationPlayed", "true");
-      },
-    });
+    tlEnd
+      .to(".preloader", 1.1, {
+        yPercent: -100,
+        ease: 'power2.inOut',
+        onComplete: function () {
+          sessionStorage.setItem("animationPlayed", "true");
+        },
+      })
+      .fromTo(
+        intro.querySelectorAll(".word"),
+        1.2,
+        { yPercent: 100 },
+        {
+          yPercent: 0,
+          ease: "Power3.easeOut",
+          stagger: {
+            amount: 0.8,
+            from: "center",
+          },
+          delay: -0.5
+        }
+      );
   }
-
-  function updateProgressBar() {
-    let windowHeight = window.innerHeight;
-    let pageHeight = document.documentElement.scrollHeight - windowHeight;
-    let scrollPosition = window.scrollY;
-    let scrollProgress = (scrollPosition / pageHeight) * 100;
-    progressBar.textContent = `Your are here: ${scrollProgress.toFixed(2)}%`;
-  }
-
-  updateProgressBar();
-
-  window.addEventListener("scroll", updateProgressBar);
-  window.addEventListener("resize", updateProgressBar);
 }
 export default preloader;
