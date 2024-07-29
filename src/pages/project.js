@@ -1,7 +1,6 @@
 import "../styles/style.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap/src";
-import SplitType from "split-type";
 
 gsap.registerPlugin(ScrollTrigger);
 function initProject() {
@@ -25,13 +24,6 @@ function initProject() {
       ease: "none",
     })
     .to("body", { duration: 0.1 });
-  let img = gsap.utils.toArray(".project__image");
-  img.forEach((img, index) => {
-    if (index % 2 !== 0) {
-      console.log(img);
-      gsap.set(img, { width: "60%" });
-    }
-  });
   function imagesTriggers() {
     let images = gsap.utils.toArray(".project__image");
 
@@ -58,7 +50,7 @@ function initProject() {
       });
     });
   }
-  imagesTriggers()
+  imagesTriggers();
 }
 
 export default initProject;
