@@ -1,6 +1,7 @@
 import Lenis from "@studio-freight/lenis";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import initHome from "./pages/home";
+import menu from "./general/menu";
 import imagesLoaded from "imagesloaded";
 import initProject from "./pages/project";
 import model3d from "./general/model";
@@ -139,8 +140,11 @@ function splithorizontal() {
     });
   });
 }
-
 function reinitializeGeneral() {
+  gsap.set(".menuwrapper", {
+    display: "none",
+  });
+  cta();
   let videos = document.querySelectorAll("video");
 
   if (document.querySelector("video")) {
@@ -148,7 +152,6 @@ function reinitializeGeneral() {
       video.play();
     });
   }
-  cta();
   splithorizontal();
   if (isMobile()) {
     splitMOBILE();
@@ -268,12 +271,10 @@ function pageTransition() {
         async enter() {
           reinitializeGeneral();
           reinitializeWebflow();
-          // reattachFormSubmitHandler();
         },
         async once() {
           reinitializeGeneral();
           reinitializeWebflow();
-          // reattachFormSubmitHandler();
         },
       },
     ],
@@ -289,6 +290,7 @@ function pageTransition() {
           }, 1);
         },
         beforeEnter() {
+          menu();
           resetScroll();
         },
       },
@@ -303,6 +305,7 @@ function pageTransition() {
           }, 1);
         },
         beforeEnter() {
+          menu();
           resetScroll();
         },
       },
@@ -317,6 +320,7 @@ function pageTransition() {
           }, 1);
         },
         beforeEnter() {
+          menu();
           resetScroll();
         },
       },
