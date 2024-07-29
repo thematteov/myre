@@ -1,5 +1,6 @@
 import gsap from "gsap";
 import Lottie from "lottie-web";
+import SplitType from "split-type";
 function cta() {
   function cursor() {
     let cursor = document.querySelector(".cursor");
@@ -68,20 +69,116 @@ function cta() {
     });
   }
   function casestudy_open() {
-    const covers = document.querySelectorAll('.case');
+    const covers = document.querySelectorAll(".case");
 
-covers.forEach((cover) => {
-  const cta = cover.querySelector('.caselink');
-
-  cover.addEventListener('mousemove', (event) => {
-    gsap.to(cta, { duration: 0.7, x: event.offsetX, y: event.offsetY, ease: 'power1.out' });
-  });
-  
-  cover.addEventListener('mouseleave', () => {
-    gsap.to(cta, { duration: 1.2, x: '0%', y: '0%', ease: 'power3.out' });
-  });
-});
+    covers.forEach((cover) => {});
   }
+  function menu() {
+    let menu = document.querySelector(".menubutton");
+    let close = document.querySelector(".closebutton");
+    let open = false;
+
+    menu.addEventListener("click", () => {
+      if (open === false) {
+        open = true;
+        gsap.set(".menuwrapper", {
+          display: "block",
+        });
+        gsap.fromTo(
+          ".closebutton",
+          0.6,
+          {
+            yPercent: -100,
+            ease: "power2.inOut",
+          },
+          {
+            yPercent: 0,
+            ease: "power2.inOut",
+          }
+        );
+        gsap.fromTo(
+          ".menulinkscontainer",
+          0.6,
+          {
+            xPercent: -100,
+            ease: "power2.inOut",
+          },
+          {
+            xPercent: 0,
+            ease: "power2.inOut",
+          }
+        );
+
+        gsap.fromTo(
+          ".menu__link",
+          0.6,
+          {
+            yPercent: 100,
+          },
+          {
+            yPercent: 0,
+            stagger: 0.1,
+            delay: 0.25,
+            ease: "power2.out",
+          }
+        );
+      } else {
+        open = false;
+        gsap.to(".closebutton", 0.6, {
+          xPercent: 100,
+          ease: "power2.inOut",
+        });
+        gsap.to(".menulinkscontainer", 0.6, {
+          yPercent: 100,
+          ease: "power2.inOut",
+          onComplete: () => {
+            gsap.set(".menuwrapper", {
+              display: "none",
+            });
+            gsap.set(".closebutton", {
+              xPercent: 0,
+            });
+            gsap.set(".menulinkscontainer", {
+              yPercent: 0,
+            });
+          },
+        });
+        gsap.to(".menu__link", 0.5, {
+          yPercent: 100,
+          ease: "power2.out",
+        });
+      }
+    });
+
+    close.addEventListener("click", () => {
+      gsap.to(".closebutton", 0.6, {
+        xPercent: 100,
+        ease: "power2.inOut",
+      });
+      gsap.to(".menulinkscontainer", 0.6, {
+        yPercent: 100,
+        ease: "power2.inOut",
+        onComplete: () => {
+          gsap.set(".menuwrapper", {
+            display: "none",
+          });
+          gsap.set(".closebutton", {
+            xPercent: 0,
+          });
+          gsap.set(".menulinkscontainer", {
+            yPercent: 0,
+          });
+        },
+      });
+      gsap.to(".menu__link", 0.5, {
+        yPercent: 100,
+        ease: "power2.out",
+      });
+      open = false
+    });
+  }
+
+  menu();
   casestudy_open();
   microinteractions();
   cursor();
