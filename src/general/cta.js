@@ -74,7 +74,20 @@ function cta() {
   function casestudy_open() {
     const covers = document.querySelectorAll(".case");
 
-    covers.forEach((cover) => {});
+    covers.forEach((cover) => {
+      cover.addEventListener("mouseenter", () => {
+        gsap.to(cover.querySelector(".videoembed"), 0.5, {
+          scale: 0.98,
+          ease: "power2.out",
+        });
+      });
+      cover.addEventListener("mouseleave", () => {
+        gsap.to(cover.querySelector(".videoembed"), 0.5, {
+          scale: 1,
+          ease: "power2.out",
+        });
+      });
+    });
   }
   casestudy_open();
   microinteractions();
