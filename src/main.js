@@ -237,11 +237,11 @@ function resetScroll() {
 
 function pageTransition() {
   let lenis = new Lenis({
-    lerp: 0.1,
-    duration: 0.7,
+    lerp: 0.5,
+    duration: 1.5,
     smoothWheel: true,
     smoothTouch: false,
-    wheelMultiplier: 0.55,
+    wheelMultiplier: 1,
     touchMultiplier: 0.4,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   });
