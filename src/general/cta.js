@@ -89,6 +89,37 @@ function cta() {
       });
     });
   }
+  function btn() {
+    const link = document.querySelectorAll(".btn");
+    link.forEach((a) => {
+      const linkwidth = a.getBoundingClientRect().width;
+      a.addEventListener("mouseover", () => {
+        gsap.to(a, {
+          duration: 0.5,
+          ease: "power2.inOut",
+          width: linkwidth + 50,
+        });
+        gsap.to(a.querySelector(".btn__orange"), {
+          duration: 0.5,
+          ease: "power2.inOut",
+          yPercent: -100,
+        });
+      });
+      a.addEventListener("mouseout", () => {
+        gsap.to(a, {
+          duration: 0.5,
+          ease: "power2.inOut",
+          width: "auto",
+        });
+        gsap.to(a.querySelector(".btn__orange"), {
+          duration: 0.5,
+          ease: "power2.inOut",
+          yPercent: 0,
+        });
+      });
+    });
+  }
+  btn();
   casestudy_open();
   microinteractions();
   cursor();
