@@ -48,20 +48,22 @@ function preloader() {
           sessionStorage.setItem("animationPlayed", "true");
         },
       })
-      .fromTo(
-        intro.querySelectorAll(".word"),
-        1.2,
-        { yPercent: 100 },
-        {
-          yPercent: 0,
-          ease: "Power3.easeOut",
-          stagger: {
-            amount: 0.8,
-            from: "center",
-          },
-          delay: -0.5
-        }
-      );
+      if(intro){
+        tlEnd.fromTo(
+          intro.querySelectorAll(".word"),
+          1.2,
+          { yPercent: 100 },
+          {
+            yPercent: 0,
+            ease: "Power3.easeOut",
+            stagger: {
+              amount: 0.8,
+              from: "center",
+            },
+            delay: -0.5
+          }
+        );
+      }
   }
 }
 export default preloader;

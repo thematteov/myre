@@ -10,7 +10,7 @@ import initabout from "./pages/about";
 import SplitType from "split-type";
 import preloader from "./general/preloader";
 import three from "./general/postprocessing";
-three();
+import product from "./pages/product";
 preloader();
 function isMobile() {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
@@ -50,13 +50,13 @@ function split() {
     });
     tl.fromTo(
       value.querySelectorAll(".word"),
-      1.2,
+      1,
       { yPercent: 100 },
       {
         yPercent: 0,
         ease: "Power3.easeOut",
         stagger: {
-          amount: 0.8,
+          amount: 0.5,
           from: "random",
         },
       }
@@ -208,11 +208,6 @@ async function pagetranOut(next) {
   });
 }
 
-function reinitializeWebflow() {
-  Webflow.ready(); // Re-trigger Webflow ready event
-  Webflow.require("ix2").init(); // Reinitialize interactions
-}
-
 function reattachFormSubmitHandler() {
   const form = document.querySelector("form");
   if (form) {
@@ -270,11 +265,11 @@ function pageTransition() {
         },
         async enter() {
           reinitializeGeneral();
-          reinitializeWebflow();
+          reattachFormSubmitHandler();
         },
         async once() {
           reinitializeGeneral();
-          reinitializeWebflow();
+          reattachFormSubmitHandler();
         },
       },
     ],
@@ -315,6 +310,25 @@ function pageTransition() {
           ScrollTrigger.refresh();
           setTimeout(() => {
             initProject();
+            ScrollTrigger.refresh();
+            // console.clear();
+          }, 1);
+        },
+        beforeEnter() {
+          menu();
+          resetScroll();
+        },
+      },
+      {
+        namespace: "product",
+        before() {
+          Webflow.ready();
+          Webflow.require("ix2").init();
+        },
+        afterEnter() {
+          ScrollTrigger.refresh();
+          setTimeout(() => {
+            product();
             ScrollTrigger.refresh();
             // console.clear();
           }, 1);
