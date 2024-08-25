@@ -29,7 +29,7 @@ function three() {
 
     const geometry = new THREE.BoxGeometry(window.innerWidth, window.innerHeight, 1);
     const material = new THREE.MeshBasicMaterial({
-      color: 0xFFFAF6,
+      color: 0xfcf6f2,
       wireframe: false,
     });
     const mesh = new THREE.Mesh(geometry, material);

@@ -47,15 +47,51 @@ function initHome() {
   });
 
   function availability() {
-    gsap.to(".availability__scale", {
-      scale: 2.5,
-      duration: 1.2,
-      opacity: 0,
-      delay: 0.3,
-      repeat: -1,
-      ease: "power2.inOut",
+    document.querySelectorAll(".availability").forEach((el) => {
+      gsap.to(el.querySelector(".availability__scale"), {
+        scale: 2.5,
+        duration: 1.2,
+        opacity: 0,
+        delay: 0.3,
+        repeat: -1,
+        ease: "power2.inOut",
+      });
     });
   }
+  function switchpackage() {
+    let switchbtn = document.querySelector(".switchpackage");
+    let switchcounter = 1;
+    switchbtn.addEventListener("click", () => {
+      if (switchcounter === 1) {
+        switchcounter = 2;
+        gsap.to(".switchcube", {
+          left: "100%",
+          xPercent: -100,
+          duration: 0.5,
+          ease: "power2.inOut",
+        });
+        gsap.to(".buy__card", {
+          yPercent: -100,
+          duration: 1.2,
+          ease: "power2.inOut",
+        });
+      } else if (switchcounter === 2) {
+        switchcounter = 1;
+        gsap.to(".switchcube", {
+          left: "0%",
+          xPercent: 0,
+          duration: 0.5,
+          ease: "power2.inOut",
+        });
+        gsap.to(".buy__card", {
+          yPercent: 0,
+          duration: 1.2,
+          ease: "power2.inOut",
+        });
+      }
+    });
+  }
+  switchpackage();
   availability();
 }
 gsap.registerPlugin(ScrollTrigger);
