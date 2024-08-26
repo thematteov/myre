@@ -115,7 +115,6 @@ function initHome() {
   }
   switchpackage();
   availability();
-  bouncycube();
 }
 gsap.registerPlugin(ScrollTrigger);
 export default initHome;
