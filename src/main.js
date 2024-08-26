@@ -44,7 +44,7 @@ function split() {
       scrollTrigger: {
         trigger: value,
         start: "top bottom-=15%",
-        toggleActions: "play none none reset",
+        toggleActions: "play none none reverse",
         markers: false,
       },
     });
