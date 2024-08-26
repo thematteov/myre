@@ -50,7 +50,7 @@ function initHome() {
     document.querySelectorAll(".availability").forEach((el) => {
       gsap.to(el.querySelector(".availability__scale"), {
         scale: 2.5,
-        duration: 1.2,
+        duration: 2,
         opacity: 0,
         delay: 0.3,
         repeat: -1,
@@ -75,6 +75,11 @@ function initHome() {
           duration: 1.2,
           ease: "power2.inOut",
         });
+        gsap.to(".availability", {
+          yPercent: -100,
+          duration: 1.2,
+          ease: "power2.inOut",
+        });
       } else if (switchcounter === 2) {
         switchcounter = 1;
         gsap.to(".switchcube", {
@@ -88,11 +93,17 @@ function initHome() {
           duration: 1.2,
           ease: "power2.inOut",
         });
+        gsap.to(".availability", {
+          yPercent: 0,
+          duration: 1.2,
+          ease: "power2.inOut",
+        });
       }
     });
   }
   switchpackage();
   availability();
+  bouncycube();
 }
 gsap.registerPlugin(ScrollTrigger);
 export default initHome;

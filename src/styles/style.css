@@ -72,18 +72,3 @@ body{
   position: relative;
   display: inline-block;
 }
-
-.backtotopcircle{
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.arrowtop{
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.pg{
-  transform: translate3d(0, 0, 0);
-  will-change: transform;
-}

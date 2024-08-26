@@ -40,33 +40,43 @@ function cta() {
   }
   function microinteractions() {
     let links = document.querySelectorAll(".a");
-    let width = document
-      .querySelector(".ctaindicatorblack")
-      .getBoundingClientRect().width;
     links.forEach((link) => {
       link.addEventListener("mouseenter", () => {
-        gsap.fromTo(
-          link.querySelector(".ctaindicatororange"),
-          0.5,
-          { yPercent: -100 },
-          {
-            yPercent: 100,
-            ease: "power3.out",
-          }
-        );
-        gsap.to(link.querySelector(".ctaindicatorblack"), 0.5, {
-          width: "3em",
-          ease: "power3.out",
+        gsap.to(link.querySelector(".ctaindicatororange"), {
+          scaleX: 1.5,
+          duration: 0.2,
+          ease: "power1.out",
+        });
+        gsap.to(link.querySelector(".ctaindicatororange"), {
+          left: "100%",
+          xPercent: -100,
+          duration: 0.5,
+          ease: "power2.inOut",
+        });
+        gsap.to(link.querySelector(".ctaindicatororange"), {
+          scaleX: 1,
+          duration: 0.5,
+          delay: 0.2,
+          ease: "power1.out",
         });
       });
       link.addEventListener("mouseleave", () => {
-        gsap.to(link.querySelector(".ctaindicatororange"), 0.5, {
-          yPercent: 200,
-          ease: "power3.out",
+        gsap.to(link.querySelector(".ctaindicatororange"), {
+          scaleX: 1.5,
+          duration: 0.2,
+          ease: "power1.out",
         });
-        gsap.to(link.querySelector(".ctaindicatorblack"), 0.5, {
-          width: width,
-          ease: "power3.out",
+        gsap.to(link.querySelector(".ctaindicatororange"), {
+          left: "0%",
+          xPercent: 0,
+          duration: 0.5,
+          ease: "power2.inOut",
+        });
+        gsap.to(link.querySelector(".ctaindicatororange"), {
+          scaleX: 1,
+          duration: 0.5,
+          delay: 0.2,
+          ease: "power1.out",
         });
       });
     });
