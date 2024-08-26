@@ -45,6 +45,18 @@ function initHome() {
       toggleActions: "play none none reverse",
     },
   });
+  gsap.from(".awardline", {
+    yPercent: 100,
+    opacity: 0,
+    stagger: 0.08,
+    duration: 0.8,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: ".awards__lines__container",
+      start: "top bottom-=25%",
+      toggleActions: "play none none reverse",
+    },
+  });
 
   function availability() {
     document.querySelectorAll(".availability").forEach((el) => {
