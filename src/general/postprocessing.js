@@ -40,12 +40,12 @@ function three() {
     document.querySelector(".canvas").appendChild(renderer.domElement);
 
     // Grain effect
-    grainEffect = new FilmPass(0.2, true);
+    grainEffect = new FilmPass(0.4, true);
 
     // Vignette effect
     vignetteEffect = new ShaderPass(VignetteShader);
     vignetteEffect.uniforms["offset"].value = 1.; // Adjust to control the vignette spread
-    vignetteEffect.uniforms["darkness"].value = .18; // Adjust to control the vignette darkness
+    vignetteEffect.uniforms["darkness"].value = .4; // Adjust to control the vignette darkness
 
     // Composer for post-processing
     composer = new EffectComposer(renderer);

@@ -92,6 +92,11 @@ function initHome() {
           duration: 1.2,
           ease: "power2.inOut",
         });
+        gsap.to(".website__type__image", {
+          xPercent: 100,
+          duration: 1.2,
+          ease: "power2.inOut",
+        });
       } else if (switchcounter === 2) {
         switchcounter = 1;
         gsap.to(".switchcube", {
@@ -107,6 +112,11 @@ function initHome() {
         });
         gsap.to(".availability", {
           yPercent: 0,
+          duration: 1.2,
+          ease: "power2.inOut",
+        });
+        gsap.to(".website__type__image", {
+          xPercent: 0,
           duration: 1.2,
           ease: "power2.inOut",
         });

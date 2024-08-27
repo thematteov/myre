@@ -51,7 +51,7 @@ function cta() {
           left: "100%",
           xPercent: -100,
           duration: 0.5,
-          ease: "power2.inOut",
+          ease: "power2.out",
         });
         gsap.to(link.querySelector(".ctaindicatororange"), {
           scaleX: 1,
@@ -70,7 +70,7 @@ function cta() {
           left: "0%",
           xPercent: 0,
           duration: 0.5,
-          ease: "power2.inOut",
+          ease: "power2.out",
         });
         gsap.to(link.querySelector(".ctaindicatororange"), {
           scaleX: 1,
