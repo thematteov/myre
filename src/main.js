@@ -344,6 +344,6 @@ function pageTransition() {
 }
 
 pageTransition();
-reattachFormSubmitHandler(); // Initial call to attach form submit handler
+reattachFormSubmitHandler();
 
 gsap.registerPlugin(ScrollTrigger);

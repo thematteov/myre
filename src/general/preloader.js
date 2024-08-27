@@ -2,27 +2,28 @@ import gsap from "gsap";
 import imagesLoaded from "imagesloaded";
 import SplitType from "split-type";
 function preloader() {
+  function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+  }
   let intro = document.querySelector(".intro");
   new SplitType(".intro");
-  var imgLoad = imagesLoaded("img");
-  imgLoad.on("progress", function () {
-    loadProgress();
-  });
-  let images = document.querySelectorAll("img").length,
-    loadedCount = 0,
-    loadingProgress = 0,
-    tlProgress = gsap.timeline({
-      paused: true,
-    });
+  var imgLoad = imagesLoaded(document.querySelectorAll("img"));
 
-  function loadProgress() {
-    let tlanimations = gsap.timeline({
-      onComplete: () => {
-        setTimeout(() => {
-          loadComplete();
-        }, 500);
-      },
-    }); 
+  imgLoad.on("progress", function (instance, image) {
+    let loadedCount = instance.images.filter((img) => img.isLoaded).length;
+    let totalCount = instance.images.length;
+    let loadingProgress = loadedCount / totalCount;
+    document.querySelector(".p__preloader").innerHTML =
+      loadingProgress * 100 + "%";
+  });
+
+  imgLoad.on("always", function (instance) {
+    loadComplete();
+  });
+  function loadComplete() {
+    let tlanimations = gsap.timeline();
     tlanimations.to(".preloader__changing", 0.4, {
       yPercent: -102,
       ease: "power2.inOut",
@@ -33,28 +34,12 @@ function preloader() {
       ease: "power2.inOut",
       delay: 0.2,
     });
-    gsap.to(tlProgress, 1, {
-      progress: loadingProgress,
-      ease: "Power3.easeInOut",
-    });
-  }
-  loadedCount++;
-
-  loadingProgress = loadedCount / images;
-  document.querySelector(".p__preloader").textContent =
-    Math.round(loadingProgress * 1000) + "%";
-
-  function loadComplete() {
-    var tlEnd = gsap.timeline();
-    tlEnd.to(".preloader", 1.1, {
+    tlanimations.to(".preloader", 1.1, {
       yPercent: -100,
       ease: "power2.inOut",
-      onComplete: function () {
-        sessionStorage.setItem("animationPlayed", "true");
-      },
     });
     if (intro) {
-      tlEnd.fromTo(
+      tlanimations.fromTo(
         intro.querySelectorAll(".word"),
         1.2,
         { yPercent: 100 },

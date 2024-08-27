@@ -124,17 +124,13 @@ function initHome() {
     });
   }
   function homeimages() {
-
-    // Create a timeline for the animation
-    const tl = gsap.timeline({ repeat: -1, repeatDelay: 0 }); // Infinite loop with yoyo effect
-
-    // Add staggered animation to the timeline
-    tl.to('.hr__image', {
+    const tl = gsap.timeline({ repeat: -1, repeatDelay: 0 });
+    tl.to(".hr__image", {
       opacity: 0,
       duration: 0,
       stagger: -0.4,
       ease: "power1.inOut",
-    }).to('.hr__image', {
+    }).to(".hr__image", {
       opacity: 1,
       duration: 0,
       stagger: 0.4,
