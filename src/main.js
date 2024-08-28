@@ -18,7 +18,11 @@ function isMobile() {
     navigator.userAgent
   );
 }
-
+if (isMobile) {
+  ScrollTrigger.config({
+    autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
+  });
+}
 function split() {
   const videos = document.querySelectorAll("video");
   videos.forEach((video) => video.play());
