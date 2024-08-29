@@ -2,6 +2,11 @@ import "../styles/style.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap/src";
 function initHome() {
+  function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+  }
   let homearchiveimg = document.querySelectorAll(".homearchiveimg");
 
   homearchiveimg.forEach((p, i) => {
@@ -146,7 +151,10 @@ function initHome() {
       pinSpacing: false,
     });
   }
-  process();
+  if (isMobile()) {
+  } else {
+    process();
+  }
   homeimages();
   switchpackage();
   availability();

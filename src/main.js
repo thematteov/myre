@@ -18,7 +18,7 @@ function isMobile() {
     navigator.userAgent
   );
 }
-if (isMobile) {
+if (isMobile()) {
   ScrollTrigger.config({
     autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
   });
