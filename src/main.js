@@ -9,9 +9,7 @@ import { gsap } from "gsap/src";
 import initabout from "./pages/about";
 import SplitType from "split-type";
 import preloader from "./general/preloader";
-import three from "./general/postprocessing";
 import product from "./pages/product";
-three();
 preloader();
 function isMobile() {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
