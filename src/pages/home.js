@@ -137,6 +137,16 @@ function initHome() {
       ease: "power1.inOut",
     });
   }
+  function process() {
+    ScrollTrigger.create({
+      trigger: ".process__steps__right",
+      pin: ".benefits__title",
+      start: "top top+=5%",
+      end: "bottom center",
+      pinSpacing: false,
+    });
+  }
+  process();
   homeimages();
   switchpackage();
   availability();
