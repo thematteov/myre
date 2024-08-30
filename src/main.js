@@ -35,6 +35,7 @@ function split() {
     const wrapper = document.createElement("span");
     wrapper.className = "line-wrapper";
     wrapper.style.overflowY = "hidden";
+    wrapper.style.perspective = "1000px";
     element.parentNode.replaceChild(wrapper, element);
     wrapper.appendChild(element);
   });
@@ -54,14 +55,12 @@ function split() {
     tl.fromTo(
       value.querySelectorAll(".word"),
       1,
-      { yPercent: 100 },
+      { yPercent: 100, rotationX: -90 },
       {
         yPercent: 0,
+        rotationX: 0,
         ease: "Power3.easeOut",
-        stagger: {
-          amount: 0.5,
-          from: "random",
-        },
+        stagger: 0.03,
       }
     );
   });
@@ -81,6 +80,7 @@ function splitMOBILE() {
     const wrapper = document.createElement("span");
     wrapper.className = "line-wrapper";
     wrapper.style.overflowY = "hidden";
+    wrapper.style.perspective = "1000px";
     element.parentNode.replaceChild(wrapper, element);
     wrapper.appendChild(element);
   });
@@ -100,11 +100,12 @@ function splitMOBILE() {
     tl.fromTo(
       value.querySelectorAll(".word"),
       0.8,
-      { yPercent: 100 },
+      { yPercent: 100, rotationX: -90 },
       {
         yPercent: 0,
+        rotationX: 0,
         ease: "Power3.easeOut",
-        stagger: 0.05,
+        stagger: 0.03,
       }
     );
   });

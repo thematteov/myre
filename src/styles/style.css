@@ -1,10 +1,11 @@
-.pagewrapper{
+.pagewrapper {
   overflow-x: hidden;
 }
-.splide__pagination{
+.splide__pagination {
   display: none;
 }
-::-moz-selection { /* Code for Firefox */
+::-moz-selection {
+  /* Code for Firefox */
   color: #1a1a1a;
   background: #d23503;
 }
@@ -13,32 +14,31 @@
   color: #1a1a1a;
   background: #d23503;
 }
-.formkit-form{
-  background-color: rgba(227,224,219,0) !important;
+.formkit-form {
+  background-color: rgba(227, 224, 219, 0) !important;
   border: 0px !important;
   max-width: none !important;
 }
-.formkit-header{
+.formkit-header {
   display: none;
 }
-.formkit-subheader{
+.formkit-subheader {
   display: none;
 }
-[data-style="minimal"]{
-  padding: 0!important;
-  margin: 0!important;
-  
+[data-style="minimal"] {
+  padding: 0 !important;
+  margin: 0 !important;
 }
-.formkit-powered-by-convertkit-container{
+.formkit-powered-by-convertkit-container {
   display: none !important;
 }
-.formkit-guarantee{
+.formkit-guarantee {
   display: none;
 }
 
 /* inteirordesign */
 
-body{
+body {
   overflow-x: hidden;
   width: 100vw;
 }
@@ -46,29 +46,35 @@ body{
 ::-webkit-scrollbar {
   width: 0px;
 }
-.char, .word, .line{
+.char,
+.word,
+.line {
   position: relative;
   font-kerning: none;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
-.ih1 .line__wrapper, .char__wrapper{
+.ih1 .line__wrapper,
+.char__wrapper {
+  position: relative;
+  display: inline-block;
+  perspective: 1000px;
+}
+.line__wrapper,
+.char__wrapper {
   position: relative;
   display: inline-block;
   /* overflow: hidden; */
 }
-.line__wrapper, .char__wrapper{
+.ih1 .char__wrapper {
   position: relative;
   display: inline-block;
   /* overflow: hidden; */
 }
-.ih1 .char__wrapper{
-  position: relative;
-  display: inline-block;
-  /* overflow: hidden; */
-}
-.icursor{
+.icursor {
   pointer-events: none;
 }
-.char{
+.char {
   position: relative;
   display: inline-block;
 }
