@@ -1,41 +1,35 @@
 import "../styles/style.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { gsap } from "gsap/src";
+import { gsap } from "gsap";
+import splits from "../general/textsplit";
 function initHome() {
   function isMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent
     );
   }
-  let homearchiveimg = document.querySelectorAll(".homearchiveimg");
+  let benefits__trackwidth = document
+    .querySelector(".benefits__flex")
+    .getBoundingClientRect().width;
 
-  homearchiveimg.forEach((p, i) => {
-    gsap.to(p, {
-      yPercent: -20,
-      ease: "none",
+  function benefits() {
+    let tl = gsap.timeline({
       scrollTrigger: {
-        trigger: p,
-        start: "top bottom",
-        end: "bottom top",
+        trigger: ".benefits__container",
+        start: "center center",
+        end: `center center-=${benefits__trackwidth + window.innerWidth * 0.5}`,
         scrub: true,
+        pin: ".benefits__section",
+        pinSpacing: true,
       },
-    });
-  });
-  let latestclients = document.querySelectorAll(".pg");
-
-  latestclients.forEach((p, i) => {
-    gsap.to(p, {
-      yPercent: -60 * (i + 1),
       ease: "none",
-      scrollTrigger: {
-        trigger: ".clients",
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-        invalidateOnRefresh: true,
-      },
     });
-  });
+    tl.to(".body", { opacity: 1, duration: 0.1 });
+    tl.to(".benefits__flex", {
+      x: () => -(benefits__trackwidth - window.innerWidth * 0.6),
+    });
+    tl.to(".body", { opacity: 1, duration: 0.2 });
+  }
 
   //////////PROJECTS//////////
   gsap.from(".case", {
@@ -45,8 +39,8 @@ function initHome() {
     duration: 1.2,
     ease: "power2.out",
     scrollTrigger: {
-      trigger: ".works_section",
-      start: "top bottom-=25%",
+      trigger: ".prjcll",
+      start: "top bottom-=10%",
       toggleActions: "play none none reverse",
     },
   });
@@ -153,11 +147,14 @@ function initHome() {
   }
   if (isMobile()) {
   } else {
+    benefits();
     process();
   }
+  benefits();
   homeimages();
   switchpackage();
   availability();
+  splits();
 }
 gsap.registerPlugin(ScrollTrigger);
 export default initHome;

@@ -1,3 +1,22 @@
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
 .pagewrapper {
   overflow-x: hidden;
 }
@@ -53,6 +72,34 @@ body {
   font-kerning: none;
   transform-style: preserve-3d;
   backface-visibility: hidden;
+}
+.preloader {
+  display: flex;
+}
+.page__transition {
+  display: flex;
+}
+.line-wrapper {
+  margin-top: -0.15em;
+  margin-bottom: -0.15em;
+  display: inline-block;
+  overflow-y: hidden;
+}
+.word {
+  display: inline-block;
+}
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.cursor {
+  pointer-events: none;
+  transform: translate(-50%, 0%);
+}
+.cursor__ball {
+  pointer-events: none;
+  transform: translate(-50%, -50%);
 }
 .ih1 .line__wrapper,
 .char__wrapper {
