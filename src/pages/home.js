@@ -26,7 +26,7 @@ function initHome() {
     });
     tl.to(".body", { opacity: 1, duration: 0.1 });
     tl.to(".benefits__flex", {
-      x: () => -(benefits__trackwidth - window.innerWidth * 0.6),
+      x: () => -(benefits__trackwidth - window.innerWidth * 0.5),
     });
     tl.to(".body", { opacity: 1, duration: 0.2 });
   }
