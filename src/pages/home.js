@@ -150,7 +150,6 @@ function initHome() {
     benefits();
     process();
   }
-  benefits();
   homeimages();
   switchpackage();
   availability();

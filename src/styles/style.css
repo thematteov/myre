@@ -81,7 +81,7 @@ body {
 }
 .line-wrapper {
   margin-top: -0.15em;
-  margin-bottom: -0.15em;
+  margin-bottom: 0.15em;
   display: inline-block;
   overflow-y: hidden;
 }
@@ -111,6 +111,7 @@ body {
 .char__wrapper {
   position: relative;
   display: inline-block;
+  padding-bottom: 0.1em;
   /* overflow: hidden; */
 }
 .ih1 .char__wrapper {
