@@ -45,8 +45,6 @@ html.lenis {
   border-radius: 50vw !important;
   background-color: #1a1a1a !important;
 }
-.formkit-field {
-}
 .formkit-header {
   display: none;
 }
@@ -93,6 +91,11 @@ body {
   margin-bottom: 0.15em;
   display: inline-block;
   overflow-y: hidden;
+}
+@media only screen and (max-width: 768px) {
+  .line-wrapper {
+    margin-bottom: 0em;
+  }
 }
 .word {
   display: inline-block;
