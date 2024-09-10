@@ -30,11 +30,6 @@ html.lenis {
   color: #1a1a1a;
   background: #d23503;
 }
-.formkit-form {
-  background-color: rgba(227, 224, 219, 0) !important;
-  border: 0px !important;
-  max-width: none !important;
-}
 .formkit-input {
   width: 100% !important;
   background-color: #e5e5e3 !important;
@@ -46,7 +41,6 @@ html.lenis {
 .formkit-form[data-uid="b2dbe2bf00"] .formkit-field,
 .formkit-form[data-uid="b2dbe2bf00"] .formkit-submit {
   flex: auto !important;
-  margin: 0 !important;
   width: 50% !important;
   border-radius: 50vw !important;
   background-color: #1a1a1a !important;
