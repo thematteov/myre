@@ -20,9 +20,6 @@ html.lenis {
 .pagewrapper {
   overflow-x: hidden;
 }
-.splide__pagination {
-  display: none;
-}
 ::-moz-selection {
   /* Code for Firefox */
   color: #1a1a1a;
@@ -37,6 +34,24 @@ html.lenis {
   background-color: rgba(227, 224, 219, 0) !important;
   border: 0px !important;
   max-width: none !important;
+}
+.formkit-input {
+  width: 100% !important;
+  background-color: #e5e5e3 !important;
+  border-bottom: 1px solid #d23503 !important;
+  border-top: 0px solid #d23503 !important;
+  border-left: 0px solid #d23503 !important;
+  border-right: 0px solid #d23503 !important;
+}
+.formkit-form[data-uid="b2dbe2bf00"] .formkit-field,
+.formkit-form[data-uid="b2dbe2bf00"] .formkit-submit {
+  flex: auto !important;
+  margin: 0 !important;
+  width: 50% !important;
+  border-radius: 50vw !important;
+  background-color: #1a1a1a !important;
+}
+.formkit-field {
 }
 .formkit-header {
   display: none;
