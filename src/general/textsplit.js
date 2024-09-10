@@ -36,19 +36,18 @@ function splits() {
         scrollTrigger: {
           trigger: value,
           start: "top bottom-=15%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play reverse play reverse",
           markers: false,
         },
       });
       tl.fromTo(
-        value.querySelectorAll(".word"),
-        1,
-        { yPercent: 100, rotationX: -90 },
+        value.querySelectorAll(".line"),
+        0.5,
+        { yPercent: 100 },
         {
           yPercent: 0,
-          rotationX: 0,
           ease: "Power3.easeOut",
-          stagger: 0.03,
+          stagger: 0.1,
         }
       );
     });

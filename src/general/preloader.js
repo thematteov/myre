@@ -39,6 +39,20 @@ function preloader() {
           delay: -0.5,
         }
       );
+      tlanimations.fromTo(
+        '.hr__image',
+        1.5,
+        { yPercent: -120},
+        {
+          yPercent: 0,
+          ease: "Power2.easeOut",
+          stagger: {
+            amount: 0.2,
+            from: 'center'
+          },
+          delay: -0.7,
+        }
+      );
     }
   }
 }

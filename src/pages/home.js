@@ -58,7 +58,6 @@ function initHome() {
   });
   gsap.to(".herosection", {
     scale: 0.9,
-    opacity: 0.6,
     transformOrigin: "top center",
     scrollTrigger: {
       trigger: ".brand__case__studies",
@@ -66,6 +65,15 @@ function initHome() {
       end: "top top",
       pin: ".herosection",
       pinSpacing: false,
+      scrub: true,
+    },
+  });
+  gsap.to(".hero__images", {
+    xPercent: -10,
+    scrollTrigger: {
+      trigger: ".brand__case__studies",
+      start: "top bottom+=21%",
+      end: "top top-=100%",
       scrub: true,
     },
   });
@@ -99,11 +107,6 @@ function initHome() {
           duration: 1.2,
           ease: "power2.inOut",
         });
-        gsap.to(".availability", {
-          yPercent: -100,
-          duration: 1.2,
-          ease: "power2.inOut",
-        });
         gsap.to(".website__type__image", {
           xPercent: 100,
           duration: 1.2,
@@ -122,31 +125,12 @@ function initHome() {
           duration: 1.2,
           ease: "power2.inOut",
         });
-        gsap.to(".availability", {
-          yPercent: 0,
-          duration: 1.2,
-          ease: "power2.inOut",
-        });
         gsap.to(".website__type__image", {
           xPercent: 0,
           duration: 1.2,
           ease: "power2.inOut",
         });
       }
-    });
-  }
-  function homeimages() {
-    const tl = gsap.timeline({ repeat: -1, repeatDelay: 0 });
-    tl.to(".hr__image", {
-      opacity: 0,
-      duration: 0,
-      stagger: -0.4,
-      ease: "power1.inOut",
-    }).to(".hr__image", {
-      opacity: 1,
-      duration: 0,
-      stagger: 0.4,
-      ease: "power1.inOut",
     });
   }
   function process() {
@@ -163,7 +147,6 @@ function initHome() {
     benefits();
     process();
   }
-  homeimages();
   switchpackage();
   availability();
   splits();
