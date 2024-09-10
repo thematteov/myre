@@ -33,9 +33,9 @@ function initHome() {
 
   //////////PROJECTS//////////
   gsap.from(".case", {
-    yPercent: -50,
+    scale: 0.6,
     opacity: 0,
-    stagger: 0.1,
+    stagger: 0.2,
     duration: 1.2,
     ease: "power2.out",
     scrollTrigger: {
@@ -54,6 +54,19 @@ function initHome() {
       trigger: ".awards__lines__container",
       start: "top bottom-=25%",
       toggleActions: "play none none reverse",
+    },
+  });
+  gsap.to(".herosection", {
+    scale: 0.9,
+    opacity: 0.6,
+    transformOrigin: "top center",
+    scrollTrigger: {
+      trigger: ".brand__case__studies",
+      start: "top bottom+=21%",
+      end: "top top",
+      pin: ".herosection",
+      pinSpacing: false,
+      scrub: true,
     },
   });
 

@@ -19,11 +19,12 @@ function preloader() {
     tlanimations.to(".preloader__changing", 0.4, {
       yPercent: -198,
       ease: "power2.inOut",
-      delay: 0.2,
+      delay: 0.4,
     });
     tlanimations.to(".preloader", 1.1, {
       yPercent: -100,
       ease: "power2.inOut",
+      delay: 0.4
     });
     if (intro) {
       tlanimations.fromTo(
