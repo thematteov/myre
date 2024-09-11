@@ -1,6 +1,8 @@
 import gsap from "gsap";
 import imagesLoaded from "imagesloaded";
 import SplitType from "split-type";
+import { CustomEase } from "gsap/all";
+gsap.registerPlugin(CustomEase)
 function preloader() {
   let intro = document.querySelector(".intro");
   new SplitType(".intro");
@@ -11,47 +13,45 @@ function preloader() {
   });
   function loadComplete() {
     let tlanimations = gsap.timeline();
-    tlanimations.to(".preloader__changing", 0.4, {
+    tlanimations.to(".preloader__changing", 0.8, {
       yPercent: -102,
-      ease: "power2.inOut",
+      ease: "power3.inOut",
       delay: 1,
     });
-    tlanimations.to(".preloader__changing", 0.4, {
+    tlanimations.to(".preloader__changing", 0.8, {
       yPercent: -198,
-      ease: "power2.inOut",
-      delay: 0.4,
+      ease: "power3.inOut",
+
     });
-    tlanimations.to(".preloader", 1.1, {
+    tlanimations.to(".preloader", 1.5, {
       yPercent: -100,
-      ease: "power2.inOut",
-      delay: 0.4
+      ease: "power3.inOut",
+
     });
     if (intro) {
       tlanimations.fromTo(
-        intro.querySelectorAll(".word"),
-        1.2,
-        { yPercent: 100, rotationX: -90 },
-        {
-          yPercent: 0,
-          rotationX: 0,
-          ease: "Power3.easeOut",
-          stagger: 0.05,
-          delay: -0.5,
-        }
-      );
-      tlanimations.fromTo(
         '.hr__image',
-        1.5,
-        { yPercent: -120},
+        2.4,
+        { yPercent: 120},
         {
           yPercent: 0,
-          ease: "Power2.easeOut",
+          ease: "power3.inOut",
           stagger: {
             amount: 0.2,
             from: 'center'
           },
-          delay: -0.7,
-        }
+        }, "-=1.5"
+      );
+      tlanimations.fromTo(
+        intro.querySelectorAll(".word"),
+        1.6,
+        { yPercent: 100, rotationX: -90 },
+        {
+          yPercent: 0,
+          rotationX: 0,
+          ease: "power3.inOut",
+          stagger: 0.05,
+        }, "-=1.4"
       );
     }
   }

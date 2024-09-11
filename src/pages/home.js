@@ -33,26 +33,14 @@ function initHome() {
 
   //////////PROJECTS//////////
   gsap.from(".case", {
-    scale: 0.6,
+    scale: 0.8,
     opacity: 0,
     stagger: 0.2,
-    duration: 1.2,
+    duration: 1.4,
     ease: "power2.out",
     scrollTrigger: {
       trigger: ".prjcll",
       start: "top bottom-=10%",
-      toggleActions: "play none none reverse",
-    },
-  });
-  gsap.from(".awardline", {
-    yPercent: 100,
-    opacity: 0,
-    stagger: 0.08,
-    duration: 0.8,
-    ease: "power2.out",
-    scrollTrigger: {
-      trigger: ".awards__lines__container",
-      start: "top bottom-=25%",
       toggleActions: "play none none reverse",
     },
   });
@@ -61,7 +49,7 @@ function initHome() {
     transformOrigin: "top center",
     scrollTrigger: {
       trigger: ".brand__case__studies",
-      start: "top bottom+=21%",
+      start: "top bottom",
       end: "top top",
       pin: ".herosection",
       pinSpacing: false,
@@ -72,7 +60,7 @@ function initHome() {
     xPercent: -10,
     scrollTrigger: {
       trigger: ".brand__case__studies",
-      start: "top bottom+=21%",
+      start: "top bottom",
       end: "top top-=100%",
       scrub: true,
     },
@@ -86,7 +74,7 @@ function initHome() {
         opacity: 0,
         delay: 0.3,
         repeat: -1,
-        ease: "power2.inOut",
+        ease: "power3.inOut",
       });
     });
   }
@@ -100,17 +88,17 @@ function initHome() {
           left: "100%",
           xPercent: -100,
           duration: 0.5,
-          ease: "power2.inOut",
+          ease: "power3.inOut",
         });
         gsap.to(".buy__card", {
           yPercent: -100,
-          duration: 1.2,
-          ease: "power2.inOut",
+          duration: 1.4 ,
+          ease: "power3.inOut",
         });
         gsap.to(".website__type__image", {
           xPercent: 100,
-          duration: 1.2,
-          ease: "power2.inOut",
+          duration: 1.4 ,
+          ease: "power3.inOut",
         });
       } else if (switchcounter === 2) {
         switchcounter = 1;
@@ -118,17 +106,17 @@ function initHome() {
           left: "0%",
           xPercent: 0,
           duration: 0.5,
-          ease: "power2.inOut",
+          ease: "power3.inOut",
         });
         gsap.to(".buy__card", {
           yPercent: 0,
-          duration: 1.2,
-          ease: "power2.inOut",
+          duration: 1.4,
+          ease: "power3.inOut",
         });
         gsap.to(".website__type__image", {
           xPercent: 0,
-          duration: 1.2,
-          ease: "power2.inOut",
+          duration: 1.4,
+          ease: "power3.inOut",
         });
       }
     });
