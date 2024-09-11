@@ -151,7 +151,7 @@ body {
     margin-bottom: 0em;
   }
   .p {
-    font-size: calc(17* var(--unit-fxmobile));
+    font-size: calc(19* var(--unit-fxmobile));
   }
   .h2 {
     font-size: calc(64 * var(--unit-fxmobile));
