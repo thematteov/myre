@@ -154,6 +154,6 @@ body {
     font-size: calc(17* var(--unit-fxmobile));
   }
   .h2 {
-    font-size: calc(128 * var(--unit-fx));
+    font-size: calc(64 * var(--unit-fxmobile));
   }
 }
