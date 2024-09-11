@@ -28,7 +28,7 @@ function initHome() {
     tl.to(".benefits__flex", {
       x: () => -(benefits__trackwidth - window.innerWidth * 0.5),
     });
-    tl.to(".body", { opacity: 1, duration: 0.2 });
+    tl.to(".body", { opacity: 1, duration: 0.1 });
   }
 
   //////////PROJECTS//////////
@@ -56,8 +56,8 @@ function initHome() {
       scrub: true,
     },
   });
-  gsap.to(".hero__images", {
-    xPercent: -10,
+  gsap.to(".hr__image", {
+    x: '-8vw',
     scrollTrigger: {
       trigger: ".brand__case__studies",
       start: "top bottom",
