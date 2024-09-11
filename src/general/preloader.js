@@ -14,12 +14,12 @@ function preloader() {
   function loadComplete() {
     let tlanimations = gsap.timeline();
     tlanimations.to(".preloader__changing", 0.8, {
-      yPercent: -102,
+      yPercent: -98,
       ease: "power3.inOut",
       delay: 1,
     });
     tlanimations.to(".preloader__changing", 0.8, {
-      yPercent: -198,
+      yPercent: -200,
       ease: "power3.inOut",
 
     });
@@ -32,15 +32,18 @@ function preloader() {
       tlanimations.fromTo(
         '.hr__image',
         2.4,
-        { yPercent: 120},
+        { yPercent: 120,
+          opacity: 0
+        },
         {
           yPercent: 0,
+          opacity: 1,
           ease: "power3.inOut",
           stagger: {
             amount: 0.2,
             from: 'center'
           },
-        }, "-=1.5"
+        }, "-=1.8"
       );
       tlanimations.fromTo(
         intro.querySelectorAll(".word"),

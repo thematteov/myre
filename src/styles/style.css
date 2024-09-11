@@ -94,6 +94,9 @@ body {
 .preloader {
   display: flex;
 }
+.hero__images {
+  overflow-y: hidden;
+}
 .page__transition {
   display: flex;
 }
