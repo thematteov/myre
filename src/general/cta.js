@@ -35,7 +35,7 @@ function cta() {
     window.addEventListener("mousemove", (e) => {
       let X = e.clientX;
       let Y = e.clientY;
-      gsap.to(cursor, 0.5, { x: X, y: Y, ease: "Power2.easeOut" });
+      gsap.to(cursor, 0.5, { x: X, y: Y, ease: "Power3.easeOut" });
     });
   }
   function microinteractions() {
@@ -51,7 +51,7 @@ function cta() {
           left: "100%",
           xPercent: -100,
           duration: 0.5,
-          ease: "power2.out",
+          ease: "power3.out",
         });
         gsap.to(link.querySelector(".ctaindicatororange"), {
           scaleX: 1,
@@ -70,7 +70,7 @@ function cta() {
           left: "0%",
           xPercent: 0,
           duration: 0.5,
-          ease: "power2.out",
+          ease: "power3.out",
         });
         gsap.to(link.querySelector(".ctaindicatororange"), {
           scaleX: 1,
@@ -88,47 +88,72 @@ function cta() {
       cover.addEventListener("mouseenter", () => {
         gsap.to(cover.querySelector(".videoembed"), 0.5, {
           opacity: 1,
-          ease: "power2.out",
+          ease: "power3.out",
         });
       });
       cover.addEventListener("mouseleave", () => {
         gsap.to(cover.querySelector(".videoembed"), 0.5, {
           opacity: 0,
-          ease: "power2.out",
+          ease: "power3.out",
         });
       });
     });
   }
   function btn() {
-    const link = document.querySelectorAll(".btn");
-    link.forEach((a) => {
-      const linkwidth = a.getBoundingClientRect().width;
-      a.addEventListener("mouseover", () => {
-        gsap.to(a, {
+    const buttons = document.querySelectorAll(".btninsteraction");
+
+    buttons.forEach((btn) => {
+      const text = btn.querySelector(".p"); // Select the <p> element inside the button
+      let initialPosition = { x: 0, y: 0 };
+
+      // Store the initial position of the text
+      initialPosition.x = text.offsetLeft;
+      initialPosition.y = text.offsetTop;
+      btn.addEventListener("mouseover", () => {
+        gsap.to(btn.querySelector(".btnblack"), {
           duration: 0.5,
-          ease: "power2.inOut",
-          width: linkwidth + 50,
-        });
-        gsap.to(a.querySelector(".btn__orange"), {
-          duration: 0.5,
-          ease: "power2.inOut",
-          yPercent: -100,
+          ease: "power3.inOut",
+          borderRadius: "10vw",
+          filter: "blur(10px)",
         });
       });
-      a.addEventListener("mouseout", () => {
-        gsap.to(a, {
-          duration: 0.5,
-          ease: "power2.inOut",
-          width: "auto",
+      // When hovering over the button
+      btn.addEventListener("mousemove", (e) => {
+        // Calculate the position of the mouse relative to the button
+        const rect = btn.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        // Move the text towards the mouse using GSAP
+        gsap.to(text, {
+          x: (mouseX - initialPosition.x)*0.05,
+          y: (mouseY - initialPosition.y)*0.2,
+          duration: 0.2,
+          ease: "power3.out",
         });
-        gsap.to(a.querySelector(".btn__orange"), {
+      });
+
+      // When the mouse leaves the button
+      btn.addEventListener("mouseout", () => {
+        // Move the text back to its original position
+        gsap.to(text, {
+          x: 0,
+          y: 0,
           duration: 0.5,
-          ease: "power2.inOut",
-          yPercent: 0,
+          ease: "power3.inOut",
+        });
+
+        // Reset any other effects (like the borderRadius and blur)
+        gsap.to(btn.querySelector(".btnblack"), {
+          duration: 0.5,
+          ease: "power3.inOut",
+          borderRadius: "0vw",
+          filter: "blur(0px)",
         });
       });
     });
   }
+
   btn();
   casestudy_open();
   microinteractions();

@@ -37,7 +37,7 @@ function initHome() {
     opacity: 0,
     stagger: 0.2,
     duration: 1.4,
-    ease: "power2.out",
+    ease: "power3.out",
     scrollTrigger: {
       trigger: ".prjcll",
       start: "top bottom-=10%",
@@ -92,12 +92,12 @@ function initHome() {
         });
         gsap.to(".buy__card", {
           yPercent: -100,
-          duration: 1.4 ,
+          duration: 1.4,
           ease: "power3.inOut",
         });
         gsap.to(".website__type__image", {
           xPercent: 100,
-          duration: 1.4 ,
+          duration: 1.4,
           ease: "power3.inOut",
         });
       } else if (switchcounter === 2) {
@@ -138,6 +138,19 @@ function initHome() {
   switchpackage();
   availability();
   splits();
+  gsap.from(".available__seat", {
+    yPercent: -100,
+    duration: 2,
+    opacity: 0,
+    rotateZ: 0,
+    ease: "power3.inOut",
+    scrollTrigger: {
+      trigger: ".mpiko__available__seats",
+      start: "top bottom",
+      end: "top top-=50%",
+      scrub: true
+    },
+  });
 }
 gsap.registerPlugin(ScrollTrigger);
 export default initHome;
