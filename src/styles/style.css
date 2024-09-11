@@ -174,3 +174,25 @@ body {
     font-size: calc(36 * var(--unit-fxmobile));
   }
 }
+@media only screen and (max-width: 1300px) {
+  .line-wrapper {
+    margin-bottom: 0em;
+  }
+  .p {
+    font-size: calc(22* var(--unit-fx));
+  }
+  .h2 {
+    font-size: calc(64 * var(--unit-fx));
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .line-wrapper {
+    margin-bottom: 0em;
+  }
+  .p {
+    font-size: calc(24* var(--unit-fx));
+  }
+  .h2 {
+    font-size: calc(72 * var(--unit-fx));
+  }
+}
