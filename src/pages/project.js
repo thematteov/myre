@@ -1,4 +1,3 @@
-import "../styles/style.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap/src";
 

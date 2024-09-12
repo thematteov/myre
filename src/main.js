@@ -20,29 +20,25 @@ if (isMobile()) {
     autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
   });
 }
-
-function reinitializeGeneral() {
-  gsap.set(".menuwrapper", {
-    display: "none",
-  });
-  cta();
-  let videos = document.querySelectorAll("video");
-
-  if (document.querySelector("video")) {
-    videos.forEach((video) => {
-      video.play();
-    });
-  }
-  splithorizontal();
+function handleScrollTrigger() {
   if (isMobile()) {
     ScrollTrigger.config({
       autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
     });
   } else {
-    window.addEventListener("resize", () => {
-      ScrollTrigger.update();
-    });
+    ScrollTrigger.refresh();
   }
+}
+function reinitializeGeneral() {
+  if (document.querySelector(".menuwrapper")) {
+    gsap.set(".menuwrapper", { display: "none" });
+  }
+  cta();
+  let videos = document.querySelectorAll("video");
+  if (videos.length > 0) {
+    videos.forEach((video) => video.play());
+  }
+  handleScrollTrigger();
 }
 
 async function pagetranIn(current) {
