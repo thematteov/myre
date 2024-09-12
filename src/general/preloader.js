@@ -8,7 +8,7 @@ function preloader() {
   new SplitType(".intro");
   var imgLoad = imagesLoaded(document.querySelectorAll("img"));
 
-  imgLoad.on("always", function (instance) {
+  imgLoad.on("always", function () {
     loadComplete();
   });
   function loadComplete() {

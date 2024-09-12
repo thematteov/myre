@@ -40,11 +40,7 @@ function reinitializeGeneral() {
   }
   handleScrollTrigger();
 }
-function initwebflow() {
-  Webflow.ready();
-  Webflow.require("ix2").init();
-}
-async function pagetranIn(current) {
+async function pagetranIn() {
   return new Promise((resolve) => {
     let tl = gsap.timeline({
       onComplete: resolve,
@@ -65,7 +61,7 @@ async function pagetranIn(current) {
   });
 }
 
-async function pagetranOut(next) {
+async function pagetranOut() {
   return new Promise((resolve) => {
     let tl = gsap.timeline({
       onComplete: resolve,
@@ -163,7 +159,6 @@ function pageTransition() {
           }, 1);
         },
         beforeEnter() {
-          initwebflow()
           menu();
           resetScroll();
         },
@@ -179,7 +174,6 @@ function pageTransition() {
           }, 1);
         },
         beforeEnter() {
-          initwebflow()
           menu();
           resetScroll();
         },
@@ -195,17 +189,12 @@ function pageTransition() {
           }, 1);
         },
         beforeEnter() {
-          initwebflow()
           menu();
           resetScroll();
         },
       },
       {
         namespace: "product",
-        before() {
-          Webflow.ready();
-          Webflow.require("ix2").init();
-        },
         afterEnter() {
           ScrollTrigger.refresh();
           setTimeout(() => {
@@ -215,7 +204,6 @@ function pageTransition() {
           }, 1);
         },
         beforeEnter() {
-          initwebflow()
           menu();
           resetScroll();
         },

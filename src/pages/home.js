@@ -32,18 +32,25 @@ function initHome() {
   }
 
   //////////PROJECTS//////////
-  gsap.from(".case", {
-    scale: 0.8,
-    opacity: 0,
-    stagger: 0.2,
-    duration: 1.4,
-    ease: "power3.out",
-    scrollTrigger: {
-      trigger: ".prjcll",
-      start: "top bottom-=10%",
-      toggleActions: "play none none reverse",
+  gsap.fromTo(
+    ".case",
+    {
+      scale: 0.8,
+      opacity: 0,
     },
-  });
+    {
+      scale: 1,
+      opacity: 1,
+      stagger: 0.2,
+      duration: 1.4,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".homearchiveprj",
+        start: "top bottom-=10%",
+        toggleActions: "play none none reverse",
+      },
+    }
+  );
   gsap.to(".herosection", {
     scale: 0.9,
     transformOrigin: "top center",
@@ -57,7 +64,7 @@ function initHome() {
     },
   });
   gsap.to(".hr__image", {
-    x: '-8vw',
+    x: "-8vw",
     scrollTrigger: {
       trigger: ".brand__case__studies",
       start: "top bottom",
@@ -148,7 +155,7 @@ function initHome() {
       trigger: ".mpiko__available__seats",
       start: "top bottom",
       end: "top top-=50%",
-      scrub: true
+      scrub: true,
     },
   });
 }

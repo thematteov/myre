@@ -1,37 +1,20 @@
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { gsap } from "gsap/src";
+import { ScrollTrigger } from "gsap/all";
+import { gsap } from "gsap/all";
 import splits from "../general/textsplit";
 
 gsap.registerPlugin(ScrollTrigger);
 function initProject() {
-  function imagesTriggers() {
-    let images = gsap.utils.toArray(".project__image");
-
-    images.forEach((el) => {
-      gsap.from(el.querySelector(".case__image__wrapper"), {
-        scale: 0.5,
-        duration: 1.2,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top bottom-=20%",
-          toggleActions: "play none none reverse",
-        },
-      });
-      gsap.from(el.querySelector(".case__image"), {
-        scale: 1.5,
-        duration: 1.2,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top bottom-=10%",
-          toggleActions: "play none none reverse",
-        },
-      });
-    });
-  }
-  splits()
-  imagesTriggers();
+  gsap.to(".prjcover", {
+    yPercent: 10,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: ".prjcovercontainer",
+      start: "top top",
+      end: "bottom top",
+      scrub: true
+    },
+  });
+  splits();
 }
 
 export default initProject;

@@ -15,7 +15,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 .p {
-  font-size: calc(18 * var(--unit-fx));
+  font-size: calc(20 * var(--unit-fx));
 }
 .h2 {
   font-size: calc(64 * var(--unit-fx));
@@ -129,6 +129,12 @@ body {
   display: inline-block;
   overflow-y: hidden;
 }
+.h1 .char__wrapper {
+  margin-top: -0.1em;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.15em;
+}
 .p .line-wrapper {
   display: inline-block;
   overflow-y: hidden;
@@ -137,31 +143,15 @@ body {
   pointer-events: none;
   transform: translate(-50%, 0%);
 }
-.ih1 .line__wrapper,
-.char__wrapper {
-  position: relative;
-  display: inline-block;
-}
 .line__wrapper,
 .char__wrapper {
   position: relative;
   display: inline-block;
 }
-.ih1 .char__wrapper {
-  position: relative;
-  display: inline-block;
-  /* overflow: hidden; */
-}
 .icursor {
   pointer-events: none;
 }
-.char {
-  position: relative;
-  display: inline-block;
-}
-.word {
-  display: inline-block;
-}
+
 .char,
 .word,
 .line {
