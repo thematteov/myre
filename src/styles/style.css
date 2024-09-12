@@ -117,9 +117,19 @@ body {
 .page__transition {
   display: flex;
 }
-.line-wrapper {
+.h2 .line-wrapper {
   margin-top: -0.15em;
   padding-bottom: 0.15em;
+  display: inline-block;
+  overflow-y: hidden;
+}
+.h1 .line-wrapper {
+  margin-top: -0.15em;
+  padding-bottom: 0.15em;
+  display: inline-block;
+  overflow-y: hidden;
+}
+.p .line-wrapper {
   display: inline-block;
   overflow-y: hidden;
 }
@@ -131,14 +141,11 @@ body {
 .char__wrapper {
   position: relative;
   display: inline-block;
-  perspective: 1000px;
 }
 .line__wrapper,
 .char__wrapper {
   position: relative;
   display: inline-block;
-  padding-bottom: 0.1em;
-  /* overflow: hidden; */
 }
 .ih1 .char__wrapper {
   position: relative;

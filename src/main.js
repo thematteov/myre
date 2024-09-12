@@ -40,7 +40,10 @@ function reinitializeGeneral() {
   }
   handleScrollTrigger();
 }
-
+function initwebflow() {
+  Webflow.ready();
+  Webflow.require("ix2").init();
+}
 async function pagetranIn(current) {
   return new Promise((resolve) => {
     let tl = gsap.timeline({
@@ -160,6 +163,7 @@ function pageTransition() {
           }, 1);
         },
         beforeEnter() {
+          initwebflow()
           menu();
           resetScroll();
         },
@@ -175,6 +179,7 @@ function pageTransition() {
           }, 1);
         },
         beforeEnter() {
+          initwebflow()
           menu();
           resetScroll();
         },
@@ -190,6 +195,7 @@ function pageTransition() {
           }, 1);
         },
         beforeEnter() {
+          initwebflow()
           menu();
           resetScroll();
         },
@@ -209,6 +215,7 @@ function pageTransition() {
           }, 1);
         },
         beforeEnter() {
+          initwebflow()
           menu();
           resetScroll();
         },
