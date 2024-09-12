@@ -168,7 +168,7 @@ body {
     font-size: calc(19 * var(--unit-fxmobile));
   }
   .h2 {
-    font-size: calc(36 * var(--unit-fxmobile));
+    font-size: calc(32 * var(--unit-fxmobile));
   }
 }
 @media only screen and (min-width: 480px) and (max-width: 768px) {
