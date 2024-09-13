@@ -51,24 +51,13 @@ function initHome() {
       },
     }
   );
-  gsap.to(".herosection", {
-    scale: 0.9,
-    transformOrigin: "top center",
+  gsap.to(".hero__images", {
+    y: '20vh',
+    ease: 'none',
     scrollTrigger: {
-      trigger: ".brand__case__studies",
-      start: "top bottom",
-      end: "top top",
-      pin: ".herosection",
-      pinSpacing: false,
-      scrub: true,
-    },
-  });
-  gsap.to(".hr__image", {
-    x: "-8vw",
-    scrollTrigger: {
-      trigger: ".brand__case__studies",
-      start: "top bottom",
-      end: "top top-=100%",
+      trigger: ".herosection",
+      start: "top top",
+      end: "bottom top-=20%",
       scrub: true,
     },
   });

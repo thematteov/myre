@@ -5,7 +5,7 @@
   --unit-vhfix: calc(var(--vhfix) / 100);
   --unit-fxmobile: calc(var(--vw) / 375);
   --unit-fymobile: calc(var(--vh) / 726);
-  --light: #fffbf0;
+  --light: #fcfaf5;
   --red: #d13017;
   --black: #1b1b1b;
   --transparent: rgba(0, 0, 0, 0);
@@ -15,7 +15,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 .p {
-  font-size: calc(20 * var(--unit-fx));
+  font-size: calc(22 * var(--unit-fx));
 }
 .h2 {
   font-size: calc(64 * var(--unit-fx));

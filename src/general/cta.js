@@ -113,7 +113,6 @@ function cta() {
         gsap.to(btn.querySelector(".btnblack"), {
           duration: 0.5,
           ease: "power3.inOut",
-          borderRadius: "10vw",
           filter: "blur(10px)",
         });
       });
@@ -147,7 +146,6 @@ function cta() {
         gsap.to(btn.querySelector(".btnblack"), {
           duration: 0.5,
           ease: "power3.inOut",
-          borderRadius: "0vw",
           filter: "blur(0px)",
         });
       });
