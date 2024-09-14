@@ -52,8 +52,8 @@ function initHome() {
     }
   );
   gsap.to(".hero__images", {
-    y: '20vh',
-    ease: 'none',
+    y: "20vh",
+    ease: "none",
     scrollTrigger: {
       trigger: ".herosection",
       start: "top top",
@@ -134,10 +134,25 @@ function initHome() {
   switchpackage();
   availability();
   splits();
+  gsap.fromTo(
+    ".available__seat",
+    {
+      yPercent: -100,
+      opacity: 0,
+    },
+    {
+      yPercent: 0,
+      opacity: 1,
+      ease: "power3.inOut",
+      scrollTrigger: {
+        trigger: ".mpiko__available__seats",
+        start: "top bottom",
+        end: "top top-=50%",
+        scrub: true,
+      },
+    }
+  );
   gsap.from(".available__seat", {
-    yPercent: -100,
-    duration: 2,
-    opacity: 0,
     rotateZ: 0,
     ease: "power3.inOut",
     scrollTrigger: {
@@ -145,6 +160,16 @@ function initHome() {
       start: "top bottom",
       end: "top top-=50%",
       scrub: true,
+    },
+  });
+  gsap.from(".seats__number", {
+    xPercent: -90,
+    duration: 4,
+    ease: "power3.out",
+    scrollTrigger: {
+      trigger: ".mpiko__available__seats",
+      start: "top bottom",
+      toggleActions: "play reverse play reverse",
     },
   });
 }

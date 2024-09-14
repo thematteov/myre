@@ -2,7 +2,8 @@ import gsap from "gsap";
 import imagesLoaded from "imagesloaded";
 import SplitType from "split-type";
 import { CustomEase } from "gsap/all";
-gsap.registerPlugin(CustomEase)
+import { display } from "@splidejs/splide/src/js/utils";
+gsap.registerPlugin(CustomEase);
 function preloader() {
   let intro = document.querySelector(".intro");
   new SplitType(".intro");
@@ -21,29 +22,26 @@ function preloader() {
     tlanimations.to(".preloader__changing", 0.8, {
       yPercent: -200,
       ease: "power3.inOut",
-
     });
     tlanimations.to(".preloader", 1.5, {
-      yPercent: -100,
+      scale: 1.4,
+      opacity: 0,
       ease: "power3.inOut",
-
+      onComplete: () => {
+        gsap.set(".preloader", { display: "none" });
+      },
     });
     if (intro) {
       tlanimations.fromTo(
-        '.hr__image',
+        ".hr__image",
         2.4,
-        { yPercent: 120,
-          opacity: 0
-        },
+        { opacity: 0, scale: 0.8 },
         {
-          yPercent: 0,
           opacity: 1,
+          scale: 1,
           ease: "power3.inOut",
-          stagger: {
-            amount: 0.2,
-            from: 'center'
-          },
-        }, "-=1.8"
+        },
+        "-=2"
       );
       tlanimations.fromTo(
         intro.querySelectorAll(".word"),
@@ -54,7 +52,8 @@ function preloader() {
           rotationX: 0,
           ease: "power3.inOut",
           stagger: 0.05,
-        }, "-=1.4"
+        },
+        "-=1.6"
       );
     }
   }

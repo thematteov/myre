@@ -160,7 +160,7 @@ body {
   transform-style: preserve-3d;
   backface-visibility: hidden;
 }
-@media (min-width: 320px) and (max-width: 480px){
+@media (min-width: 320px) and (max-width: 480px) {
   .line-wrapper {
     margin-bottom: 0em;
   }
