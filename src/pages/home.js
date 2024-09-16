@@ -151,6 +151,7 @@ function initHome() {
         start: "top bottom",
         end: "top top-=50%",
         scrub: true,
+        markers: true
       },
     }
   );
@@ -162,6 +163,7 @@ function initHome() {
       start: "top bottom",
       end: "top top-=50%",
       scrub: true,
+      markers: true
     },
   });
   gsap.from(".seats__number", {
