@@ -75,49 +75,6 @@ function initHome() {
       });
     });
   }
-  function switchpackage() {
-    let switchbtn = document.querySelector(".switchpackage");
-    let switchcounter = 1;
-    switchbtn.addEventListener("click", () => {
-      if (switchcounter === 1) {
-        switchcounter = 2;
-        gsap.to(".switchcube", {
-          left: "100%",
-          xPercent: -100,
-          duration: 0.5,
-          ease: "power3.inOut",
-        });
-        gsap.to(".buy__card", {
-          yPercent: -100,
-          duration: 1.4,
-          ease: "power3.inOut",
-        });
-        gsap.to(".website__type__image", {
-          xPercent: 100,
-          duration: 1.4,
-          ease: "power3.inOut",
-        });
-      } else if (switchcounter === 2) {
-        switchcounter = 1;
-        gsap.to(".switchcube", {
-          left: "0%",
-          xPercent: 0,
-          duration: 0.5,
-          ease: "power3.inOut",
-        });
-        gsap.to(".buy__card", {
-          yPercent: 0,
-          duration: 1.4,
-          ease: "power3.inOut",
-        });
-        gsap.to(".website__type__image", {
-          xPercent: 0,
-          duration: 1.4,
-          ease: "power3.inOut",
-        });
-      }
-    });
-  }
   function process() {
     ScrollTrigger.create({
       trigger: ".process__steps__right",
@@ -127,15 +84,51 @@ function initHome() {
       pinSpacing: false,
     });
   }
+  function maintentancePlans() {
+    let button = document.querySelectorAll(".switchpackage");
+    let prices = document.querySelectorAll(".maintenance__price");
+    button.forEach((b, i) => {
+      let open = false;
+      b.addEventListener("click", () => {
+        if (open === false) {
+          open = true;
+          gsap.to(prices[i], {
+            duration: 0.5,
+            ease: "power3.inOut",
+            yPercent: -100,
+          });
+          gsap.to(b.querySelector(".switchcube"), {
+            left: "100%",
+            xPercent: -100,
+            duration: 0.5,
+            ease: "power3.inOut",
+          });
+        } else if (open === true) {
+          open = false;
+          gsap.to(prices[i], {
+            duration: 0.5,
+            ease: "power3.inOut",
+            yPercent: 100,
+          });
+          gsap.to(b.querySelector(".switchcube"), {
+            left: "0%",
+            xPercent: 0,
+            duration: 0.5,
+            ease: "power3.inOut",
+          });
+        }
+      });
+    });
+  }
   if (isMobile()) {
   } else {
     benefits();
     process();
+    maintentancePlans();
   }
-  switchpackage();
   availability();
   splits();
-  footerparallax()
+  footerparallax();
   gsap.fromTo(
     ".available__seat",
     {
@@ -151,7 +144,6 @@ function initHome() {
         start: "top bottom",
         end: "top top-=50%",
         scrub: true,
-        markers: true
       },
     }
   );
@@ -163,7 +155,6 @@ function initHome() {
       start: "top bottom",
       end: "top top-=50%",
       scrub: true,
-      markers: true
     },
   });
   gsap.from(".seats__number", {
