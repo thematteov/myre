@@ -1,15 +1,16 @@
 import Lenis from "@studio-freight/lenis";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollTrigger } from "gsap/all";
 import initHome from "./pages/home";
 import menu from "./general/menu";
 import initProject from "./pages/project";
 import cta from "./general/cta";
 import barba from "@barba/core";
-import { gsap } from "gsap/src";
+import { gsap } from "gsap/all";
 import initabout from "./pages/about";
 import preloader from "./general/preloader";
 import product from "./pages/product";
 preloader();
+gsap.registerPlugin(ScrollTrigger);
 function isMobile() {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
     navigator.userAgent
@@ -211,8 +212,5 @@ function pageTransition() {
     ],
   });
 }
-
 pageTransition();
 reattachFormSubmitHandler();
-
-gsap.registerPlugin(ScrollTrigger);

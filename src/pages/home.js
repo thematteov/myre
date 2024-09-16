@@ -2,6 +2,7 @@ import "../styles/style.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { gsap } from "gsap";
 import splits from "../general/textsplit";
+import footerparallax from "../general/footer";
 function initHome() {
   function isMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
@@ -134,6 +135,7 @@ function initHome() {
   switchpackage();
   availability();
   splits();
+  footerparallax()
   gsap.fromTo(
     ".available__seat",
     {

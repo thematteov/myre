@@ -1,6 +1,7 @@
 import { ScrollTrigger } from "gsap/all";
 import { gsap } from "gsap/all";
 import splits from "../general/textsplit";
+import footerparallax from "../general/footer";
 
 gsap.registerPlugin(ScrollTrigger);
 function initProject() {
@@ -15,6 +16,7 @@ function initProject() {
     },
   });
   splits();
+  footerparallax()
 }
 
 export default initProject;

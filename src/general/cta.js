@@ -1,5 +1,8 @@
-import gsap from "gsap";
+import gsap from "gsap/all";
 import Lottie from "lottie-web";
+import { ScrollTrigger } from "gsap/all";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function cta() {
   function cursor() {
@@ -125,8 +128,8 @@ function cta() {
 
         // Move the text towards the mouse using GSAP
         gsap.to(text, {
-          x: (mouseX - initialPosition.x)*0.05,
-          y: (mouseY - initialPosition.y)*0.2,
+          x: (mouseX - initialPosition.x) * 0.05,
+          y: (mouseY - initialPosition.y) * 0.2,
           duration: 0.2,
           ease: "power3.out",
         });
@@ -151,7 +154,6 @@ function cta() {
       });
     });
   }
-
   btn();
   casestudy_open();
   microinteractions();
