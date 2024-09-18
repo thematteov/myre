@@ -9,27 +9,22 @@ function initHome() {
       navigator.userAgent
     );
   }
-  let benefits__trackwidth = document
-    .querySelector(".benefits__flex")
-    .getBoundingClientRect().width;
 
   function benefits() {
-    let tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".benefits__container",
-        start: "center center",
-        end: `center center-=${benefits__trackwidth + window.innerWidth * 0.5}`,
-        scrub: true,
-        pin: ".benefits__section",
-        pinSpacing: true,
-      },
-      ease: "none",
+    let cards = document.querySelectorAll(".benefits__card");
+    cards.forEach((c, i) => {
+      gsap.to(c,{
+        yPercent: -30*i,
+        scrollTrigger: {
+          trigger: '.benefits__flex',
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+          markers: false
+        },
+        ease: "none",
+      });
     });
-    tl.to(".body", { opacity: 1, duration: 0.1 });
-    tl.to(".benefits__flex", {
-      x: () => -(benefits__trackwidth - window.innerWidth * 0.5),
-    });
-    tl.to(".body", { opacity: 1, duration: 0.1 });
   }
 
   //////////PROJECTS//////////
@@ -122,10 +117,10 @@ function initHome() {
   }
   if (isMobile()) {
   } else {
-    benefits();
     process();
     maintentancePlans();
   }
+  benefits();
   availability();
   splits();
   footerparallax();
