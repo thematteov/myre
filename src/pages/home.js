@@ -47,7 +47,7 @@ function initHome() {
       xPercent: 100,
       scrollTrigger: {
         trigger: ".card__background3",
-        start: "top bottom+=20%",
+        start: "top bottom+=10%",
         toggleActions: 'play none none reverse'
       },
       ease: "power3.inOut",

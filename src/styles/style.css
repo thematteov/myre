@@ -129,6 +129,10 @@ body {
   display: inline-block;
   overflow-y: hidden;
 }
+.p .line {
+  margin-top: -0.15em;
+  padding-bottom: 0.15em;
+}
 .h1 .char__wrapper {
   margin-top: -0.1em;
   position: relative;
