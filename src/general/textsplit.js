@@ -102,7 +102,7 @@ function splits() {
     let cahrsSlide = document.querySelectorAll(".splitx");
     new SplitType(".splitx");
     const elementsToWrap = document.querySelectorAll(".splitx .char");
-    gsap.set(elementsToWrap, { x: "-150%" });
+    gsap.set(elementsToWrap, { x: "-150%", rotation: 12 });
 
     elementsToWrap.forEach((element) => {
       const wrapper = document.createElement("span");
@@ -125,6 +125,8 @@ function splits() {
         },
       });
       tl.to(value.querySelectorAll(".char"), 1, {
+        rotation: 0,
+        transformOrigin: 'top left',
         x: "0%",
         ease: "Power2.out",
         stagger: 0.02,

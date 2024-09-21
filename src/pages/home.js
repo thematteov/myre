@@ -13,17 +13,44 @@ function initHome() {
   function benefits() {
     let cards = document.querySelectorAll(".benefits__card");
     cards.forEach((c, i) => {
-      gsap.to(c,{
-        yPercent: -30*i,
+      gsap.to(c, {
+        yPercent: -30 * i,
         scrollTrigger: {
-          trigger: '.benefits__flex',
+          trigger: ".benefits__flex",
           start: "top bottom",
           end: "bottom top",
           scrub: true,
-          markers: false
+          markers: false,
         },
         ease: "none",
       });
+    });
+    gsap.from(".card__background1", 1, {
+      xPercent: 100,
+      scrollTrigger: {
+        trigger: ".card__background1",
+        start: "top bottom",
+        toggleActions: 'play none none reverse'
+      },
+      ease: "power3.inOut",
+    });
+    gsap.from(".card__background2", 1, {
+      xPercent: -100,
+      scrollTrigger: {
+        trigger: ".card__background2",
+        start: "top bottom",
+        toggleActions: 'play none none reverse'
+      },
+      ease: "power3.inOut",
+    });
+    gsap.from(".card__background3", 1, {
+      xPercent: 100,
+      scrollTrigger: {
+        trigger: ".card__background3",
+        start: "top bottom+=20%",
+        toggleActions: 'play none none reverse'
+      },
+      ease: "power3.inOut",
     });
   }
 
