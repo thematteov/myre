@@ -25,32 +25,32 @@ function initHome() {
         ease: "none",
       });
     });
-    gsap.from(".card__background1", 1, {
+    gsap.from(".card__background1", 0.6, {
       xPercent: 100,
       scrollTrigger: {
         trigger: ".card__background1",
         start: "top bottom",
         toggleActions: 'play none none reverse'
       },
-      ease: "power3.inOut",
+      ease: "power2.inOut",
     });
-    gsap.from(".card__background2", 1, {
+    gsap.from(".card__background2", 0.6, {
       xPercent: -100,
       scrollTrigger: {
         trigger: ".card__background2",
         start: "top bottom",
         toggleActions: 'play none none reverse'
       },
-      ease: "power3.inOut",
+      ease: "power2.inOut",
     });
-    gsap.from(".card__background3", 1, {
+    gsap.from(".card__background3", 0.6, {
       xPercent: 100,
       scrollTrigger: {
         trigger: ".card__background3",
         start: "top bottom+=10%",
         toggleActions: 'play none none reverse'
       },
-      ease: "power3.inOut",
+      ease: "power2.inOut",
     });
   }
 
